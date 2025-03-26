@@ -46,7 +46,7 @@ const Login: React.FC = () => {
     <div className="min-h-screen py-10 px-4 relative overflow-hidden bg-gradient-to-b from-indigo-600 to-indigo-800" dir="rtl">
       <StarsBackground />
       
-      <div className="max-w-md mx-auto flex flex-col items-center justify-center h-full pt-10">
+      <div className="max-w-2xl mx-auto flex flex-col items-center justify-center h-full pt-10">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-white mb-2">ברוכים הבאים -</h1>
           <h1 className="text-7xl font-bold text-white mb-6">WIN CAMP</h1>
@@ -101,16 +101,16 @@ const Login: React.FC = () => {
           </div>
         </div>
         
-        <div className="relative">
+        <div className="relative w-full">
           {/* Robot image */}
           <img 
-            src="/lovable-uploads/b999c532-4bb1-4c27-8bde-3e5fed1926d5.png" 
+            src="/lovable-uploads/87ffcad5-80ca-42a8-a18b-9b6a4c67d665.png" 
             alt="Robot mascot" 
-            className="h-40 object-contain absolute bottom-0 right-0 translate-x-20"
+            className="h-48 object-contain absolute bottom-0 right-0 translate-x-0 translate-y-10"
           />
           {/* Rocket image */}
-          <div className="absolute bottom-20 left-0 -translate-x-20">
-            <svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <div className="absolute bottom-20 left-20">
+            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M4.5 16.5L3 20L6.5 18.5" stroke="#FF5733" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M19.5 16.5L21 20L17.5 18.5" stroke="#FF5733" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M12 15L12 21" stroke="#FF5733" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
