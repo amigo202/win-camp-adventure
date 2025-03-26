@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginUser, isLoggedIn } from '../utils/authUtils';
 import { toast } from '../components/ui/use-toast';
-import Header from '../components/Header';
 import StarsBackground from '../components/StarsBackground';
 
 const Login: React.FC = () => {
@@ -44,24 +43,20 @@ const Login: React.FC = () => {
   };
   
   return (
-    <div className="min-h-screen py-10 px-4 relative overflow-hidden" dir="rtl">
+    <div className="min-h-screen py-10 px-4 relative overflow-hidden bg-gradient-to-b from-indigo-600 to-indigo-800" dir="rtl">
       <StarsBackground />
       
-      <div className="max-w-md mx-auto">
-        <Header showLogout={false} />
+      <div className="max-w-md mx-auto flex flex-col items-center justify-center h-full pt-10">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-white mb-2">ברוכים הבאים -</h1>
+          <h1 className="text-7xl font-bold text-white mb-6">WIN CAMP</h1>
+          <p className="text-xl text-white mb-10">עולם של תכנות, יצירה מאוכנת וכיף</p>
+        </div>
         
-        <div className="glass-card rounded-xl p-8 shadow-xl animate-float">
-          <h1 className="text-2xl font-bold text-center mb-6 text-wincamp-purple">
-            ברוכים הבאים ל-WIN CAMP
-          </h1>
-          
-          <p className="text-center mb-8 text-gray-600">
-            עולם של תכנות, יצירה, בינה מלאכותית וכיף!
-          </p>
-          
+        <div className="glass-card bg-blue-200/70 rounded-xl p-8 shadow-xl w-full max-w-md mb-6">
           <form onSubmit={handleLogin} className="space-y-6">
             <div>
-              <label htmlFor="username" className="block text-sm font-medium mb-1">
+              <label htmlFor="username" className="block text-right text-xl font-medium mb-2 text-indigo-900">
                 שם משתמש
               </label>
               <input
@@ -69,14 +64,14 @@ const Login: React.FC = () => {
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-wincamp-purple/50"
+                className="w-full p-3 rounded-lg border border-blue-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-blue-100/80 text-right"
                 placeholder="WINCAMP"
                 required
               />
             </div>
             
             <div>
-              <label htmlFor="password" className="block text-sm font-medium mb-1">
+              <label htmlFor="password" className="block text-right text-xl font-medium mb-2 text-indigo-900">
                 סיסמה
               </label>
               <input
@@ -84,7 +79,7 @@ const Login: React.FC = () => {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-wincamp-purple/50"
+                className="w-full p-3 rounded-lg border border-blue-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-blue-100/80 text-right"
                 placeholder="12345"
                 required
               />
@@ -92,26 +87,44 @@ const Login: React.FC = () => {
             
             <button
               type="submit"
-              className="w-full btn-primary py-3 text-lg"
+              className="w-full bg-orange-400 hover:bg-orange-500 text-white text-xl font-bold py-3 px-4 rounded-xl transition-colors"
               disabled={loading}
             >
-              {loading ? "רק רגע..." : "התחבר"}
+              התחברות
             </button>
           </form>
           
           <div className="mt-4 text-center">
-            <a href="#" className="text-sm text-wincamp-blue hover:text-wincamp-purple transition-colors">
+            <a href="#" className="text-indigo-700 hover:text-indigo-900 transition-colors">
               שכחת סיסמה?
             </a>
           </div>
-          
-          <div className="mt-8 text-center text-xs text-gray-500">
-            רמז: נסו שם משתמש WINCAMP וסיסמה 12345
+        </div>
+        
+        <div className="relative">
+          {/* Robot image */}
+          <img 
+            src="/lovable-uploads/b999c532-4bb1-4c27-8bde-3e5fed1926d5.png" 
+            alt="Robot mascot" 
+            className="h-40 object-contain absolute bottom-0 right-0 translate-x-20"
+          />
+          {/* Rocket image */}
+          <div className="absolute bottom-20 left-0 -translate-x-20">
+            <svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4.5 16.5L3 20L6.5 18.5" stroke="#FF5733" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M19.5 16.5L21 20L17.5 18.5" stroke="#FF5733" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M12 15L12 21" stroke="#FF5733" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M4.5 12H19.5L17 3L12 7L7 3L4.5 12Z" fill="#FF7043" stroke="#FF5733" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
           </div>
+        </div>
+        
+        <div className="mt-8 text-center text-xs text-blue-200">
+          רמז: נסו שם משתמש WINCAMP וסיסמה 12345
         </div>
       </div>
       
-      <div className="absolute bottom-6 left-0 right-0 text-center text-gray-500 text-sm">
+      <div className="absolute bottom-6 left-0 right-0 text-center text-blue-200 text-sm">
         WIN CAMP &copy; {new Date().getFullYear()} | עולם של הרפתקאות טכנולוגיות
       </div>
     </div>

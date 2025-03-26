@@ -10,6 +10,11 @@ import NotFound from "./pages/NotFound";
 import Admin from "./pages/Admin";
 import { isLoggedIn } from "./utils/authUtils";
 
+// Create a protected route component
+const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
+  return isLoggedIn() ? element : <Navigate to="/login" />;
+};
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -21,8 +26,8 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
+          <Route path="/admin" element={<ProtectedRoute element={<Admin />} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

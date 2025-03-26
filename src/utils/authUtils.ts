@@ -8,6 +8,7 @@ const MOCK_PASSWORD = "12345";
 export interface User {
   username: string;
   displayName: string;
+  isAdmin?: boolean;
 }
 
 // Login function
@@ -16,7 +17,8 @@ export const loginUser = (username: string, password: string): User | null => {
   if (username.toUpperCase() === MOCK_USERNAME && password === MOCK_PASSWORD) {
     const user: User = {
       username: username.toUpperCase(),
-      displayName: username
+      displayName: username,
+      isAdmin: true // The main WINCAMP user is an admin
     };
     
     // Store user in localStorage for persistence
@@ -31,6 +33,12 @@ export const loginUser = (username: string, password: string): User | null => {
 // Check if user is logged in
 export const isLoggedIn = (): boolean => {
   return localStorage.getItem('wincamp_user') !== null;
+};
+
+// Check if user is an admin
+export const isAdmin = (): boolean => {
+  const user = getCurrentUser();
+  return user?.isAdmin === true;
 };
 
 // Get current user
