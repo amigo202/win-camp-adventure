@@ -1,4 +1,3 @@
-
 export interface Tool {
   id: string;
   title: string;
@@ -87,8 +86,8 @@ export const tools: Tool[] = [
     title: "תכנות python",
     category: "programming",
     icon: "🐍",
-    link: "https://www.python.org/",
-    description: "שפת תכנות פופולרית וידידותית למתחילים"
+    link: "#",
+    description: "שפת תכנות פופולרית וידידותית למתחילים עם שיעורים אינטראקטיביים"
   },
   {
     id: "pythonturtle",
@@ -99,7 +98,7 @@ export const tools: Tool[] = [
     description: "שרטוט וציור באמצעות תכנות בפייתון"
   },
   {
-    id: "codestuido",
+    id: "codestudio",
     title: "סטודיו קוד",
     category: "programming",
     icon: "📝",
