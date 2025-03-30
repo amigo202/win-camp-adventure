@@ -1,9 +1,10 @@
 
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { isLoggedIn, getCurrentUser, getCompletedToolsCount, resetCompletedTools } from '../utils/authUtils';
+import { isLoggedIn, getCurrentUser, getCompletedToolsCount, resetCompletedTools, isGuide, isAdmin } from '../utils/authUtils';
 import { categories, getToolsByCategory, Tool } from '../utils/data';
 import Header from '../components/Header';
+import GuideNavigation from '../components/GuideNavigation';
 import CategorySection from '../components/CategorySection';
 import SearchBar from '../components/SearchBar';
 import StarsBackground from '../components/StarsBackground';
@@ -60,6 +61,7 @@ const Dashboard: React.FC = () => {
   };
   
   const user = getCurrentUser();
+  const showGuideNav = isGuide() || isAdmin();
   
   return (
     <div className="min-h-screen py-6 px-4 md:px-8 relative" dir="rtl">
@@ -67,6 +69,8 @@ const Dashboard: React.FC = () => {
       
       <div className="max-w-6xl mx-auto">
         <Header />
+        
+        {showGuideNav && <GuideNavigation />}
         
         <div className="glass-card rounded-xl p-6 mb-8 animate-slide-in-bottom">
           <h1 className="text-2xl font-bold mb-2">
