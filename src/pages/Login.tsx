@@ -4,11 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import { loginUser, isLoggedIn } from '../utils/authUtils';
 import { toast } from '../components/ui/use-toast';
 import StarsBackground from '../components/StarsBackground';
+import { Button } from '../components/ui/button';
+import { LogIn, ChevronDown } from 'lucide-react';
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showGuideInfo, setShowGuideInfo] = useState(false);
   const navigate = useNavigate();
   
   useEffect(() => {
@@ -40,6 +43,16 @@ const Login: React.FC = () => {
       
       setLoading(false);
     }, 800); // Simulate network request
+  };
+
+  const setGuideLogin = (guideNumber: number) => {
+    if (guideNumber === 1) {
+      setUsername('WINCAMP100');
+      setPassword('12345');
+    } else if (guideNumber === 2) {
+      setUsername('WINCAMP200');
+      setPassword('12345');
+    }
   };
   
   return (
@@ -87,11 +100,58 @@ const Login: React.FC = () => {
             
             <button
               type="submit"
-              className="w-full bg-orange-400 hover:bg-orange-500 text-white text-xl font-bold py-3 px-4 rounded-xl transition-colors"
+              className="w-full bg-orange-400 hover:bg-orange-500 text-white text-xl font-bold py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-2"
               disabled={loading}
             >
+              <LogIn size={20} />
               התחברות
             </button>
+
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setShowGuideInfo(!showGuideInfo)}
+                className="w-full bg-indigo-700 hover:bg-indigo-800 text-white font-bold py-2 px-4 rounded-xl transition-colors flex items-center justify-center gap-2"
+              >
+                כניסה למדריכים
+                <ChevronDown size={18} className={`transition-transform ${showGuideInfo ? 'rotate-180' : ''}`} />
+              </button>
+              
+              {showGuideInfo && (
+                <div className="mt-2 bg-white/80 rounded-lg p-4 shadow-md text-right">
+                  <h3 className="font-bold text-indigo-900 mb-2">פרטי התחברות למדריכים:</h3>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <button
+                        type="button"
+                        onClick={() => setGuideLogin(1)}
+                        className="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded text-sm"
+                      >
+                        בחר
+                      </button>
+                      <div>
+                        <p><strong>מדריך 1:</strong> WINCAMP100</p>
+                        <p><strong>סיסמה:</strong> 12345</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex justify-between items-center">
+                      <button
+                        type="button"
+                        onClick={() => setGuideLogin(2)}
+                        className="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded text-sm"
+                      >
+                        בחר
+                      </button>
+                      <div>
+                        <p><strong>מדריך 2:</strong> WINCAMP200</p>
+                        <p><strong>סיסמה:</strong> 12345</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
           </form>
           
           <div className="mt-4 text-center">

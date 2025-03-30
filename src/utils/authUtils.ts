@@ -2,8 +2,11 @@
 // Simple authentication utilities for WIN CAMP
 
 // Mock credentials - in a real app, these would be stored securely on a server
-const MOCK_USERNAME = "WINCAMP";
-const MOCK_PASSWORD = "12345";
+const MOCK_USERS = [
+  { username: "WINCAMP", password: "12345", isAdmin: true, displayName: "WINCAMP" },
+  { username: "WINCAMP100", password: "12345", isAdmin: false, displayName: "מדריך 1" },
+  { username: "WINCAMP200", password: "12345", isAdmin: false, displayName: "מדריך 2" },
+];
 
 export interface User {
   username: string;
@@ -13,12 +16,19 @@ export interface User {
 
 // Login function
 export const loginUser = (username: string, password: string): User | null => {
-  // Simple validation
-  if (username.toUpperCase() === MOCK_USERNAME && password === MOCK_PASSWORD) {
+  // Convert to uppercase for case-insensitive comparison
+  const uppercaseUsername = username.toUpperCase();
+  
+  // Find matching user
+  const matchedUser = MOCK_USERS.find(
+    user => user.username === uppercaseUsername && user.password === password
+  );
+  
+  if (matchedUser) {
     const user: User = {
-      username: username.toUpperCase(),
-      displayName: username,
-      isAdmin: true // The main WINCAMP user is an admin
+      username: matchedUser.username,
+      displayName: matchedUser.displayName,
+      isAdmin: matchedUser.isAdmin
     };
     
     // Store user in localStorage for persistence

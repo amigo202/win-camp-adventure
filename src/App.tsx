@@ -9,11 +9,16 @@ import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import Admin from "./pages/Admin";
 import PythonCourse from "./pages/PythonCourse";
-import { isLoggedIn } from "./utils/authUtils";
+import { isLoggedIn, isAdmin } from "./utils/authUtils";
 
 // Create a protected route component
 const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
   return isLoggedIn() ? element : <Navigate to="/login" />;
+};
+
+// Create an admin-only route component
+const AdminRoute = ({ element }: { element: JSX.Element }) => {
+  return isLoggedIn() && isAdmin() ? element : <Navigate to="/dashboard" />;
 };
 
 const queryClient = new QueryClient();
@@ -28,7 +33,7 @@ const App = () => (
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
-          <Route path="/admin" element={<ProtectedRoute element={<Admin />} />} />
+          <Route path="/admin" element={<AdminRoute element={<Admin />} />} />
           <Route path="/python-course" element={<ProtectedRoute element={<PythonCourse />} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
