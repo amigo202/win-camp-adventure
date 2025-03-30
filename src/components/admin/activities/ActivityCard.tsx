@@ -25,7 +25,7 @@ const ActivityCard: React.FC<ActivityCardProps> = ({ title, description, onClick
         <CardTitle className="text-lg font-bold">{title}</CardTitle>
       </CardHeader>
       <CardContent className="pt-2">
-        <p className={isExpanded ? "" : "line-clamp-2"} dir="rtl" className="text-sm text-gray-200">
+        <p className={`text-sm text-gray-200 ${isExpanded ? "" : "line-clamp-2"}`} dir="rtl">
           {description}
         </p>
       </CardContent>

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { getStudentsData } from '../../utils/studentUtils';
 import { getCompletedToolsCount } from '../../utils/authUtils';
-import { Student } from './StudentManagement';
+import { Student } from '@/types/student';
 import {
   BarChart,
   Bar,

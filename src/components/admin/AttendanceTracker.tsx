@@ -8,7 +8,7 @@ import { he } from 'date-fns/locale';
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { toast } from "sonner";
-import { Student } from './StudentManagement';
+import { Student } from '@/types/student';
 import { getStudentsData, saveStudentsData } from '../../utils/studentUtils';
 
 const AttendanceTracker: React.FC = () => {
