@@ -1,14 +1,15 @@
 
 import React, { useState } from 'react';
-import { Search } from 'lucide-react';
-import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import SearchBar from './activities/SearchBar';
+import ActivityCard from './activities/ActivityCard';
+import FeaturedActivity from './activities/FeaturedActivity';
 import activitiesData from '../../utils/activities.json';
+import { Activity } from '@/types/activity';
 
 const ActivityIdeas: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [currentActivity, setCurrentActivity] = useState<null | {title: string, description: string}>(null);
+  const [currentActivity, setCurrentActivity] = useState<Activity | null>(null);
   
   // Filter activities based on search term
   const filteredActivities = activitiesData.filter(activity => 
@@ -33,43 +34,18 @@ const ActivityIdeas: React.FC = () => {
         </Button>
       </div>
 
-      {currentActivity && (
-        <Card className="bg-white/10 border-white/20 text-white shadow-lg mb-6 transition-all duration-300">
-          <CardHeader className="bg-white/5 rounded-t-lg pb-3">
-            <CardTitle className="text-xl font-bold">{currentActivity.title}</CardTitle>
-          </CardHeader>
-          <CardContent className="pt-4">
-            <p className="whitespace-pre-line">{currentActivity.description}</p>
-          </CardContent>
-        </Card>
-      )}
+      <FeaturedActivity activity={currentActivity} />
 
-      <div className="relative">
-        <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
-        <Input 
-          className="bg-white/10 text-white border-white/30 pr-10"
-          placeholder="חיפוש פעילויות..." 
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </div>
+      <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {filteredActivities.map((activity, index) => (
-          <Card 
-            key={index} 
-            className="bg-white/10 border-white/20 text-white shadow-md hover:shadow-lg hover:bg-white/20 cursor-pointer transition-all duration-200"
+          <ActivityCard
+            key={index}
+            title={activity.title}
+            description={activity.description}
             onClick={() => setCurrentActivity(activity)}
-          >
-            <CardHeader className="bg-white/5 rounded-t-lg pb-1">
-              <CardTitle className="text-lg font-bold">{activity.title}</CardTitle>
-            </CardHeader>
-            <CardContent className="pt-2">
-              <p className="line-clamp-2 text-sm text-gray-200">
-                {activity.description}
-              </p>
-            </CardContent>
-          </Card>
+          />
         ))}
       </div>
 
