@@ -8,13 +8,20 @@ import {
   NavigationMenuList,
   NavigationMenuItem,
 } from '@/components/ui/navigation-menu';
-import { isGuide, isAdmin } from '../utils/authUtils';
+import { isGuide, isAdmin, isStudent } from '../utils/authUtils';
 
 const GuideNavigation: React.FC = () => {
   const navigate = useNavigate();
   const isUserGuide = isGuide();
   const isUserAdmin = isAdmin();
+  const isUserStudent = isStudent();
 
+  // Don't show this navigation for students
+  if (isUserStudent) {
+    return null;
+  }
+
+  // Only show this navigation for guides or admins
   if (!isUserGuide && !isUserAdmin) {
     return null;
   }
