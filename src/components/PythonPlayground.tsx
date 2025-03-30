@@ -1,13 +1,16 @@
 
 import React, { useState } from "react";
-import { Textarea } from "./ui/textarea";
 import { Play } from "lucide-react";
+import CodeEditor from "./python/CodeEditor";
+import OutputDisplay from "./python/OutputDisplay";
 
 interface PythonPlaygroundProps {
   initialCode?: string;
 }
 
-const PythonPlayground: React.FC<PythonPlaygroundProps> = ({ initialCode = "# כתבו את הקוד שלכם כאן\nprint('שלום עולם!')" }) => {
+const PythonPlayground: React.FC<PythonPlaygroundProps> = ({ 
+  initialCode = "# כתבו את הקוד שלכם כאן\nprint('שלום עולם!')" 
+}) => {
   const [code, setCode] = useState(initialCode);
   const [output, setOutput] = useState("");
   const [isRunning, setIsRunning] = useState(false);
@@ -32,12 +35,9 @@ const PythonPlayground: React.FC<PythonPlaygroundProps> = ({ initialCode = "# כ
   return (
     <div className="border rounded-lg p-4 bg-white shadow-sm">
       <div className="text-lg font-medium mb-2">סביבת הרצת קוד פייתון</div>
-      <Textarea
-        value={code}
-        onChange={(e) => setCode(e.target.value)}
-        className="font-mono text-sm h-[150px] mb-2 bg-gray-50 ltr-text"
-        dir="ltr"
-      />
+      
+      <CodeEditor code={code} onChange={setCode} />
+      
       <button
         onClick={runCode}
         disabled={isRunning}
@@ -46,12 +46,8 @@ const PythonPlayground: React.FC<PythonPlaygroundProps> = ({ initialCode = "# כ
         <Play size={16} />
         הרץ קוד
       </button>
-      {output && (
-        <div className="mt-4 p-3 bg-gray-100 rounded-md">
-          <div className="font-medium mb-1">תוצאה:</div>
-          <div className="whitespace-pre-wrap font-mono text-sm">{output}</div>
-        </div>
-      )}
+      
+      <OutputDisplay output={output} />
     </div>
   );
 };
