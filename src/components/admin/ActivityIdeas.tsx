@@ -23,7 +23,7 @@ const ActivityIdeas: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" dir="rtl">
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold">רעיונות לפעילויות גיבוש</h2>
         <Button 

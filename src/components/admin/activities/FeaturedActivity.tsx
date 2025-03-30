@@ -1,12 +1,10 @@
 
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Activity } from '@/types/activity';
 
 interface FeaturedActivityProps {
-  activity: {
-    title: string;
-    description: string;
-  } | null;
+  activity: Activity | null;
 }
 
 const FeaturedActivity: React.FC<FeaturedActivityProps> = ({ activity }) => {
@@ -18,7 +16,7 @@ const FeaturedActivity: React.FC<FeaturedActivityProps> = ({ activity }) => {
         <CardTitle className="text-xl font-bold">{activity.title}</CardTitle>
       </CardHeader>
       <CardContent className="pt-4">
-        <p className="whitespace-pre-line">{activity.description}</p>
+        <p className="whitespace-pre-line" dir="rtl">{activity.description}</p>
       </CardContent>
     </Card>
   );

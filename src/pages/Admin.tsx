@@ -32,7 +32,7 @@ const Admin: React.FC = () => {
   }, [navigate]);
 
   if (loading) {
-    return <div className="flex justify-center items-center h-screen">טוען...</div>;
+    return <div className="flex justify-center items-center h-screen" dir="rtl">טוען...</div>;
   }
 
   return (
