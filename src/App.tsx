@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import Admin from "./pages/Admin";
+import PythonCourse from "./pages/PythonCourse";
 import { isLoggedIn } from "./utils/authUtils";
 
 // Create a protected route component
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
           <Route path="/admin" element={<ProtectedRoute element={<Admin />} />} />
+          <Route path="/python-course" element={<ProtectedRoute element={<PythonCourse />} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

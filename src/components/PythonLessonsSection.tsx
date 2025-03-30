@@ -1,67 +1,22 @@
 
-import React, { useState } from "react";
-import PythonPlayground from "./PythonPlayground";
-import LessonItem from "./python/LessonItem";
-import FinalProject from "./python/FinalProject";
-import PythonLessonLayout from "./python/PythonLessonLayout";
-import { lessons } from "./python/lessonsData";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const PythonLessonsSection: React.FC = () => {
-  const [showLessons, setShowLessons] = useState(false);
-  const [expandedLesson, setExpandedLesson] = useState<number | null>(null);
-  const [showPlayground, setShowPlayground] = useState(false);
-  const [playgroundCode, setPlaygroundCode] = useState("# כתבו את הקוד שלכם כאן\nprint('שלום עולם!')");
+  const navigate = useNavigate();
 
-  const toggleLesson = (index: number) => {
-    if (expandedLesson === index) {
-      setExpandedLesson(null);
-    } else {
-      setExpandedLesson(index);
-      // If a lesson has sample code and is expanded, update the playground
-      if (lessons[index].sampleCode) {
-        setPlaygroundCode(lessons[index].sampleCode);
-        setShowPlayground(true);
-      }
-    }
-  };
-
-  const tryCode = (code: string) => {
-    setPlaygroundCode(code);
-    setShowPlayground(true);
+  const handleStartPython = () => {
+    navigate('/python-course');
   };
 
   return (
     <div className="bg-yellow-50 rounded-xl p-6 shadow-md" dir="rtl">
       <button
-        onClick={() => setShowLessons(!showLessons)}
-        className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded w-full"
+        onClick={handleStartPython}
+        className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg w-full text-lg transition-all transform hover:scale-105"
       >
-        {showLessons ? "סגור שיעורי פייתון" : "💻 שיעור פייתון - לחץ להתחלה"}
+        💻 שיעור פייתון - לחץ להתחלה
       </button>
-
-      {showLessons && (
-        <PythonLessonLayout>
-          <div className="space-y-4">
-            {lessons.map((lesson, index) => (
-              <LessonItem 
-                key={index}
-                lesson={lesson}
-                isExpanded={expandedLesson === index}
-                index={index}
-                onToggle={toggleLesson}
-                onTryCode={tryCode}
-              />
-            ))}
-            <FinalProject onTryCode={tryCode} />
-          </div>
-          
-          {showPlayground && (
-            <div id="python-playground" className="sticky top-6">
-              <PythonPlayground initialCode={playgroundCode} />
-            </div>
-          )}
-        </PythonLessonLayout>
-      )}
     </div>
   );
 };
