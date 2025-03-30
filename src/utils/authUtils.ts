@@ -6,12 +6,18 @@ const MOCK_USERS = [
   { username: "WINCAMP", password: "12345", isAdmin: true, displayName: "WINCAMP" },
   { username: "WINCAMP100", password: "12345", isAdmin: false, displayName: "מדריך 1" },
   { username: "WINCAMP200", password: "12345", isAdmin: false, displayName: "מדריך 2" },
+  { username: "STUDENT1", password: "12345", isAdmin: false, isStudent: true, displayName: "תלמיד 1" },
+  { username: "STUDENT2", password: "12345", isAdmin: false, isStudent: true, displayName: "תלמיד 2" },
+  { username: "STUDENT3", password: "12345", isAdmin: false, isStudent: true, displayName: "תלמיד 3" },
+  { username: "STUDENT4", password: "12345", isAdmin: false, isStudent: true, displayName: "תלמיד 4" },
+  { username: "STUDENT5", password: "12345", isAdmin: false, isStudent: true, displayName: "תלמיד 5" },
 ];
 
 export interface User {
   username: string;
   displayName: string;
   isAdmin?: boolean;
+  isStudent?: boolean;
 }
 
 // Login function
@@ -28,7 +34,8 @@ export const loginUser = (username: string, password: string): User | null => {
     const user: User = {
       username: matchedUser.username,
       displayName: matchedUser.displayName,
-      isAdmin: matchedUser.isAdmin
+      isAdmin: matchedUser.isAdmin,
+      isStudent: matchedUser.isStudent
     };
     
     // Store user in localStorage for persistence
@@ -49,6 +56,18 @@ export const isLoggedIn = (): boolean => {
 export const isAdmin = (): boolean => {
   const user = getCurrentUser();
   return user?.isAdmin === true;
+};
+
+// Check if user is a student
+export const isStudent = (): boolean => {
+  const user = getCurrentUser();
+  return user?.isStudent === true;
+};
+
+// Check if user is a guide (not admin, not student)
+export const isGuide = (): boolean => {
+  const user = getCurrentUser();
+  return !user?.isAdmin && !user?.isStudent;
 };
 
 // Get current user

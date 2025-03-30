@@ -5,13 +5,14 @@ import { loginUser, isLoggedIn } from '../utils/authUtils';
 import { toast } from '../components/ui/use-toast';
 import StarsBackground from '../components/StarsBackground';
 import { Button } from '../components/ui/button';
-import { LogIn, ChevronDown } from 'lucide-react';
+import { LogIn, ChevronDown, Users } from 'lucide-react';
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [showGuideInfo, setShowGuideInfo] = useState(false);
+  const [showStudentInfo, setShowStudentInfo] = useState(false);
   const navigate = useNavigate();
   
   useEffect(() => {
@@ -53,6 +54,11 @@ const Login: React.FC = () => {
       setUsername('WINCAMP200');
       setPassword('12345');
     }
+  };
+
+  const setStudentLogin = (studentId: string) => {
+    setUsername('STUDENT' + studentId);
+    setPassword('12345');
   };
   
   return (
@@ -107,50 +113,91 @@ const Login: React.FC = () => {
               התחברות
             </button>
 
-            <div className="relative">
-              <button
-                type="button"
-                onClick={() => setShowGuideInfo(!showGuideInfo)}
-                className="w-full bg-indigo-700 hover:bg-indigo-800 text-white font-bold py-2 px-4 rounded-xl transition-colors flex items-center justify-center gap-2"
-              >
-                כניסה למדריכים
-                <ChevronDown size={18} className={`transition-transform ${showGuideInfo ? 'rotate-180' : ''}`} />
-              </button>
-              
-              {showGuideInfo && (
-                <div className="mt-2 bg-white/80 rounded-lg p-4 shadow-md text-right">
-                  <h3 className="font-bold text-indigo-900 mb-2">פרטי התחברות למדריכים:</h3>
-                  <div className="space-y-3">
-                    <div className="flex justify-between items-center">
-                      <button
-                        type="button"
-                        onClick={() => setGuideLogin(1)}
-                        className="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded text-sm"
-                      >
-                        בחר
-                      </button>
-                      <div>
-                        <p><strong>מדריך 1:</strong> WINCAMP100</p>
-                        <p><strong>סיסמה:</strong> 12345</p>
+            <div className="flex gap-2">
+              <div className="relative flex-1">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowGuideInfo(!showGuideInfo);
+                    setShowStudentInfo(false);
+                  }}
+                  className="w-full bg-indigo-700 hover:bg-indigo-800 text-white font-bold py-2 px-4 rounded-xl transition-colors flex items-center justify-center gap-2"
+                >
+                  כניסה למדריכים
+                  <ChevronDown size={18} className={`transition-transform ${showGuideInfo ? 'rotate-180' : ''}`} />
+                </button>
+                
+                {showGuideInfo && (
+                  <div className="mt-2 bg-white/80 rounded-lg p-4 shadow-md text-right absolute z-10 w-full">
+                    <h3 className="font-bold text-indigo-900 mb-2">פרטי התחברות למדריכים:</h3>
+                    <div className="space-y-3">
+                      <div className="flex justify-between items-center">
+                        <button
+                          type="button"
+                          onClick={() => setGuideLogin(1)}
+                          className="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded text-sm"
+                        >
+                          בחר
+                        </button>
+                        <div>
+                          <p><strong>מדריך 1:</strong> WINCAMP100</p>
+                          <p><strong>סיסמה:</strong> 12345</p>
+                        </div>
                       </div>
-                    </div>
-                    
-                    <div className="flex justify-between items-center">
-                      <button
-                        type="button"
-                        onClick={() => setGuideLogin(2)}
-                        className="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded text-sm"
-                      >
-                        בחר
-                      </button>
-                      <div>
-                        <p><strong>מדריך 2:</strong> WINCAMP200</p>
-                        <p><strong>סיסמה:</strong> 12345</p>
+                      
+                      <div className="flex justify-between items-center">
+                        <button
+                          type="button"
+                          onClick={() => setGuideLogin(2)}
+                          className="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded text-sm"
+                        >
+                          בחר
+                        </button>
+                        <div>
+                          <p><strong>מדריך 2:</strong> WINCAMP200</p>
+                          <p><strong>סיסמה:</strong> 12345</p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
+
+              <div className="relative flex-1">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowStudentInfo(!showStudentInfo);
+                    setShowGuideInfo(false);
+                  }}
+                  className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded-xl transition-colors flex items-center justify-center gap-2"
+                >
+                  כניסה לתלמידים
+                  <Users size={18} />
+                </button>
+                
+                {showStudentInfo && (
+                  <div className="mt-2 bg-white/80 rounded-lg p-4 shadow-md text-right absolute z-10 w-full">
+                    <h3 className="font-bold text-teal-900 mb-2">כניסת תלמידים:</h3>
+                    <p className="mb-2 text-sm">הכנס את מספר התלמיד שלך לכניסה מהירה:</p>
+                    <div className="flex gap-2 flex-wrap">
+                      {[1, 2, 3, 4, 5].map(num => (
+                        <button
+                          key={num}
+                          type="button"
+                          onClick={() => setStudentLogin(num.toString())}
+                          className="bg-teal-500 hover:bg-teal-600 text-white px-3 py-1 rounded-full text-sm"
+                        >
+                          {num}
+                        </button>
+                      ))}
+                    </div>
+                    <p className="mt-3 text-xs text-gray-600">
+                      * סיסמאות תלמידים הן: 12345
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
           </form>
           
