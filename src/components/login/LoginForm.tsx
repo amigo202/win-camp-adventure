@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { LogIn } from 'lucide-react';
-import StudentLoginSection from './StudentLoginSection';
 import GuideLoginSection from './GuideLoginSection';
 
 interface LoginFormProps {
@@ -22,7 +21,6 @@ const LoginForm: React.FC<LoginFormProps> = ({
   setPassword,
   loading,
   handleLogin,
-  setStudentLogin,
   setGuideLogin
 }) => {
   return (
@@ -56,9 +54,6 @@ const LoginForm: React.FC<LoginFormProps> = ({
           required
         />
       </div>
-      
-      {/* Student login section */}
-      <StudentLoginSection setStudentLogin={setStudentLogin} />
       
       <button
         type="submit"

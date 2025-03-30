@@ -7,7 +7,6 @@ import {
   NavigationMenu,
   NavigationMenuList,
   NavigationMenuItem,
-  navigationMenuTriggerStyle
 } from '@/components/ui/navigation-menu';
 import { isGuide, isAdmin } from '../utils/authUtils';
 
@@ -21,18 +20,19 @@ const GuideNavigation: React.FC = () => {
   }
 
   return (
-    <div className="bg-indigo-900/80 text-white py-3 px-6 flex justify-between items-center glass-card rounded-lg mb-4" dir="rtl">
-      <div className="text-lg font-bold">ממשק מדריך</div>
+    <div className="bg-indigo-900 text-white py-4 px-6 flex justify-between items-center rounded-lg mb-6 shadow-lg" dir="rtl">
+      <div className="text-xl font-bold">ממשק מדריך</div>
       
       <NavigationMenu dir="rtl">
-        <NavigationMenuList className="gap-2">
+        <NavigationMenuList className="gap-3">
           <NavigationMenuItem>
             <Button 
               variant="outline" 
-              className="text-white border-white hover:bg-white/20"
+              size="lg"
+              className="text-white border-white hover:bg-white/30 text-base font-bold"
               onClick={() => navigate('/dashboard')}
             >
-              <LayoutDashboard className="ml-2" size={16} />
+              <LayoutDashboard className="ml-2" size={18} />
               דף ראשי
             </Button>
           </NavigationMenuItem>
@@ -41,10 +41,11 @@ const GuideNavigation: React.FC = () => {
             <NavigationMenuItem>
               <Button 
                 variant="outline" 
-                className="text-white border-white hover:bg-white/20"
+                size="lg"
+                className="text-white border-white hover:bg-white/30 text-base font-bold"
                 onClick={() => navigate('/admin')}
               >
-                <Users className="ml-2" size={16} />
+                <Users className="ml-2" size={18} />
                 ניהול קייטנה
               </Button>
             </NavigationMenuItem>
@@ -53,10 +54,11 @@ const GuideNavigation: React.FC = () => {
           <NavigationMenuItem>
             <Button 
               variant="outline" 
-              className="text-white border-white hover:bg-white/20"
+              size="lg"
+              className="text-white border-white hover:bg-white/30 text-base font-bold"
               onClick={() => navigate('/python-course')}
             >
-              <BookOpen className="ml-2" size={16} />
+              <BookOpen className="ml-2" size={18} />
               קורס פייתון
             </Button>
           </NavigationMenuItem>
