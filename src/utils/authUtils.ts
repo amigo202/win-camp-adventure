@@ -4,8 +4,8 @@
 // Mock credentials - in a real app, these would be stored securely on a server
 const MOCK_USERS = [
   { username: "WINCAMP", password: "12345", isAdmin: true, displayName: "WINCAMP" },
-  { username: "WINCAMP100", password: "12345", isAdmin: false, displayName: "מדריך 1" },
-  { username: "WINCAMP200", password: "12345", isAdmin: false, displayName: "מדריך 2" },
+  { username: "WINCAMP100", password: "12345", isAdmin: false, isGuide: true, displayName: "מדריך 1" },
+  { username: "WINCAMP200", password: "12345", isAdmin: false, isGuide: true, displayName: "מדריך 2" },
   { username: "STUDENT1", password: "12345", isAdmin: false, isStudent: true, displayName: "תלמיד 1" },
   { username: "STUDENT2", password: "12345", isAdmin: false, isStudent: true, displayName: "תלמיד 2" },
   { username: "STUDENT3", password: "12345", isAdmin: false, isStudent: true, displayName: "תלמיד 3" },
@@ -18,6 +18,7 @@ export interface User {
   displayName: string;
   isAdmin?: boolean;
   isStudent?: boolean;
+  isGuide?: boolean;
 }
 
 // Login function
@@ -64,9 +65,10 @@ export const isStudent = (): boolean => {
   return user?.isStudent === true;
 };
 
-// Check if user is a guide (not admin, not student)
+// Check if user is a guide (has isGuide flag or is not admin and not student)
 export const isGuide = (): boolean => {
   const user = getCurrentUser();
+  if (user?.isGuide === true) return true;
   return !user?.isAdmin && !user?.isStudent;
 };
 

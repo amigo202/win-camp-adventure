@@ -36,7 +36,7 @@ const GuideNavigation: React.FC = () => {
             <Button 
               variant="outline" 
               size="lg"
-              className="text-white border-white hover:bg-white/30 text-base font-bold"
+              className="bg-indigo-800 text-white border-white hover:bg-indigo-700 text-base font-bold"
               onClick={() => navigate('/dashboard')}
             >
               <LayoutDashboard className="ml-2" size={18} />
@@ -49,7 +49,7 @@ const GuideNavigation: React.FC = () => {
               <Button 
                 variant="outline" 
                 size="lg"
-                className="text-white border-white hover:bg-white/30 text-base font-bold"
+                className="bg-indigo-800 text-white border-white hover:bg-indigo-700 text-base font-bold"
                 onClick={() => navigate('/admin')}
               >
                 <Users className="ml-2" size={18} />
@@ -62,7 +62,7 @@ const GuideNavigation: React.FC = () => {
             <Button 
               variant="outline" 
               size="lg"
-              className="text-white border-white hover:bg-white/30 text-base font-bold"
+              className="bg-indigo-800 text-white border-white hover:bg-indigo-700 text-base font-bold"
               onClick={() => navigate('/python-course')}
             >
               <BookOpen className="ml-2" size={18} />
