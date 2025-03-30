@@ -1,9 +1,12 @@
 
 import React from "react";
+import { Copy } from "lucide-react";
+import { toast } from "../ui/use-toast";
 
 export interface LessonContentItem {
   text: string;
   type: "paragraph" | "code";
+  explanation?: string; // Added explanation field
 }
 
 export interface LessonData {
@@ -28,6 +31,15 @@ const LessonItem: React.FC<LessonItemProps> = ({
   onToggle,
   onTryCode,
 }) => {
+  const handleCopyCode = (code: string) => {
+    navigator.clipboard.writeText(code);
+    toast({
+      title: "הועתק!",
+      description: "הקוד הועתק ללוח",
+      duration: 2000,
+    });
+  };
+
   return (
     <div className="bg-white p-5 rounded-lg shadow-md hover:shadow-lg transition-all border border-gray-100">
       <div 
@@ -50,9 +62,29 @@ const LessonItem: React.FC<LessonItemProps> = ({
                 <p className="text-gray-800 text-base leading-relaxed">{item.text}</p>
               ) : (
                 <div>
-                  <pre className="bg-gray-100 p-4 rounded-lg font-mono text-sm overflow-x-auto whitespace-pre-wrap border border-gray-200">
-                    {item.text}
-                  </pre>
+                  <div className="relative">
+                    <pre className="bg-gray-100 p-4 rounded-lg font-mono text-sm overflow-x-auto whitespace-pre-wrap border border-gray-200">
+                      {item.text}
+                    </pre>
+                    <button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleCopyCode(item.text);
+                      }}
+                      className="absolute top-2 right-2 p-1 bg-white rounded-md hover:bg-gray-100 transition-colors"
+                      aria-label="העתק קוד"
+                    >
+                      <Copy size={16} />
+                    </button>
+                  </div>
+                  
+                  {item.explanation && (
+                    <div className="mt-2 p-3 bg-yellow-50 rounded-md text-sm">
+                      <span className="font-bold">הסבר: </span>
+                      {item.explanation}
+                    </div>
+                  )}
+                  
                   <button 
                     onClick={() => onTryCode(item.text)}
                     className="mt-3 w-full text-sm bg-indigo-100 hover:bg-indigo-200 text-indigo-700 px-4 py-2 rounded-md transition-colors flex items-center justify-center"
