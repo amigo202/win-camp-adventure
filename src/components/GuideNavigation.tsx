@@ -2,12 +2,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ChevronLeft, LayoutDashboard, Users, BookOpen } from 'lucide-react';
+import { LayoutDashboard, Users, BookOpen } from 'lucide-react';
 import { 
   NavigationMenu,
   NavigationMenuList,
   NavigationMenuItem,
-  NavigationMenuLink,
   navigationMenuTriggerStyle
 } from '@/components/ui/navigation-menu';
 import { isGuide, isAdmin } from '../utils/authUtils';
