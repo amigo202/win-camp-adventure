@@ -1,5 +1,5 @@
 
-import { Student } from '../components/admin/StudentManagement';
+import { Student } from '../types/student';
 
 // מפתח localStorage לשמירת נתוני תלמידים
 const STUDENTS_STORAGE_KEY = 'wincamp_students';
