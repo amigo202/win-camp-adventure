@@ -1,5 +1,5 @@
-
 import React, { useState } from "react";
+import PythonPlayground from "./PythonPlayground";
 
 const lessons = [
   {
@@ -30,7 +30,8 @@ const lessons = [
         text: "print(\"שלום\", \"לכולם\", \"!\")",
         type: "code"
       }
-    ]
+    ],
+    sampleCode: "# בואו ננסה להדפיס משהו\nprint(\"שלום עולם!\")\n\n# נסו לשנות את הטקסט כאן:\nprint(\"אני לומד פייתון!\")"
   },
   {
     title: "משתנים וסוגי מידע",
@@ -60,7 +61,8 @@ const lessons = [
         text: "שם_פרטי = \"יוסי\"\nשם_משפחה = \"כהן\"\nשם_מלא = שם_פרטי + \" \" + שם_משפחה\nprint(שם_מלא)  # יציג: יוסי כהן",
         type: "code"
       }
-    ]
+    ],
+    sampleCode: "# שמירת שם וגיל\nname = \"דניאל\"\nage = 10\n\n# הדפסת מידע\nprint(\"שם:\", name)\nprint(\"גיל:\", age)\n\n# נסו לשנות את השם והגיל"
   },
   {
     title: "תנאים והחלטות",
@@ -90,7 +92,8 @@ const lessons = [
         text: "מספר_סודי = 7\nניחוש = int(input(\"נחשו מספר בין 1 ל-10: \"))\n\nif ניחוש == מספר_סודי:\n    print(\"כל הכבוד! ניחשתם נכון!\")\nelif ניחוש < מספר_סודי:\n    print(\"נמוך מדי...\")\nelse:\n    print(\"גבוה מדי...\")",
         type: "code"
       }
-    ]
+    ],
+    sampleCode: "# בדיקת גילאים\nage = 18\n\nif age >= 18:\n    print(\"אתה בגיר, מותר לך להצביע.\")\nelse:\n    print(\"אתה עדיין צעיר מכדי להצביע.\")\n\n# נסו לשנות את הגיל"
   },
   {
     title: "לולאות והפעלה חוזרת",
@@ -128,20 +131,37 @@ const lessons = [
         text: "import random\n\nמספר_סודי = random.randint(1, 20)\nניחוש = 0\nנסיונות = 0\n\nwhile ניחוש != מספר_סודי and נסיונות < 5:\n    ניחוש = int(input(\"נחשו מספר בין 1 ל-20: \"))\n    נסיונות = נסיונות + 1\n    \n    if ניחוש < מספר_סודי:\n        print(\"נמוך מדי!\")\n    elif ניחוש > מספר_סודי:\n        print(\"גבוה מדי!\")\n    else:\n        print(\"כל הכבוד! ניחשתם נכון ב-\", נסיונות, \"ניסיונות!\")\n\nif ניחוש != מספר_סודי:\n    print(\"המספר הסודי היה\", מספר_סודי)",
         type: "code"
       }
-    ]
+    ],
+    sampleCode: "# הדפסת רשימת מספרים\nnumbers = [1, 2, 3, 4, 5]\n\nfor num in numbers:\n    print(num)\n\n# נסו לשנות את הרשימה"
   }
 ];
 
 const PythonLessonsSection: React.FC = () => {
   const [showLessons, setShowLessons] = useState(false);
   const [expandedLesson, setExpandedLesson] = useState<number | null>(null);
+  const [showPlayground, setShowPlayground] = useState(false);
+  const [playgroundCode, setPlaygroundCode] = useState("# כתבו את הקוד שלכם כאן\nprint('שלום עולם!')");
 
   const toggleLesson = (index: number) => {
     if (expandedLesson === index) {
       setExpandedLesson(null);
     } else {
       setExpandedLesson(index);
+      // If a lesson has sample code and is expanded, update the playground
+      if (lessons[index].sampleCode) {
+        setPlaygroundCode(lessons[index].sampleCode);
+        setShowPlayground(true);
+      }
     }
+  };
+
+  const tryCode = (code: string) => {
+    setPlaygroundCode(code);
+    setShowPlayground(true);
+    // Scroll to playground
+    setTimeout(() => {
+      document.getElementById('python-playground')?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
   };
 
   return (
@@ -176,9 +196,17 @@ const PythonLessonsSection: React.FC = () => {
                       {item.type === "paragraph" ? (
                         <p className="text-gray-800 mb-2">{item.text}</p>
                       ) : (
-                        <pre className="bg-gray-100 p-3 rounded font-mono text-sm overflow-x-auto whitespace-pre-wrap">
-                          {item.text}
-                        </pre>
+                        <div>
+                          <pre className="bg-gray-100 p-3 rounded font-mono text-sm overflow-x-auto whitespace-pre-wrap">
+                            {item.text}
+                          </pre>
+                          <button 
+                            onClick={() => tryCode(item.text)}
+                            className="mt-2 text-sm bg-indigo-100 hover:bg-indigo-200 text-indigo-700 px-3 py-1 rounded transition-colors"
+                          >
+                            נסו את הקוד הזה
+                          </button>
+                        </div>
                       )}
                     </div>
                   ))}
@@ -186,6 +214,12 @@ const PythonLessonsSection: React.FC = () => {
               )}
             </div>
           ))}
+
+          {showPlayground && (
+            <div id="python-playground" className="mt-6">
+              <PythonPlayground initialCode={playgroundCode} />
+            </div>
+          )}
 
           <div className="bg-indigo-100 border-r-4 border-indigo-500 p-4 mt-6">
             <h4 className="font-bold text-indigo-700 mb-1">🎉 פרויקט סיום:</h4>
@@ -208,6 +242,27 @@ else:
 
 print("תודה ששוחחת איתי", שם + "! להתראות!")
 </pre>
+            <button 
+              onClick={() => tryCode(`# פרוייקט לדוגמה - רובוט שיחה פשוט
+שם = input("שלום! איך קוראים לך? ")
+print("נעים להכיר,", שם + "!")
+
+תחביב = input("מה אתה אוהב לעשות? ")
+
+if "משחק" in תחביב or "משחקים" in תחביב:
+    print("גם אני אוהב לשחק משחקים!")
+elif "ספורט" in תחביב:
+    print("ספורט זה בריא ומהנה!")
+elif "קריאה" in תחביב or "לקרוא" in תחביב:
+    print("ספרים פותחים לנו עולמות חדשים!")
+else:
+    print(תחביב, "זה באמת תחביב מעניין!")
+
+print("תודה ששוחחת איתי", שם + "! להתראות!")`)}
+              className="mt-2 text-sm bg-indigo-500 hover:bg-indigo-600 text-white px-3 py-1 rounded transition-colors"
+            >
+              נסו את הפרויקט הזה
+            </button>
           </div>
         </div>
       )}
