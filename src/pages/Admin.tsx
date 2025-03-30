@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import StudentManagement from '../components/admin/StudentManagement';
 import AttendanceTracker from '../components/admin/AttendanceTracker';
 import ActivityMonitor from '../components/admin/ActivityMonitor';
+import ActivityIdeas from '../components/admin/ActivityIdeas';
 import { ChevronLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -46,10 +47,11 @@ const Admin: React.FC = () => {
         </div>
 
         <Tabs defaultValue="students" className="w-full">
-          <TabsList className="grid grid-cols-3 mb-8">
+          <TabsList className="grid grid-cols-4 mb-8">
             <TabsTrigger value="students">ניהול תלמידים</TabsTrigger>
             <TabsTrigger value="attendance">רישום נוכחות</TabsTrigger>
             <TabsTrigger value="activity">מעקב פעילות</TabsTrigger>
+            <TabsTrigger value="ideas">רעיונות לפעילויות</TabsTrigger>
           </TabsList>
           
           <TabsContent value="students" className="bg-white/10 rounded-lg p-4">
@@ -62,6 +64,10 @@ const Admin: React.FC = () => {
           
           <TabsContent value="activity" className="bg-white/10 rounded-lg p-4">
             <ActivityMonitor />
+          </TabsContent>
+
+          <TabsContent value="ideas" className="bg-white/10 rounded-lg p-4">
+            <ActivityIdeas />
           </TabsContent>
         </Tabs>
       </div>
