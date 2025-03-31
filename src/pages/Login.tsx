@@ -29,10 +29,8 @@ const Login: React.FC = () => {
         });
         
         // Redirect based on user role
-        if (user.role === 'admin') {
+        if (user.role === 'admin' || user.role === 'instructor') {
           navigate('/admin');
-        } else if (user.role === 'instructor') {
-          navigate('/python-course');
         } else {
           navigate('/');
         }

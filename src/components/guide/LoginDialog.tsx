@@ -35,12 +35,8 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ open, onOpenChange }) => {
         // Close the dialog first
         onOpenChange(false);
         
-        // Redirect based on user role
-        if (user.role === 'admin') {
-          navigate('/admin');
-        } else {
-          navigate('/python-course');
-        }
+        // תמיד להפנות למסך הניהול
+        navigate('/admin');
       } else {
         toast({
           title: "התחברות נכשלה",

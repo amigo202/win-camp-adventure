@@ -16,7 +16,7 @@ const GuideNavigation: React.FC = () => {
   const isUserAdmin = isAdmin();
   const user = getCurrentUser();
 
-  // Only show this navigation for guides or admins
+  // רק להציג את התפריט הזה למדריכים או מנהלים
   if (!isUserGuide && !isUserAdmin) {
     return null;
   }
@@ -39,19 +39,17 @@ const GuideNavigation: React.FC = () => {
             </Button>
           </NavigationMenuItem>
           
-          {isUserAdmin && (
-            <NavigationMenuItem>
-              <Button 
-                variant="outline" 
-                size="lg"
-                className="bg-indigo-800 text-white border-white hover:bg-indigo-700 text-base font-bold"
-                onClick={() => navigate('/admin')}
-              >
-                <Users className="ml-2" size={18} />
-                ניהול קייטנה
-              </Button>
-            </NavigationMenuItem>
-          )}
+          <NavigationMenuItem>
+            <Button 
+              variant="outline" 
+              size="lg"
+              className="bg-indigo-800 text-white border-white hover:bg-indigo-700 text-base font-bold"
+              onClick={() => navigate('/admin')}
+            >
+              <Users className="ml-2" size={18} />
+              ניהול קייטנה
+            </Button>
+          </NavigationMenuItem>
           
           <NavigationMenuItem>
             <Button 

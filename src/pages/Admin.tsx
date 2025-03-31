@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { isLoggedIn, getCurrentUser, isAdmin } from '../utils/authUtils';
+import { isLoggedIn, getCurrentUser, isAdmin, isGuide } from '../utils/authUtils';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import StudentManagement from '../components/admin/StudentManagement';
 import AttendanceTracker from '../components/admin/AttendanceTracker';
@@ -17,23 +17,22 @@ const Admin: React.FC = () => {
 
   useEffect(() => {
     const checkAuth = () => {
-      // Check if user is logged in
+      // בדיקה אם המשתמש מחובר
       if (!isLoggedIn()) {
         navigate('/login');
         return;
       }
 
-      // Check if user is admin
-      if (!isAdmin()) {
-        // If not admin, redirect to appropriate page
-        navigate('/python-course');
+      // בדיקה אם המשתמש מנהל או מדריך
+      if (!isAdmin() && !isGuide()) {
+        navigate('/');
         return;
       }
 
       setLoading(false);
     };
 
-    // Run auth check immediately
+    // הרץ בדיקת אימות מידית
     checkAuth();
   }, [navigate]);
 

@@ -18,7 +18,7 @@ const AdminRoute = ({ element }: { element: JSX.Element }) => {
   }
   
   if (!isAdmin()) {
-    return <Navigate to="/python-course" />;
+    return <Navigate to="/" />;
   }
   
   return element;
@@ -40,10 +40,8 @@ const GuideRoute = ({ element }: { element: JSX.Element }) => {
 // Create a redirect component for already logged in users
 const AuthRedirect = ({ element }: { element: JSX.Element }) => {
   if (isLoggedIn()) {
-    if (isAdmin()) {
+    if (isAdmin() || isGuide()) {
       return <Navigate to="/admin" />;
-    } else if (isGuide()) {
-      return <Navigate to="/python-course" />;
     } else {
       return <Navigate to="/" />;
     }
