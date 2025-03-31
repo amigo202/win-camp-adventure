@@ -1,4 +1,5 @@
 
+import React from 'react';
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -12,7 +13,7 @@ import Login from "./pages/Login";
 import Index from "./pages/Index";
 import { isLoggedIn, isAdmin, isStudent, isGuide, getCurrentUser } from "./utils/authUtils";
 
-// Create an admin-only route component
+// Modify the existing route components to allow guides
 const AdminRoute = ({ element }: { element: JSX.Element }) => {
   if (!isLoggedIn()) {
     return <Navigate to="/login" />;
@@ -25,7 +26,7 @@ const AdminRoute = ({ element }: { element: JSX.Element }) => {
   return element;
 };
 
-// Python Course - Admin only route
+// Update PythonRoute to use the same logic as AdminRoute
 const PythonRoute = ({ element }: { element: JSX.Element }) => {
   if (!isLoggedIn()) {
     return <Navigate to="/login" />;
@@ -38,15 +39,16 @@ const PythonRoute = ({ element }: { element: JSX.Element }) => {
   return element;
 };
 
-// Create a redirect component for already logged in users
-const AuthRedirect = ({ element }: { element: JSX.Element }) => {
-  if (isLoggedIn()) {
-    if (isAdmin() || isGuide()) {
-      return <Navigate to="/admin" />;
-    } else {
-      return <Navigate to="/" />;
-    }
+// Create a route for Tools Gallery that allows guides and admins
+const ToolsGalleryRoute = ({ element }: { element: JSX.Element }) => {
+  if (!isLoggedIn()) {
+    return <Navigate to="/login" />;
   }
+  
+  if (!isAdmin() && !isGuide()) {
+    return <Navigate to="/" />;
+  }
+  
   return element;
 };
 
@@ -60,7 +62,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/tools" element={<ToolsGallery />} />
+          <Route path="/tools" element={<ToolsGalleryRoute element={<ToolsGallery />} />} />
           <Route path="/login" element={<AuthRedirect element={<Login />} />} />
           <Route path="/admin" element={<AdminRoute element={<Admin />} />} />
           <Route path="/python-course" element={<PythonRoute element={<PythonCourse />} />} />
