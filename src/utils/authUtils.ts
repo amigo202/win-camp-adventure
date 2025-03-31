@@ -32,7 +32,8 @@ export const loginUser = (username: string, password: string): User | null => {
     const user: User = {
       username: matchedUser.username,
       displayName: matchedUser.displayName,
-      role: matchedUser.role
+      // Explicitly type assert the role to ensure it matches the allowed types
+      role: matchedUser.role as "admin" | "instructor" | "student"
     };
     
     // Store user in localStorage for persistence
