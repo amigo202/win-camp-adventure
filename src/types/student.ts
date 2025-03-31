@@ -9,4 +9,5 @@ export interface Student {
   attendanceDays?: string[];
   completedTools?: string[];
   lastActive?: string;
+  createdBy?: string; // Adding the createdBy property to track which instructor created this student
 }
