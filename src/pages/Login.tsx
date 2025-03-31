@@ -1,7 +1,7 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { loginUser } from '../utils/authUtils';
+import { loginUser, isLoggedIn, isAdmin, isGuide } from '../utils/authUtils';
 import { toast } from '../components/ui/use-toast';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,6 +14,19 @@ const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  
+  // Check if user is already logged in and redirect accordingly
+  useEffect(() => {
+    if (isLoggedIn()) {
+      if (isAdmin()) {
+        navigate('/admin');
+      } else if (isGuide()) {
+        navigate('/python-course');
+      } else {
+        navigate('/');
+      }
+    }
+  }, [navigate]);
   
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,22 +41,24 @@ const Login: React.FC = () => {
           description: `ברוך הבא, ${user.displayName}!`,
         });
         
-        if (user.role === 'admin') {
-          navigate('/admin');
-        } else if (user.role === 'instructor') {
-          navigate('/');
-        } else {
-          navigate('/');
-        }
+        // Small delay to ensure the state is updated before navigation
+        setTimeout(() => {
+          if (user.role === 'admin') {
+            navigate('/admin');
+          } else if (user.role === 'instructor') {
+            navigate('/python-course');
+          } else {
+            navigate('/');
+          }
+        }, 100);
       } else {
         toast({
           title: "התחברות נכשלה",
           description: "שם משתמש או סיסמה לא נכונים",
           variant: "destructive",
         });
+        setLoading(false);
       }
-      
-      setLoading(false);
     }, 800);
   };
   

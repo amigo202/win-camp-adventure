@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getCurrentUser, getCompletedToolsCount, isLoggedIn, isAdmin } from '../utils/authUtils';
+import { getCurrentUser, getCompletedToolsCount, isLoggedIn, isAdmin, isGuide } from '../utils/authUtils';
 import { Tool } from '../utils/data';
 import StarsBackground from '../components/StarsBackground';
 import SearchBar from '../components/SearchBar';
@@ -16,9 +16,17 @@ const ToolsGallery: React.FC = () => {
   const [showGuideLogin, setShowGuideLogin] = useState(false);
   
   useEffect(() => {
-    // If the user is already logged in as an admin, redirect them
-    if (isLoggedIn() && isAdmin()) {
-      navigate('/admin');
+    // If the user is already logged in as an admin or guide, redirect them to the appropriate page
+    if (isLoggedIn()) {
+      if (isAdmin()) {
+        navigate('/admin');
+        return;
+      }
+      
+      if (isGuide()) {
+        navigate('/python-course');
+        return;
+      }
     }
     
     updateCompletedCount();
@@ -47,6 +55,16 @@ const ToolsGallery: React.FC = () => {
           }, 2000);
         }
       }, 500);
+    }
+  };
+  
+  // Handle successful login by closing the dialog and redirecting
+  const handleLoginSuccess = (role: string) => {
+    setShowGuideLogin(false);
+    if (role === 'admin') {
+      navigate('/admin');
+    } else if (role === 'instructor') {
+      navigate('/python-course');
     }
   };
   

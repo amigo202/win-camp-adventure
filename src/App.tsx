@@ -13,12 +13,12 @@ import { isLoggedIn, isAdmin, isStudent, isGuide, getCurrentUser } from "./utils
 
 // Create an admin-only route component
 const AdminRoute = ({ element }: { element: JSX.Element }) => {
-  return isLoggedIn() && isAdmin() ? element : <Navigate to="/" />;
+  return isLoggedIn() && isAdmin() ? element : <Navigate to="/login" />;
 };
 
 // Create a guide-only route component
 const GuideRoute = ({ element }: { element: JSX.Element }) => {
-  return isLoggedIn() && (isGuide() || isAdmin()) ? element : <Navigate to="/" />;
+  return isLoggedIn() && (isGuide() || isAdmin()) ? element : <Navigate to="/login" />;
 };
 
 const queryClient = new QueryClient();

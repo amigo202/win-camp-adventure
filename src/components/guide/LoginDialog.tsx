@@ -22,6 +22,7 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ open, onOpenChange }) => {
   const handleGuideLogin = () => {
     setLoading(true);
     
+    // Simulate network request with a slight delay
     setTimeout(() => {
       const user = loginUser(username, password);
       
@@ -31,21 +32,27 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ open, onOpenChange }) => {
           description: `ברוך הבא, ${user.displayName}!`,
         });
         
-        if (user.role === 'admin') {
-          navigate('/admin');
-        } else {
-          navigate('/');
-        }
+        // Close the dialog first to prevent UI issues
+        onOpenChange(false);
+        
+        // Redirect with a small delay to ensure the dialog closes first
+        setTimeout(() => {
+          if (user.role === 'admin') {
+            navigate('/admin');
+          } else if (user.role === 'instructor') {
+            navigate('/python-course');
+          }
+          setLoading(false);
+        }, 100);
       } else {
         toast({
           title: "התחברות נכשלה",
           description: "שם משתמש או סיסמה לא נכונים. רק למדריכים ומנהלים.",
           variant: "destructive",
         });
+        setLoading(false);
       }
-      
-      setLoading(false);
-    }, 800); // Simulate network request
+    }, 800);
   };
   
   return (
