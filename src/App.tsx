@@ -13,12 +13,28 @@ import { isLoggedIn, isAdmin, isStudent, isGuide, getCurrentUser } from "./utils
 
 // Create an admin-only route component
 const AdminRoute = ({ element }: { element: JSX.Element }) => {
-  return isLoggedIn() && isAdmin() ? element : <Navigate to="/login" />;
+  if (!isLoggedIn()) {
+    return <Navigate to="/login" />;
+  }
+  
+  if (!isAdmin()) {
+    return <Navigate to="/python-course" />;
+  }
+  
+  return element;
 };
 
 // Create a guide-only route component
 const GuideRoute = ({ element }: { element: JSX.Element }) => {
-  return isLoggedIn() && (isGuide() || isAdmin()) ? element : <Navigate to="/login" />;
+  if (!isLoggedIn()) {
+    return <Navigate to="/login" />;
+  }
+  
+  if (!isGuide() && !isAdmin()) {
+    return <Navigate to="/" />;
+  }
+  
+  return element;
 };
 
 // Create a redirect component for already logged in users
@@ -28,6 +44,8 @@ const AuthRedirect = ({ element }: { element: JSX.Element }) => {
       return <Navigate to="/admin" />;
     } else if (isGuide()) {
       return <Navigate to="/python-course" />;
+    } else {
+      return <Navigate to="/" />;
     }
   }
   return element;

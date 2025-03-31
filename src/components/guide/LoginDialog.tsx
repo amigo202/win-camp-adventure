@@ -35,14 +35,12 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ open, onOpenChange }) => {
         // Close the dialog first
         onOpenChange(false);
         
-        // Use setTimeout to ensure state is updated before navigation
-        setTimeout(() => {
-          if (user.role === 'admin') {
-            navigate('/admin');
-          } else if (user.role === 'instructor') {
-            navigate('/python-course');
-          }
-        }, 300);
+        // Redirect based on user role
+        if (user.role === 'admin') {
+          navigate('/admin');
+        } else {
+          navigate('/python-course');
+        }
       } else {
         toast({
           title: "התחברות נכשלה",

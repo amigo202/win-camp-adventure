@@ -16,20 +16,25 @@ const Admin: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check if user is logged in
-    if (!isLoggedIn()) {
-      navigate('/login');
-      return;
-    }
+    const checkAuth = () => {
+      // Check if user is logged in
+      if (!isLoggedIn()) {
+        navigate('/login');
+        return;
+      }
 
-    // Check if user is admin
-    if (!isAdmin()) {
-      // If not admin, redirect to appropriate page
-      navigate('/python-course');
-      return;
-    }
+      // Check if user is admin
+      if (!isAdmin()) {
+        // If not admin, redirect to appropriate page
+        navigate('/python-course');
+        return;
+      }
 
-    setLoading(false);
+      setLoading(false);
+    };
+
+    // Run auth check immediately
+    checkAuth();
   }, [navigate]);
 
   if (loading) {
