@@ -54,7 +54,7 @@
   
   /* Custom utility classes */
   .glass-card {
-    @apply bg-white/80 backdrop-blur-sm border border-white/20 shadow-lg;
+    @apply bg-white/70 backdrop-blur-sm border border-white/20 shadow-lg rounded-xl transition-all hover:shadow-xl;
   }
   
   .card-hover {
@@ -62,15 +62,15 @@
   }
   
   .btn-primary {
-    @apply bg-wincamp-turquoise hover:bg-wincamp-blue text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg;
+    @apply bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105;
   }
   
   .btn-secondary {
-    @apply bg-wincamp-orange hover:bg-wincamp-yellow text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg;
+    @apply bg-wincamp-orange hover:bg-wincamp-yellow text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105;
   }
   
   .section-title {
-    @apply text-2xl font-bold text-wincamp-purple mb-4 flex items-center;
+    @apply text-3xl font-bold text-blue-900 mb-4 flex items-center;
   }
   
   .section-icon {
@@ -121,23 +121,34 @@
   
   /* Custom tooltip */
   .tooltip {
-    @apply invisible absolute z-10 py-2 px-3 bg-gray-800 text-white text-sm rounded-lg opacity-0 transition-opacity duration-300 w-48 text-center bottom-full left-1/2 -translate-x-1/2 mb-2;
+    @apply invisible absolute z-10 py-3 px-4 bg-blue-900 text-white text-sm rounded-lg opacity-0 transition-opacity duration-300 w-48 text-center bottom-full left-1/2 -translate-x-1/2 mb-2 shadow-lg;
   }
   
   .tooltip-container:hover .tooltip {
     @apply visible opacity-100;
   }
 
-  /* Fix light text on light background */
-  .glass-card {
-    @apply text-gray-800;
+  /* Typography improvements */
+  h1, h2, h3, h4, h5, h6 {
+    @apply tracking-wide;
   }
   
-  .text-gray-500 {
-    @apply text-gray-600;
+  p {
+    @apply leading-relaxed;
   }
   
-  .text-gray-600 {
-    @apply text-gray-700;
+  /* Input focus styles */
+  input:focus, textarea:focus, select:focus {
+    @apply ring-2 ring-blue-400 ring-opacity-50;
+  }
+  
+  /* Button improvements */
+  button {
+    @apply transition-all duration-200;
+  }
+  
+  /* Card improvements */
+  .card {
+    @apply bg-white/70 backdrop-blur-sm rounded-xl p-6 shadow-lg transition-all hover:shadow-xl;
   }
 }

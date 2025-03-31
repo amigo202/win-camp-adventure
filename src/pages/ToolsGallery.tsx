@@ -56,7 +56,7 @@ const ToolsGallery: React.FC = () => {
   };
   
   return (
-    <div className="min-h-screen py-6 px-4 md:px-8 relative" dir="rtl">
+    <div className="min-h-screen py-6 px-4 md:px-8 relative bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50" dir="rtl">
       <StarsBackground />
       
       <div className="max-w-6xl mx-auto">
@@ -77,7 +77,7 @@ const ToolsGallery: React.FC = () => {
         onOpenChange={setShowGuideLogin}
       />
       
-      <div className="mt-10 text-center text-gray-500 text-sm">
+      <div className="mt-10 text-center text-gray-600 text-lg bg-white/70 backdrop-blur-sm rounded-xl p-4 shadow-lg max-w-lg mx-auto">
         WIN CAMP &copy; {new Date().getFullYear()} | עולם של הרפתקאות טכנולוגיות
       </div>
     </div>
