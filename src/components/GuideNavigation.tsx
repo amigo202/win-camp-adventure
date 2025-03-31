@@ -2,7 +2,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { LayoutDashboard, Users } from 'lucide-react';
+import { LayoutDashboard } from 'lucide-react';
 import { 
   NavigationMenu,
   NavigationMenuList,
@@ -49,19 +49,7 @@ const GuideNavigation: React.FC = () => {
               onClick={() => navigate('/')}
             >
               <LayoutDashboard className="ml-2" size={18} />
-              לדף הראשי
-            </Button>
-          </NavigationMenuItem>
-          
-          <NavigationMenuItem>
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="bg-white/20 text-white border-white/30 hover:bg-white/30 hover:text-white text-base font-bold shadow-md backdrop-blur-sm rounded-xl hover:scale-105 transition-all"
-              onClick={() => navigate('/admin')}
-            >
-              <Users className="ml-2" size={18} />
-              ניהול קייטנה
+              מעבר לגלריית הכלים
             </Button>
           </NavigationMenuItem>
         </NavigationMenuList>
