@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { Tool } from '../utils/data';
 import { isToolCompleted, markToolAsComplete } from '../utils/authUtils';
 import { Check } from 'lucide-react';
-import PythonLessonsSection from './PythonLessonsSection';
 
 interface ToolCardProps {
   tool: Tool;
@@ -12,7 +11,6 @@ interface ToolCardProps {
 const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
   const [completed, setCompleted] = useState(false);
   const [animateIn, setAnimateIn] = useState(false);
-  const [showPythonLessons, setShowPythonLessons] = useState(false);
   
   useEffect(() => {
     // Check if the tool is already completed
@@ -27,11 +25,7 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
   }, [tool.id]);
   
   const handleStartClick = () => {
-    if (tool.id === "python") {
-      setShowPythonLessons(true);
-    } else {
-      window.open(tool.link, "_blank");
-    }
+    window.open(tool.link, "_blank");
   };
   
   const handleToggleCompleted = (e: React.MouseEvent) => {
@@ -82,12 +76,6 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
           {tool.description}
         </div>
       </div>
-      
-      {showPythonLessons && tool.id === "python" && (
-        <div className="mt-4">
-          <PythonLessonsSection />
-        </div>
-      )}
     </div>
   );
 };

@@ -1,7 +1,8 @@
+
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { LayoutDashboard, Wrench } from 'lucide-react';
+import { Wrench } from 'lucide-react';
 import { 
   NavigationMenu,
   NavigationMenuList,
@@ -38,17 +39,6 @@ const GuideNavigation: React.FC = () => {
       
       <NavigationMenu dir="rtl" className="relative z-10">
         <NavigationMenuList className="gap-3">
-          <NavigationMenuItem>
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="bg-white/20 text-white border-white/30 hover:bg-white/30 hover:text-white text-base font-bold shadow-md backdrop-blur-sm rounded-xl hover:scale-105 transition-all mr-2"
-              onClick={() => navigate('/python-course')}
-            >
-              <LayoutDashboard className="ml-2" size={18} />
-              קורס פייתון
-            </Button>
-          </NavigationMenuItem>
           <NavigationMenuItem>
             <Button 
               variant="outline" 
