@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Header from '../components/Header';
 import GuideNavigation from '../components/GuideNavigation';
@@ -12,7 +13,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
-import { Sparkles, Laptop, Bot, Code, Lightbulb, ChevronRight } from 'lucide-react';
+import { Sparkles, Laptop, Robot, Code, Lightbulb, ChevronRight } from 'lucide-react';
 
 const Index = () => {
   const user = getCurrentUser();
@@ -73,11 +74,11 @@ const Index = () => {
                 <Code className="text-wincamp-yellow mr-2" size={24} />
                 <h3 className="text-xl font-bold text-white">למידה חווייתית</h3>
               </div>
-              <p className="text-white/80">תכנות, משחקים, ויצ��רה בסביבה תומכת ומהנה</p>
+              <p className="text-white/80">תכנות, משחקים, ויצירה בסביבה תומכת ומהנה</p>
             </div>
             <div className="glass-card p-6 rounded-xl transition-all hover:bg-indigo-800/40 hover:scale-105 duration-300">
               <div className="flex items-center mb-3">
-                <Bot className="text-wincamp-turquoise mr-2" size={24} />
+                <Robot className="text-wincamp-turquoise mr-2" size={24} />
                 <h3 className="text-xl font-bold text-white">כלים חדשניים</h3>
               </div>
               <p className="text-white/80">גישה למגוון כלים טכנולוגיים עדכניים ומתקדמים</p>
@@ -183,7 +184,7 @@ const Index = () => {
           <div className="glass-card p-8 rounded-xl text-center relative overflow-hidden animate-float">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-wincamp-turquoise via-wincamp-purple to-wincamp-orange"></div>
             <h2 className="text-2xl font-bold text-white mb-4">הצטרפו אלינו למסע טכנולוגי מרתק!</h2>
-            <p className="text-white/90 mb-6 max-w-3xl mx-auto">במחנה WIN CAMP, אנו מאמינים שכל ילד יכול להפוך לממציא, מתכנת או יזם של המחר. בואו לגלות את הפוטנצי��ל!</p>
+            <p className="text-white/90 mb-6 max-w-3xl mx-auto">במחנה WIN CAMP, אנו מאמינים שכל ילד יכול להפוך לממציא, מתכנת או יזם של המחר. בואו לגלות את הפוטנציאל!</p>
             <Link 
               to="/tools" 
               className="inline-block px-8 py-4 bg-gradient-to-r from-wincamp-purple to-wincamp-blue text-white font-medium rounded-full transition-all transform hover:scale-105 shadow-lg"
