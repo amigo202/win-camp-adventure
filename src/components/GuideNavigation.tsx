@@ -2,7 +2,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { LayoutDashboard, Users, Sparkles, Zap } from 'lucide-react';
+import { LayoutDashboard, Users, Sparkles } from 'lucide-react';
 import { 
   NavigationMenu,
   NavigationMenuList,
