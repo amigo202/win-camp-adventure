@@ -1,5 +1,5 @@
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { toast } from "sonner";
 import * as XLSX from 'xlsx';
 import { saveStudentsData, getStudentsData, deleteStudent, addStudent } from '../../utils/studentUtils';
@@ -11,7 +11,7 @@ import StudentsTable from './students/StudentsTable';
 import StudentActions from './students/StudentActions';
 
 const StudentManagement: React.FC = () => {
-  const [students, setStudents] = useState<Student[]>(() => getStudentsData());
+  const [students, setStudents] = useState<Student[]>([]);
   const [newStudent, setNewStudent] = useState<Omit<Student, 'id' | 'attendanceDays' | 'completedTools' | 'lastActive' | 'createdBy'>>({
     name: '',
     password: '',
@@ -22,16 +22,27 @@ const StudentManagement: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const currentUser = getCurrentUser();
 
+  // Load students data when component mounts
+  useEffect(() => {
+    const loadedStudents = getStudentsData();
+    console.log("Loaded students from storage:", loadedStudents);
+    setStudents(loadedStudents);
+  }, []);
+
   const handleAddStudent = () => {
-    if (!newStudent.name || !newStudent.password) {
-      toast.error("יש להזין שם ותעודת זהות");
+    if (!newStudent.name) {
+      toast.error("יש להזין שם");
       return;
     }
 
     const id = Date.now().toString();
+    // Generate random password if not provided
+    const password = newStudent.password || Math.floor(1000 + Math.random() * 9000).toString();
+    
     const student: Student = {
       id,
       ...newStudent,
+      password,
       attendanceDays: [],
       completedTools: [],
       createdBy: currentUser?.username
@@ -71,7 +82,7 @@ const StudentManagement: React.FC = () => {
     reader.onload = (event) => {
       try {
         const data = event.target?.result;
-        console.log("Raw file data:", data);
+        console.log("Raw file data received");
 
         if (!data) {
           toast.error("לא ניתן לקרוא את הקובץ");
@@ -83,34 +94,72 @@ const StudentManagement: React.FC = () => {
         
         const sheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[sheetName];
-        console.log("Raw worksheet:", worksheet);
 
-        // Set defval to empty string to handle missing values
-        const excelData = XLSX.utils.sheet_to_json<any>(worksheet, { defval: "" });
-        console.log("Excel data (full):", excelData);
-
+        // Convert Excel data to JSON with proper header detection
+        const excelData = XLSX.utils.sheet_to_json<any>(worksheet, { 
+          defval: "",
+          raw: false
+        });
+        
+        console.log(`Extracted ${excelData.length} rows from Excel file`);
+        
         if (excelData.length === 0) {
           toast.error("הקובץ ריק או לא בפורמט המצופה");
           return;
         }
 
-        const newStudents: Student[] = excelData.map((row, index) => {
-          console.log(`Processing row ${index}:`, row);
-          
-          // Check all possible field names in Hebrew and English
-          const name = row.name || row.Name || row.שם || row["שם"] || '';
-          const grade = row.grade || row.Grade || row.כיתה || row["כיתה"] || '';
-          const phone = row.phone || row.Phone || row.parentPhone || row["טלפון הורה"] || row["טלפון"] || row["טלפון"] || '';
-          const notes = row.notes || row.Notes || row.הערות || row["הערות"] || '';
-          
-          console.log("Extracted fields:", { name, grade, phone, notes });
-          
-          // Generate random password if not provided
-          const password = row.password || row.Password || row.סיסמה || row["סיסמה"] || 
-                          Math.floor(1000 + Math.random() * 9000).toString();
+        // Get the first row to check column names
+        const firstRow = excelData[0];
+        console.log("First row sample:", firstRow);
 
-          return {
-            id: (Date.now() + index).toString(),
+        // Find the appropriate column names (Hebrew or English)
+        const findColumn = (hebrewNames: string[], englishNames: string[], row: any): string => {
+          for (const name of hebrewNames) {
+            if (row[name] !== undefined) return name;
+          }
+          for (const name of englishNames) {
+            if (row[name] !== undefined) return name;
+          }
+          return "";
+        };
+
+        // Define possible column names
+        const nameColumn = findColumn(["שם", "שם מלא"], ["name", "fullname", "full name"], firstRow);
+        const gradeColumn = findColumn(["כיתה"], ["grade", "class"], firstRow);
+        const phoneColumn = findColumn(["טלפון הורה", "טלפון"], ["phone", "parent phone", "parentphone", "phone number"], firstRow);
+        const notesColumn = findColumn(["הערות"], ["notes", "comments"], firstRow);
+
+        console.log("Detected columns:", { nameColumn, gradeColumn, phoneColumn, notesColumn });
+
+        if (!nameColumn) {
+          toast.error("לא נמצאה עמודת 'שם' בקובץ האקסל");
+          return;
+        }
+
+        const newStudents: Student[] = [];
+        
+        // Process each row
+        for (let i = 0; i < excelData.length; i++) {
+          const row = excelData[i];
+          console.log(`Processing row ${i}:`, row);
+          
+          // Extract fields with the identified column names
+          const name = row[nameColumn] || '';
+          const grade = gradeColumn ? (row[gradeColumn] || '') : '';
+          const phone = phoneColumn ? (row[phoneColumn] || '') : '';
+          const notes = notesColumn ? (row[notesColumn] || '') : '';
+          
+          // Skip rows without a name
+          if (!name.trim()) {
+            console.log(`Row ${i} skipped - no name found`);
+            continue;
+          }
+          
+          // Generate random 4-digit password
+          const password = Math.floor(1000 + Math.random() * 9000).toString();
+
+          const newStudent: Student = {
+            id: (Date.now() + i).toString(),
             name,
             password,
             grade,
@@ -120,28 +169,24 @@ const StudentManagement: React.FC = () => {
             completedTools: [],
             createdBy: currentUser?.username
           };
-        });
+          
+          newStudents.push(newStudent);
+        }
 
-        console.log("Transformed students:", newStudents);
-
-        // Validate that students have at least name and either grade or phone
-        const validStudents = newStudents.filter(student => 
-          student.name && (student.grade || student.parentPhone)
-        );
+        console.log(`Created ${newStudents.length} new student records`);
         
-        if (validStudents.length === 0) {
-          toast.error("לא נמצאו תלמידים חוקיים בקובץ. יש לוודא שיש עמודות שם, כיתה וטלפון.");
+        if (newStudents.length === 0) {
+          toast.error("לא נמצאו תלמידים חוקיים בקובץ");
           return;
         }
 
-        if (validStudents.length !== newStudents.length) {
-          toast.warning(`${newStudents.length - validStudents.length} תלמידים לא יובאו בגלל חוסר פרטים חיוניים`);
-        }
-
-        const updatedStudents = [...students, ...validStudents];
+        // Update the state and save to storage
+        const updatedStudents = [...students, ...newStudents];
+        console.log(`Saving ${updatedStudents.length} total students`);
         setStudents(updatedStudents);
         saveStudentsData(updatedStudents);
-        toast.success(`יובאו ${validStudents.length} תלמידים בהצלחה`);
+        
+        toast.success(`יובאו ${newStudents.length} תלמידים בהצלחה`);
       } catch (error) {
         console.error('שגיאה בייבוא קובץ:', error);
         toast.error("שגיאה בייבוא הקובץ. יש לוודא שהקובץ בפורמט אקסל תקין.");
