@@ -1,8 +1,7 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { LayoutDashboard, Tool } from 'lucide-react';
+import { LayoutDashboard, ToolIcon } from 'lucide-react';
 import { 
   NavigationMenu,
   NavigationMenuList,
@@ -16,7 +15,6 @@ const GuideNavigation: React.FC = () => {
   const isUserAdmin = isAdmin();
   const user = getCurrentUser();
 
-  // רק להציג את התפריט הזה למדריכים או מנהלים
   if (!isUserGuide && !isUserAdmin) {
     return null;
   }
@@ -31,7 +29,6 @@ const GuideNavigation: React.FC = () => {
       }}
       dir="rtl"
     >
-      {/* אפקט שקיפות כדי שהטקסט יהיה קריא */}
       <div className="absolute inset-0 bg-indigo-900/70 backdrop-blur-sm"></div>
       
       <div className="text-xl font-bold relative z-10 flex items-center">
@@ -59,7 +56,7 @@ const GuideNavigation: React.FC = () => {
               className="bg-white/20 text-white border-white/30 hover:bg-white/30 hover:text-white text-base font-bold shadow-md backdrop-blur-sm rounded-xl hover:scale-105 transition-all"
               onClick={() => navigate('/')}
             >
-              <Tool className="ml-2" size={18} />
+              <ToolIcon className="ml-2" size={18} />
               גלריית הכלים
             </Button>
           </NavigationMenuItem>
