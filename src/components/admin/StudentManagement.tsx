@@ -16,7 +16,8 @@ const StudentManagement: React.FC = () => {
     name: '',
     password: '',
     grade: '',
-    notes: ''
+    notes: '',
+    parentPhone: ''
   });
   const fileInputRef = useRef<HTMLInputElement>(null);
   const currentUser = getCurrentUser();
@@ -46,7 +47,8 @@ const StudentManagement: React.FC = () => {
       name: '',
       password: '',
       grade: '',
-      notes: ''
+      notes: '',
+      parentPhone: ''
     });
     
     toast.success("התלמיד נוסף בהצלחה");

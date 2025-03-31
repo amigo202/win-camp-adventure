@@ -29,6 +29,7 @@ const StudentsTable: React.FC<StudentsTableProps> = ({ students, handleDeleteStu
               <TableHead className="text-white font-bold">שם</TableHead>
               <TableHead className="text-white font-bold">סיסמה</TableHead>
               <TableHead className="text-white font-bold">כיתה</TableHead>
+              <TableHead className="text-white font-bold">טלפון הורה</TableHead>
               <TableHead className="text-white font-bold">הערות</TableHead>
               <TableHead className="text-white font-bold text-right">פעולות</TableHead>
             </TableRow>
@@ -39,6 +40,7 @@ const StudentsTable: React.FC<StudentsTableProps> = ({ students, handleDeleteStu
                 <TableCell className="font-medium text-white">{student.name}</TableCell>
                 <TableCell className="text-white">{student.password}</TableCell>
                 <TableCell className="text-white">{student.grade || '-'}</TableCell>
+                <TableCell className="text-white">{student.parentPhone || '-'}</TableCell>
                 <TableCell className="text-white">{student.notes || '-'}</TableCell>
                 <TableCell className="text-right">
                   <Button 
