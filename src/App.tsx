@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound";
 import Admin from "./pages/Admin";
 import PythonCourse from "./pages/PythonCourse";
 import Login from "./pages/Login";
+import Index from "./pages/Index";
 import { isLoggedIn, isAdmin, isStudent, isGuide, getCurrentUser } from "./utils/authUtils";
 
 // Create an admin-only route component
@@ -58,7 +59,8 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<ToolsGallery />} />
+          <Route path="/" element={<Index />} />
+          <Route path="/tools" element={<ToolsGallery />} />
           <Route path="/login" element={<AuthRedirect element={<Login />} />} />
           <Route path="/admin" element={<AdminRoute element={<Admin />} />} />
           <Route path="/python-course" element={<PythonRoute element={<PythonCourse />} />} />
