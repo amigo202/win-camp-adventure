@@ -28,7 +28,7 @@ const GuideNavigation: React.FC = () => {
       <NavigationMenu dir="rtl">
         <NavigationMenuList className="gap-3">
           <NavigationMenuItem>
-            <Link to="/">
+            <Link to="/" className="no-underline">
               <Button 
                 variant="outline" 
                 size="lg"
