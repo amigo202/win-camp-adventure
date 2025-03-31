@@ -47,13 +47,13 @@ const Login: React.FC = () => {
   };
   
   return (
-    <div className="min-h-screen py-6 px-4 md:px-8 relative bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50" dir="rtl">
+    <div className="page-container" dir="rtl">
       <StarsBackground />
       
-      <div className="max-w-md mx-auto">
+      <div className="w-full max-w-md mx-auto p-6 md:p-10 space-y-6">
         <Header showLogout={false} />
         
-        <div className="bg-white/70 backdrop-blur-sm rounded-xl p-8 mb-8 shadow-lg animate-slide-in-bottom">
+        <div className="content-section animate-slide-in-bottom">
           <h1 className="text-4xl font-bold mb-6 text-center text-blue-900">כניסה ל-WIN CAMP</h1>
           
           <form onSubmit={handleLogin} className="space-y-6">

@@ -34,7 +34,7 @@ const Header: React.FC<HeaderProps> = ({ showLogout = true }) => {
         <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-wincamp-yellow to-wincamp-orange mr-2 animate-pulse-glow">
           WIN CAMP
         </div>
-        <div className="text-lg text-white">עולם של תכנות, יצירה, בינה מלאכותית וכיף!</div>
+        <div className="text-lg text-white hidden md:block">עולם של תכנות, יצירה, בינה מלאכותית וכיף!</div>
       </div>
       
       {showLogout && user && (

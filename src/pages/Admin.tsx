@@ -44,7 +44,7 @@ const Admin: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen py-6 px-4 md:px-8 relative bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50" dir="rtl">
+    <div className="page-container" dir="rtl">
       <StarsBackground />
       
       <div className="max-w-7xl mx-auto">
@@ -52,7 +52,7 @@ const Admin: React.FC = () => {
         
         <GuideNavigation />
 
-        <div className="mb-4">
+        <div className="mb-6">
           <button
             onClick={() => navigate("/")}
             className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl shadow-md transition-all hover:scale-105"
@@ -62,7 +62,7 @@ const Admin: React.FC = () => {
           </button>
         </div>
 
-        <div className="bg-white/70 backdrop-blur-sm rounded-xl p-6 mb-8 shadow-lg animate-slide-in-bottom">
+        <div className="content-section animate-slide-in-bottom">
           <h1 className="text-4xl font-bold text-blue-900">ממשק ניהול קייטנת WIN CAMP</h1>
         </div>
 
@@ -94,19 +94,19 @@ const Admin: React.FC = () => {
             </TabsTrigger>
           </TabsList>
           
-          <TabsContent value="students" className="bg-white/70 backdrop-blur-sm rounded-lg p-4 border border-blue-100 shadow-lg">
+          <TabsContent value="students" className="content-section">
             <StudentManagement />
           </TabsContent>
           
-          <TabsContent value="attendance" className="bg-white/70 backdrop-blur-sm rounded-lg p-4 border border-blue-100 shadow-lg">
+          <TabsContent value="attendance" className="content-section">
             <AttendanceTracker />
           </TabsContent>
           
-          <TabsContent value="activity" className="bg-white/70 backdrop-blur-sm rounded-lg p-4 border border-blue-100 shadow-lg">
+          <TabsContent value="activity" className="content-section">
             <ActivityMonitor />
           </TabsContent>
 
-          <TabsContent value="ideas" className="bg-white/70 backdrop-blur-sm rounded-lg p-4 border border-blue-100 shadow-lg">
+          <TabsContent value="ideas" className="content-section">
             <ActivityIdeas />
           </TabsContent>
         </Tabs>
