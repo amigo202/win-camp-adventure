@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { LayoutDashboard, Users } from 'lucide-react';
 import { 
@@ -22,7 +22,7 @@ const GuideNavigation: React.FC = () => {
   }
 
   return (
-    <div className="bg-gradient-to-r from-indigo-800 to-purple-800 text-white py-4 px-6 flex justify-between items-center rounded-lg mb-6 shadow-lg border border-white/10" dir="rtl">
+    <div className="bg-indigo-800/70 text-white py-4 px-6 flex justify-between items-center rounded-lg mb-6 shadow-lg border border-white/10" dir="rtl">
       <div className="text-xl font-bold">ממשק מדריך - {user?.displayName}</div>
       
       <NavigationMenu dir="rtl">
@@ -31,8 +31,10 @@ const GuideNavigation: React.FC = () => {
             <Button 
               variant="outline" 
               size="lg"
-              className="bg-white/10 text-white border-white/20 hover:bg-white/20 hover:text-white text-base font-bold shadow-md"
+              className="bg-white/20 text-white border-white/30 hover:bg-white/30 hover:text-white text-base font-bold shadow-md"
               onClick={() => navigate('/')}
+              as={Link}
+              to="/"
             >
               <LayoutDashboard className="ml-2" size={18} />
               דף ראשי
@@ -43,7 +45,7 @@ const GuideNavigation: React.FC = () => {
             <Button 
               variant="outline" 
               size="lg"
-              className="bg-white/10 text-white border-white/20 hover:bg-white/20 hover:text-white text-base font-bold shadow-md"
+              className="bg-white/20 text-white border-white/30 hover:bg-white/30 hover:text-white text-base font-bold shadow-md"
               onClick={() => navigate('/admin')}
             >
               <Users className="ml-2" size={18} />
