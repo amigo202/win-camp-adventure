@@ -16,15 +16,16 @@ const Admin: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // ודא שהמשתמש מחובר
+    // Check if user is logged in
     if (!isLoggedIn()) {
       navigate('/login');
       return;
     }
 
-    // בדיקה פשוטה האם זה מנהל
+    // Check if user is admin
     if (!isAdmin()) {
-      navigate('/dashboard');
+      // If not admin, redirect to appropriate page
+      navigate('/python-course');
       return;
     }
 
