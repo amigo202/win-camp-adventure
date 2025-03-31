@@ -3,12 +3,15 @@ import React from 'react';
 import Header from '../components/Header';
 import GuideNavigation from '../components/GuideNavigation';
 import { getCurrentUser } from '../utils/authUtils';
+import StarsBackground from '../components/StarsBackground';
 
 const Index = () => {
   const user = getCurrentUser();
   
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-indigo-900 to-indigo-950">
+      <StarsBackground />
+      
       {/* Header Component */}
       <div className="container mx-auto px-4 pt-4">
         <Header />
