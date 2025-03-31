@@ -8,16 +8,22 @@ import ToolsGallery from "./pages/ToolsGallery";
 import NotFound from "./pages/NotFound";
 import Admin from "./pages/Admin";
 import PythonCourse from "./pages/PythonCourse";
+import Login from "./pages/Login";
 import { isLoggedIn, isAdmin, isStudent, isGuide, getCurrentUser } from "./utils/authUtils";
+
+// Create a protected route component
+const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
+  return isLoggedIn() ? element : <Navigate to="/login" />;
+};
 
 // Create a guide-only route component
 const GuideRoute = ({ element }: { element: JSX.Element }) => {
-  return isLoggedIn() && (isGuide() || isAdmin()) ? element : <Navigate to="/" />;
+  return isLoggedIn() && (isGuide() || isAdmin()) ? element : <Navigate to="/login" />;
 };
 
 // Create an admin-only route component
 const AdminRoute = ({ element }: { element: JSX.Element }) => {
-  return isLoggedIn() && isAdmin() ? element : <Navigate to="/" />;
+  return isLoggedIn() && isAdmin() ? element : <Navigate to="/login" />;
 };
 
 const queryClient = new QueryClient();
@@ -29,9 +35,10 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<ToolsGallery />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<ProtectedRoute element={<ToolsGallery />} />} />
           <Route path="/admin" element={<AdminRoute element={<Admin />} />} />
-          <Route path="/python-course" element={<PythonCourse />} />
+          <Route path="/python-course" element={<ProtectedRoute element={<PythonCourse />} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

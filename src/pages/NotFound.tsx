@@ -14,7 +14,7 @@ const NotFound: React.FC = () => {
         <p className="text-xl text-gray-600 mb-6">אופס! העמוד לא נמצא</p>
         
         <Link 
-          to={"/dashboard"} 
+          to={"/"} 
           className="inline-block btn-primary"
         >
           חזרה לעמוד הראשי
