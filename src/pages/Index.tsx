@@ -5,7 +5,7 @@ import GuideNavigation from '../components/GuideNavigation';
 import { getCurrentUser } from '../utils/authUtils';
 import StarsBackground from '../components/StarsBackground';
 import { Link } from 'react-router-dom';
-import { Bot } from 'lucide-react';
+import { Bot } from 'lucide-react'; // Changed from Robot to Bot which exists in lucide-react
 
 const Index = () => {
   const user = getCurrentUser();

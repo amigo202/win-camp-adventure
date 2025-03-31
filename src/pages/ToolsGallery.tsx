@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getCurrentUser, getCompletedToolsCount, isLoggedIn } from '../utils/authUtils';
+import { getCurrentUser, getCompletedToolsCount, isLoggedIn, isAdmin } from '../utils/authUtils';
 import { Tool } from '../utils/data';
 import StarsBackground from '../components/StarsBackground';
 import SearchBar from '../components/SearchBar';
@@ -9,20 +8,22 @@ import HeaderSection from '../components/gallery/HeaderSection';
 import ProgressSection from '../components/gallery/ProgressSection';
 import CategoriesDisplay from '../components/gallery/CategoriesDisplay';
 import LoginDialog from '../components/guide/LoginDialog';
-import GuideNavigation from '../components/GuideNavigation';
 
 const ToolsGallery: React.FC = () => {
   const navigate = useNavigate();
   const [completedCount, setCompletedCount] = useState(0);
   const [showGuideLogin, setShowGuideLogin] = useState(false);
-  const user = getCurrentUser();
   
   useEffect(() => {
+    if (isLoggedIn() && isAdmin()) {
+      navigate('/admin');
+    }
+    
     updateCompletedCount();
     
     const interval = setInterval(updateCompletedCount, 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [navigate]);
   
   const updateCompletedCount = () => {
     setCompletedCount(getCompletedToolsCount());
@@ -51,8 +52,6 @@ const ToolsGallery: React.FC = () => {
       
       <div className="max-w-6xl mx-auto">
         <HeaderSection showGuideLogin={() => setShowGuideLogin(true)} />
-        
-        {user && <GuideNavigation />}
         
         <ProgressSection 
           completedCount={completedCount} 

@@ -52,7 +52,7 @@ const Admin: React.FC = () => {
 
         <div className="mb-4">
           <button
-            onClick={() => navigate("/tools")}
+            onClick={() => navigate("/")}
             className="flex items-center gap-2 bg-wincamp-blue hover:bg-wincamp-blue/90 text-white px-4 py-2 rounded-md shadow-md transition-colors"
           >
             <Home size={20} />
