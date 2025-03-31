@@ -10,12 +10,14 @@ import { Calendar } from "@/components/ui/calendar";
 import { toast } from "sonner";
 import { Student } from '@/types/student';
 import { getStudentsData, saveStudentsData } from '../../utils/studentUtils';
+import { getCurrentUser } from '../../utils/authUtils';
 
 const AttendanceTracker: React.FC = () => {
   const [students, setStudents] = useState<Student[]>([]);
   const [date, setDate] = useState<Date>(new Date());
   const [attendance, setAttendance] = useState<Record<string, boolean>>({});
   const [unsavedChanges, setUnsavedChanges] = useState(false);
+  const currentUser = getCurrentUser();
 
   // טעינת נתוני תלמידים
   useEffect(() => {

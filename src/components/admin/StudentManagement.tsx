@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import * as XLSX from 'xlsx';
 import { saveStudentsData, getStudentsData, deleteStudent, addStudent } from '../../utils/studentUtils';
 import { Student } from '@/types/student';
+import { getCurrentUser } from '../../utils/authUtils';
 import StudentForm from './students/StudentForm';
 import ExcelTemplateInfo from './students/ExcelTemplateInfo';
 import StudentsTable from './students/StudentsTable';
@@ -11,13 +12,14 @@ import StudentActions from './students/StudentActions';
 
 const StudentManagement: React.FC = () => {
   const [students, setStudents] = useState<Student[]>(() => getStudentsData());
-  const [newStudent, setNewStudent] = useState<Omit<Student, 'id' | 'attendanceDays' | 'completedTools' | 'lastActive'>>({
+  const [newStudent, setNewStudent] = useState<Omit<Student, 'id' | 'attendanceDays' | 'completedTools' | 'lastActive' | 'createdBy'>>({
     name: '',
     password: '',
     grade: '',
     notes: ''
   });
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const currentUser = getCurrentUser();
 
   // הוספת תלמיד בודד
   const handleAddStudent = () => {
@@ -31,7 +33,8 @@ const StudentManagement: React.FC = () => {
       id,
       ...newStudent,
       attendanceDays: [],
-      completedTools: []
+      completedTools: [],
+      createdBy: currentUser?.username
     };
 
     const updatedStudents = [...students, student];
