@@ -1,3 +1,4 @@
+
 export interface Tool {
   id: string;
   title: string;
@@ -80,14 +81,6 @@ export const tools: Tool[] = [
     icon: "🌐",
     link: "https://code.org/",
     description: "למדו לבנות אתרי אינטרנט בצורה פשוטה וידידותית"
-  },
-  {
-    id: "python",
-    title: "תכנות python",
-    category: "programming",
-    icon: "🐍",
-    link: "#",
-    description: "שפת תכנות פופולרית וידידותית למתחילים עם שיעורים אינטראקטיביים"
   },
   {
     id: "pythonturtle",
