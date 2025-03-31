@@ -28,7 +28,7 @@ const Login: React.FC = () => {
           description: `ברוך הבא, ${user.displayName}!`,
         });
         
-        // Redirect based on user role
+        // Redirect based on user role - always send instructors to admin panel, not Python course
         if (user.role === 'admin' || user.role === 'instructor') {
           navigate('/admin');
         } else {
