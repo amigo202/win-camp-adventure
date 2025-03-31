@@ -9,7 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import Admin from "./pages/Admin";
 import PythonCourse from "./pages/PythonCourse";
-import { isLoggedIn, isAdmin } from "./utils/authUtils";
+import { isLoggedIn, isAdmin, isStudent, isGuide, getCurrentUser } from "./utils/authUtils";
 
 // Create a protected route component
 const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
@@ -21,6 +21,28 @@ const AdminRoute = ({ element }: { element: JSX.Element }) => {
   return isLoggedIn() && isAdmin() ? element : <Navigate to="/dashboard" />;
 };
 
+// Create a guide-only route component
+const GuideRoute = ({ element }: { element: JSX.Element }) => {
+  return isLoggedIn() && (isGuide() || isAdmin()) ? element : <Navigate to="/dashboard" />;
+};
+
+// Create a student-only route component
+const StudentRoute = ({ element }: { element: JSX.Element }) => {
+  return isLoggedIn() && isStudent() ? element : <Navigate to="/dashboard" />;
+};
+
+// Home route redirects based on user role
+const HomeRoute = () => {
+  if (!isLoggedIn()) return <Navigate to="/login" />;
+  
+  const user = getCurrentUser();
+  if (user?.role === "admin") return <Navigate to="/admin" />;
+  if (user?.role === "instructor") return <Navigate to="/python-course" />;
+  if (user?.role === "student") return <Navigate to="/dashboard" />;
+  
+  return <Navigate to="/login" />;
+};
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -30,11 +52,11 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/" element={<HomeRoute />} />
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
           <Route path="/admin" element={<AdminRoute element={<Admin />} />} />
-          <Route path="/python-course" element={<ProtectedRoute element={<PythonCourse />} />} />
+          <Route path="/python-course" element={<GuideRoute element={<PythonCourse />} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

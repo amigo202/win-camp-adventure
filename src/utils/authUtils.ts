@@ -1,24 +1,21 @@
-
 // Simple authentication utilities for WIN CAMP
 
 // Mock credentials - in a real app, these would be stored securely on a server
 const MOCK_USERS = [
-  { username: "WINCAMP", password: "12345", isAdmin: true, displayName: "WINCAMP" },
-  { username: "WINCAMP100", password: "12345", isAdmin: false, isGuide: true, displayName: "מדריך 1" },
-  { username: "WINCAMP200", password: "12345", isAdmin: false, isGuide: true, displayName: "מדריך 2" },
-  { username: "STUDENT1", password: "12345", isAdmin: false, isStudent: true, displayName: "תלמיד 1" },
-  { username: "STUDENT2", password: "12345", isAdmin: false, isStudent: true, displayName: "תלמיד 2" },
-  { username: "STUDENT3", password: "12345", isAdmin: false, isStudent: true, displayName: "תלמיד 3" },
-  { username: "STUDENT4", password: "12345", isAdmin: false, isStudent: true, displayName: "תלמיד 4" },
-  { username: "STUDENT5", password: "12345", isAdmin: false, isStudent: true, displayName: "תלמיד 5" },
+  { username: "WINCAMP", password: "12345", role: "admin", displayName: "WINCAMP" },
+  { username: "WINCAMP100", password: "12345", role: "instructor", displayName: "מדריך 1" },
+  { username: "WINCAMP200", password: "12345", role: "instructor", displayName: "מדריך 2" },
+  { username: "STUDENT1", password: "12345", role: "student", displayName: "תלמיד 1" },
+  { username: "STUDENT2", password: "12345", role: "student", displayName: "תלמיד 2" },
+  { username: "STUDENT3", password: "12345", role: "student", displayName: "תלמיד 3" },
+  { username: "STUDENT4", password: "12345", role: "student", displayName: "תלמיד 4" },
+  { username: "STUDENT5", password: "12345", role: "student", displayName: "תלמיד 5" },
 ];
 
 export interface User {
   username: string;
   displayName: string;
-  isAdmin?: boolean;
-  isStudent?: boolean;
-  isGuide?: boolean;
+  role: "admin" | "instructor" | "student";
 }
 
 // Login function
@@ -35,8 +32,7 @@ export const loginUser = (username: string, password: string): User | null => {
     const user: User = {
       username: matchedUser.username,
       displayName: matchedUser.displayName,
-      isAdmin: matchedUser.isAdmin,
-      isStudent: matchedUser.isStudent
+      role: matchedUser.role
     };
     
     // Store user in localStorage for persistence
@@ -56,20 +52,19 @@ export const isLoggedIn = (): boolean => {
 // Check if user is an admin
 export const isAdmin = (): boolean => {
   const user = getCurrentUser();
-  return user?.isAdmin === true;
+  return user?.role === "admin";
 };
 
 // Check if user is a student
 export const isStudent = (): boolean => {
   const user = getCurrentUser();
-  return user?.isStudent === true;
+  return user?.role === "student";
 };
 
-// Check if user is a guide (has isGuide flag or is not admin and not student)
+// Check if user is a guide/instructor
 export const isGuide = (): boolean => {
   const user = getCurrentUser();
-  if (user?.isGuide === true) return true;
-  return !user?.isAdmin && !user?.isStudent;
+  return user?.role === "instructor";
 };
 
 // Get current user
