@@ -16,17 +16,14 @@ const ToolsGallery: React.FC = () => {
   const [showGuideLogin, setShowGuideLogin] = useState(false);
   
   useEffect(() => {
-    // If the user is already logged in as an admin or guide, redirect them to the appropriate page
+    // Check if the user is logged in and redirect only if they're an admin or guide
     if (isLoggedIn()) {
       if (isAdmin()) {
         navigate('/admin');
-        return;
-      }
-      
-      if (isGuide()) {
+      } else if (isGuide()) {
         navigate('/python-course');
-        return;
       }
+      // Students and non-logged-in users stay on the gallery page
     }
     
     updateCompletedCount();
@@ -58,16 +55,6 @@ const ToolsGallery: React.FC = () => {
     }
   };
   
-  // Handle successful login by closing the dialog and redirecting
-  const handleLoginSuccess = (role: string) => {
-    setShowGuideLogin(false);
-    if (role === 'admin') {
-      navigate('/admin');
-    } else if (role === 'instructor') {
-      navigate('/python-course');
-    }
-  };
-  
   return (
     <div className="min-h-screen py-6 px-4 md:px-8 relative" dir="rtl">
       <StarsBackground />
@@ -87,7 +74,7 @@ const ToolsGallery: React.FC = () => {
       
       <LoginDialog 
         open={showGuideLogin} 
-        onOpenChange={setShowGuideLogin} 
+        onOpenChange={setShowGuideLogin}
       />
       
       <div className="mt-10 text-center text-gray-500 text-sm">

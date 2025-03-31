@@ -18,13 +18,18 @@ const Login: React.FC = () => {
   // Check if user is already logged in and redirect accordingly
   useEffect(() => {
     if (isLoggedIn()) {
-      if (isAdmin()) {
-        navigate('/admin');
-      } else if (isGuide()) {
-        navigate('/python-course');
-      } else {
-        navigate('/');
-      }
+      const redirectUser = () => {
+        if (isAdmin()) {
+          navigate('/admin');
+        } else if (isGuide()) {
+          navigate('/python-course');
+        } else {
+          navigate('/');
+        }
+      };
+      
+      // Use setTimeout to ensure state updates have propagated
+      setTimeout(redirectUser, 100);
     }
   }, [navigate]);
   
@@ -41,7 +46,7 @@ const Login: React.FC = () => {
           description: `ברוך הבא, ${user.displayName}!`,
         });
         
-        // Small delay to ensure the state is updated before navigation
+        // Use setTimeout to ensure state updates have propagated
         setTimeout(() => {
           if (user.role === 'admin') {
             navigate('/admin');

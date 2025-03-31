@@ -32,18 +32,17 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ open, onOpenChange }) => {
           description: `ברוך הבא, ${user.displayName}!`,
         });
         
-        // Close the dialog first to prevent UI issues
+        // Close the dialog first
         onOpenChange(false);
         
-        // Redirect with a small delay to ensure the dialog closes first
+        // Use setTimeout to ensure state is updated before navigation
         setTimeout(() => {
           if (user.role === 'admin') {
             navigate('/admin');
           } else if (user.role === 'instructor') {
             navigate('/python-course');
           }
-          setLoading(false);
-        }, 100);
+        }, 300);
       } else {
         toast({
           title: "התחברות נכשלה",
@@ -84,6 +83,11 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ open, onOpenChange }) => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="text-right"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleGuideLogin();
+                }
+              }}
             />
           </div>
         </div>

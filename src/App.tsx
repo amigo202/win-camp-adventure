@@ -21,6 +21,18 @@ const GuideRoute = ({ element }: { element: JSX.Element }) => {
   return isLoggedIn() && (isGuide() || isAdmin()) ? element : <Navigate to="/login" />;
 };
 
+// Create a redirect component for already logged in users
+const AuthRedirect = ({ element }: { element: JSX.Element }) => {
+  if (isLoggedIn()) {
+    if (isAdmin()) {
+      return <Navigate to="/admin" />;
+    } else if (isGuide()) {
+      return <Navigate to="/python-course" />;
+    }
+  }
+  return element;
+};
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -31,7 +43,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<ToolsGallery />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<AuthRedirect element={<Login />} />} />
           <Route path="/admin" element={<AdminRoute element={<Admin />} />} />
           <Route path="/python-course" element={<GuideRoute element={<PythonCourse />} />} />
           <Route path="*" element={<NotFound />} />
