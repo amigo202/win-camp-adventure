@@ -54,7 +54,7 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ open, onOpenChange }) => {
         <DialogHeader>
           <DialogTitle className="text-right">כניסת מדריכים</DialogTitle>
           <DialogDescription className="text-right text-gray-700">
-            הזן שם משתמש וסיסמה כדי להיכנס לממשק המדריך
+            הזן שם משתמש וסיסמה כדי להיכנס לממשק הניהול
           </DialogDescription>
         </DialogHeader>
         <div className="space-y-4 py-4">
@@ -62,7 +62,7 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ open, onOpenChange }) => {
             <Label htmlFor="username" className="text-right block text-gray-800">שם משתמש</Label>
             <Input
               id="username"
-              placeholder="WINCAMP100"
+              placeholder="הכנס שם משתמש"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               className="text-right"
@@ -73,7 +73,7 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ open, onOpenChange }) => {
             <Input
               id="password"
               type="password"
-              placeholder="12345"
+              placeholder="הכנס סיסמה"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="text-right"

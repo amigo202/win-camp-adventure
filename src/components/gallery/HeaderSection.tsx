@@ -18,7 +18,7 @@ const HeaderSection: React.FC<HeaderSectionProps> = ({ showGuideLogin }) => {
         onClick={showGuideLogin}
       >
         <BookOpen className="ml-2" />
-        כניסת מדריכים
+        כניסה למדריכים
       </Button>
     </div>
   );

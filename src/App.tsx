@@ -17,20 +17,7 @@ const AdminRoute = ({ element }: { element: JSX.Element }) => {
     return <Navigate to="/login" />;
   }
   
-  if (!isAdmin()) {
-    return <Navigate to="/" />;
-  }
-  
-  return element;
-};
-
-// Create a guide-only route component
-const GuideRoute = ({ element }: { element: JSX.Element }) => {
-  if (!isLoggedIn()) {
-    return <Navigate to="/login" />;
-  }
-  
-  if (!isGuide() && !isAdmin()) {
+  if (!isAdmin() && !isGuide()) {
     return <Navigate to="/" />;
   }
   
@@ -43,8 +30,8 @@ const PythonRoute = ({ element }: { element: JSX.Element }) => {
     return <Navigate to="/login" />;
   }
   
-  if (!isAdmin()) {
-    return <Navigate to="/admin" />;
+  if (!isAdmin() && !isGuide()) {
+    return <Navigate to="/" />;
   }
   
   return element;
@@ -73,7 +60,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<ToolsGallery />} />
           <Route path="/login" element={<AuthRedirect element={<Login />} />} />
-          <Route path="/admin" element={<GuideRoute element={<Admin />} />} />
+          <Route path="/admin" element={<AdminRoute element={<Admin />} />} />
           <Route path="/python-course" element={<PythonRoute element={<PythonCourse />} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
