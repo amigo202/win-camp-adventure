@@ -13,7 +13,7 @@ const Header: React.FC<HeaderProps> = ({ showLogout = true }) => {
   
   const handleLogout = () => {
     logoutUser();
-    navigate('/login');
+    navigate('/');
   };
   
   return (
@@ -22,7 +22,7 @@ const Header: React.FC<HeaderProps> = ({ showLogout = true }) => {
         <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-wincamp-purple to-wincamp-blue mr-2 animate-pulse-glow">
           WIN CAMP
         </div>
-        <div className="text-sm text-gray-600">עולם של תכנות, יצירה, בינה מלאכותית וכיף!</div>
+        <div className="text-sm text-gray-700">עולם של תכנות, יצירה, בינה מלאכותית וכיף!</div>
       </div>
       
       {showLogout && user && (

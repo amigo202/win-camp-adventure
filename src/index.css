@@ -127,4 +127,17 @@
   .tooltip-container:hover .tooltip {
     @apply visible opacity-100;
   }
+
+  /* Fix light text on light background */
+  .glass-card {
+    @apply text-gray-800;
+  }
+  
+  .text-gray-500 {
+    @apply text-gray-600;
+  }
+  
+  .text-gray-600 {
+    @apply text-gray-700;
+  }
 }

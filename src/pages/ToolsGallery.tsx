@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getCurrentUser, getCompletedToolsCount, isLoggedIn } from '../utils/authUtils';
+import { getCurrentUser, getCompletedToolsCount, isLoggedIn, isAdmin } from '../utils/authUtils';
 import { Tool } from '../utils/data';
 import StarsBackground from '../components/StarsBackground';
 import SearchBar from '../components/SearchBar';
@@ -17,11 +17,8 @@ const ToolsGallery: React.FC = () => {
   
   useEffect(() => {
     // If the user is already logged in as an admin, redirect them
-    if (isLoggedIn()) {
-      const user = getCurrentUser();
-      if (user?.role === 'admin') {
-        navigate('/admin');
-      }
+    if (isLoggedIn() && isAdmin()) {
+      navigate('/admin');
     }
     
     updateCompletedCount();
