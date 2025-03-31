@@ -28,16 +28,17 @@ const GuideNavigation: React.FC = () => {
       <NavigationMenu dir="rtl">
         <NavigationMenuList className="gap-3">
           <NavigationMenuItem>
-            <Link to="/" className="no-underline">
-              <Button 
-                variant="outline" 
-                size="lg"
-                className="bg-white/20 text-white border-white/30 hover:bg-white/30 hover:text-white text-base font-bold shadow-md"
-              >
+            <Button 
+              variant="outline" 
+              size="lg"
+              className="bg-white/20 text-white border-white/30 hover:bg-white/30 hover:text-white text-base font-bold shadow-md"
+              asChild
+            >
+              <Link to="/">
                 <LayoutDashboard className="ml-2" size={18} />
                 דף ראשי
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </NavigationMenuItem>
           
           <NavigationMenuItem>
