@@ -10,7 +10,7 @@ const ExcelTemplateInfo: React.FC = () => {
         <FileSpreadsheet size={20} className="text-white" />
         <h3 className="text-lg text-white font-bold">תבנית אקסל לייבוא</h3>
       </div>
-      <p className="text-sm text-indigo-200 mb-4">וודאו שקובץ האקסל שלכם מכיל את העמודות הבאות: שם, כיתה, טלפון הורה (חובה). הערות הם אופציונליים.</p>
+      <p className="text-sm text-indigo-200 mb-4">וודאו שקובץ האקסל שלכם מכיל את העמודות הבאות: שם (חובה), כיתה וטלפון הורה. הערות הם אופציונליים.</p>
       <div className="overflow-x-auto">
         <Table className="border border-indigo-600/50">
           <TableHeader className="bg-indigo-800/50">
