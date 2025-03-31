@@ -52,6 +52,18 @@ const ToolsGalleryRoute = ({ element }: { element: JSX.Element }) => {
   return element;
 };
 
+// Create a redirect component for already logged in users
+const AuthRedirect = ({ element }: { element: JSX.Element }) => {
+  if (isLoggedIn()) {
+    if (isAdmin() || isGuide()) {
+      return <Navigate to="/admin" />;
+    } else {
+      return <Navigate to="/" />;
+    }
+  }
+  return element;
+};
+
 const queryClient = new QueryClient();
 
 const App = () => (
