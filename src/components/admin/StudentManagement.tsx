@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import { toast } from "sonner";
 import * as XLSX from 'xlsx';
@@ -22,7 +21,6 @@ const StudentManagement: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const currentUser = getCurrentUser();
 
-  // הוספת תלמיד בודד
   const handleAddStudent = () => {
     if (!newStudent.name || !newStudent.password) {
       toast.error("יש להזין שם ותעודת זהות");
@@ -54,7 +52,6 @@ const StudentManagement: React.FC = () => {
     toast.success("התלמיד נוסף בהצלחה");
   };
 
-  // מחיקת תלמיד
   const handleDeleteStudent = (id: string) => {
     if (window.confirm("האם אתה בטוח שברצונך למחוק את התלמיד?")) {
       const updatedStudents = students.filter(student => student.id !== id);
@@ -65,7 +62,6 @@ const StudentManagement: React.FC = () => {
     }
   };
 
-  // העלאת קובץ אקסל
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -74,28 +70,38 @@ const StudentManagement: React.FC = () => {
     reader.onload = (event) => {
       try {
         const data = event.target?.result;
+        console.log("Raw file data:", data);
+
         if (!data) {
-          toast.error("לא ניתן לקרוא את הקובץ");
+          toast.error("לא ניתן לקרוא את ה��ובץ");
           return;
         }
         
         const workbook = XLSX.read(data, { type: 'binary' });
+        console.log("Sheet names:", workbook.SheetNames);
+        
         const sheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[sheetName];
-        const excelData = XLSX.utils.sheet_to_json<any>(worksheet);
-        
-        console.log("Excel data:", excelData); // Debug log
-        
+        console.log("Raw worksheet:", worksheet);
+
+        const excelData = XLSX.utils.sheet_to_json<any>(worksheet, { defval: "" });
+        console.log("Excel data (full):", excelData);
+
         if (excelData.length === 0) {
           toast.error("הקובץ ריק או לא בפורמט המצופה");
           return;
         }
 
-        // המרת המידע למבנה תלמידים
         const newStudents: Student[] = excelData.map((row, index) => {
-          // בדיקה של מבנה הנתונים בקובץ האקסל לצורך התאמה
-          console.log("Processing row:", row);
+          console.log(`Processing row ${index}:`, row);
           
+          console.log("שם fields:", {
+            name1: row.name,
+            name2: row.Name,
+            name3: row.שם,
+            name4: row["שם"]
+          });
+
           return {
             id: (Date.now() + index).toString(),
             name: row.name || row.Name || row.שם || row["שם"] || '',
@@ -109,7 +115,8 @@ const StudentManagement: React.FC = () => {
           };
         });
 
-        // וידוא שכל התלמידים יש להם שם וסיסמה
+        console.log("Transformed students:", newStudents);
+
         const validStudents = newStudents.filter(student => student.name && student.password);
         
         if (validStudents.length === 0) {
@@ -121,7 +128,6 @@ const StudentManagement: React.FC = () => {
           toast.warning(`${newStudents.length - validStudents.length} תלמידים לא יובאו בגלל חוסר פרטים`);
         }
 
-        // הגדרת הרשימה החדשה או הוספה לקיימת
         const updatedStudents = [...students, ...validStudents];
         setStudents(updatedStudents);
         saveStudentsData(updatedStudents);
@@ -131,14 +137,12 @@ const StudentManagement: React.FC = () => {
         toast.error("שגיאה בייבוא הקובץ");
       }
       
-      // איפוס שדה הקובץ
       if (fileInputRef.current) fileInputRef.current.value = '';
     };
     
     reader.readAsBinaryString(file);
   };
 
-  // ייצוא לאקסל
   const handleExportToExcel = () => {
     const exportData = students.map(({ name, password, grade, notes, parentPhone }) => ({
       שם: name,
