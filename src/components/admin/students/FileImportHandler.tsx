@@ -12,7 +12,7 @@ interface FileImportHandlerProps {
   onStudentsImported: (newStudents: Student[]) => void;
 }
 
-const FileImportHandler: React.FC<FileImportHandlerProps> = ({ students, setStudents, onStudentsImported }) => {
+const FileImportHandler: React.FC<FileImportHandlerProps> = ({ students, onStudentsImported }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
