@@ -37,7 +37,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
             <SelectValue placeholder="סנן לפי כיתה" />
           </SelectTrigger>
           <SelectContent className="bg-indigo-800 text-white border-indigo-600">
-            <SelectItem value="">כל הכיתות</SelectItem>
+            <SelectItem value="all">כל הכיתות</SelectItem>
             {availableGrades.map((grade) => (
               <SelectItem key={grade} value={grade}>
                 {grade}

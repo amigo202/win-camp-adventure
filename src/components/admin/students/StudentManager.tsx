@@ -18,7 +18,7 @@ const StudentManager: React.FC = () => {
   } = useStudentManagement();
 
   const [searchTerm, setSearchTerm] = useState('');
-  const [filterGrade, setFilterGrade] = useState('');
+  const [filterGrade, setFilterGrade] = useState('all');
 
   // Extract unique grades from students for the filter dropdown
   const availableGrades = useMemo(() => {
@@ -36,7 +36,7 @@ const StudentManager: React.FC = () => {
         student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         (student.notes && student.notes.toLowerCase().includes(searchTerm.toLowerCase()));
       
-      const matchesGrade = filterGrade === '' || student.grade === filterGrade;
+      const matchesGrade = filterGrade === 'all' || student.grade === filterGrade;
       
       return matchesSearch && matchesGrade;
     });
