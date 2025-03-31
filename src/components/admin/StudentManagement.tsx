@@ -1,3 +1,4 @@
+
 import React, { useState, useRef } from 'react';
 import { toast } from "sonner";
 import * as XLSX from 'xlsx';
@@ -73,7 +74,7 @@ const StudentManagement: React.FC = () => {
         console.log("Raw file data:", data);
 
         if (!data) {
-          toast.error("לא ניתן לקרוא את ה��ובץ");
+          toast.error("לא ניתן לקרוא את הקובץ");
           return;
         }
         
@@ -84,6 +85,7 @@ const StudentManagement: React.FC = () => {
         const worksheet = workbook.Sheets[sheetName];
         console.log("Raw worksheet:", worksheet);
 
+        // Set defval to empty string to handle missing values
         const excelData = XLSX.utils.sheet_to_json<any>(worksheet, { defval: "" });
         console.log("Excel data (full):", excelData);
 
@@ -95,20 +97,25 @@ const StudentManagement: React.FC = () => {
         const newStudents: Student[] = excelData.map((row, index) => {
           console.log(`Processing row ${index}:`, row);
           
-          console.log("שם fields:", {
-            name1: row.name,
-            name2: row.Name,
-            name3: row.שם,
-            name4: row["שם"]
-          });
+          // Check all possible field names in Hebrew and English
+          const name = row.name || row.Name || row.שם || row["שם"] || '';
+          const grade = row.grade || row.Grade || row.כיתה || row["כיתה"] || '';
+          const phone = row.phone || row.Phone || row.parentPhone || row["טלפון הורה"] || row["טלפון"] || row["טלפון"] || '';
+          const notes = row.notes || row.Notes || row.הערות || row["הערות"] || '';
+          
+          console.log("Extracted fields:", { name, grade, phone, notes });
+          
+          // Generate random password if not provided
+          const password = row.password || row.Password || row.סיסמה || row["סיסמה"] || 
+                          Math.floor(1000 + Math.random() * 9000).toString();
 
           return {
             id: (Date.now() + index).toString(),
-            name: row.name || row.Name || row.שם || row["שם"] || '',
-            password: row.password || row.Password || row.סיסמה || row["סיסמה"] || '',
-            grade: row.grade || row.Grade || row.כיתה || row["כיתה"] || '',
-            notes: row.notes || row.Notes || row.הערות || row["הערות"] || '',
-            parentPhone: row.parentPhone || row["טלפון הורה"] || row.phone || row.Phone || '',
+            name,
+            password,
+            grade,
+            notes,
+            parentPhone: phone,
             attendanceDays: [],
             completedTools: [],
             createdBy: currentUser?.username
@@ -117,15 +124,18 @@ const StudentManagement: React.FC = () => {
 
         console.log("Transformed students:", newStudents);
 
-        const validStudents = newStudents.filter(student => student.name && student.password);
+        // Validate that students have at least name and either grade or phone
+        const validStudents = newStudents.filter(student => 
+          student.name && (student.grade || student.parentPhone)
+        );
         
         if (validStudents.length === 0) {
-          toast.error("לא נמצאו תלמידים חוקיים בקובץ");
+          toast.error("לא נמצאו תלמידים חוקיים בקובץ. יש לוודא שיש עמודות שם, כיתה וטלפון.");
           return;
         }
 
         if (validStudents.length !== newStudents.length) {
-          toast.warning(`${newStudents.length - validStudents.length} תלמידים לא יובאו בגלל חוסר פרטים`);
+          toast.warning(`${newStudents.length - validStudents.length} תלמידים לא יובאו בגלל חוסר פרטים חיוניים`);
         }
 
         const updatedStudents = [...students, ...validStudents];
@@ -134,7 +144,7 @@ const StudentManagement: React.FC = () => {
         toast.success(`יובאו ${validStudents.length} תלמידים בהצלחה`);
       } catch (error) {
         console.error('שגיאה בייבוא קובץ:', error);
-        toast.error("שגיאה בייבוא הקובץ");
+        toast.error("שגיאה בייבוא הקובץ. יש לוודא שהקובץ בפורמט אקסל תקין.");
       }
       
       if (fileInputRef.current) fileInputRef.current.value = '';
@@ -144,9 +154,8 @@ const StudentManagement: React.FC = () => {
   };
 
   const handleExportToExcel = () => {
-    const exportData = students.map(({ name, password, grade, notes, parentPhone }) => ({
+    const exportData = students.map(({ name, grade, parentPhone, notes }) => ({
       שם: name,
-      סיסמה: password,
       כיתה: grade || '',
       'טלפון הורה': parentPhone || '',
       הערות: notes || ''
