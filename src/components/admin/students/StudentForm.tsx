@@ -16,7 +16,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ newStudent, setNewStudent, ha
   return (
     <div className="bg-indigo-700/30 p-4 rounded-lg backdrop-blur-sm border border-indigo-600/50">
       <h3 className="text-xl mb-4 text-white font-bold">הוספת תלמיד</h3>
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
         <div className="md:col-span-2">
           <Input 
             placeholder="שם התלמיד" 
@@ -38,6 +38,14 @@ const StudentForm: React.FC<StudentFormProps> = ({ newStudent, setNewStudent, ha
             placeholder="כיתה (אופציונלי)" 
             value={newStudent.grade || ''} 
             onChange={(e) => setNewStudent({...newStudent, grade: e.target.value})}
+            className="bg-indigo-600/30 text-white placeholder:text-indigo-300 border-indigo-500/50 focus-visible:ring-offset-indigo-800"
+          />
+        </div>
+        <div>
+          <Input 
+            placeholder="טלפון הורה (אופציונלי)" 
+            value={newStudent.parentPhone || ''} 
+            onChange={(e) => setNewStudent({...newStudent, parentPhone: e.target.value})}
             className="bg-indigo-600/30 text-white placeholder:text-indigo-300 border-indigo-500/50 focus-visible:ring-offset-indigo-800"
           />
         </div>

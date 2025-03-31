@@ -5,6 +5,7 @@ export interface Student {
   password: string;
   grade?: string;
   notes?: string;
+  parentPhone?: string;
   attendanceDays?: string[];
   completedTools?: string[];
   lastActive?: string;
