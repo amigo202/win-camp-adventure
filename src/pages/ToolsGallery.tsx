@@ -1,10 +1,8 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginUser, getCurrentUser, getCompletedToolsCount, resetCompletedTools, isLoggedIn } from '../utils/authUtils';
 import { categories, getToolsByCategory, Tool } from '../utils/data';
 import Header from '../components/Header';
-import GuideNavigation from '../components/GuideNavigation';
 import CategorySection from '../components/CategorySection';
 import SearchBar from '../components/SearchBar';
 import StarsBackground from '../components/StarsBackground';
@@ -24,13 +22,11 @@ const ToolsGallery: React.FC = () => {
   const [loading, setLoading] = useState(false);
   
   useEffect(() => {
-    // If the user is already logged in as a guide or admin, redirect them
+    // If the user is already logged in as an admin, redirect them
     if (isLoggedIn()) {
       const user = getCurrentUser();
       if (user?.role === 'admin') {
         navigate('/admin');
-      } else if (user?.role === 'instructor') {
-        navigate('/python-course');
       }
     }
     
@@ -88,8 +84,6 @@ const ToolsGallery: React.FC = () => {
         
         if (user.role === 'admin') {
           navigate('/admin');
-        } else {
-          navigate('/python-course');
         }
       } else {
         toast({

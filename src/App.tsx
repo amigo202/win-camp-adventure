@@ -31,7 +31,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<ToolsGallery />} />
           <Route path="/admin" element={<AdminRoute element={<Admin />} />} />
-          <Route path="/python-course" element={<GuideRoute element={<PythonCourse />} />} />
+          <Route path="/python-course" element={<PythonCourse />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

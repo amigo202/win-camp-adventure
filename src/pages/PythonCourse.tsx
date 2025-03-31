@@ -1,30 +1,17 @@
 
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { isLoggedIn } from '../utils/authUtils';
+import React from 'react';
 import Header from '../components/Header';
-import GuideNavigation from '../components/GuideNavigation';
 import PythonLessonsSection from '../components/PythonLessonsSection';
 import PythonPlayground from '../components/PythonPlayground';
 import StarsBackground from '../components/StarsBackground';
 
 const PythonCourse: React.FC = () => {
-  const navigate = useNavigate();
-  
-  useEffect(() => {
-    if (!isLoggedIn()) {
-      navigate('/login');
-    }
-  }, [navigate]);
-  
   return (
     <div className="min-h-screen py-6 px-4 md:px-8 relative" dir="rtl">
       <StarsBackground />
       
       <div className="max-w-6xl mx-auto">
         <Header />
-        
-        <GuideNavigation />
         
         <div className="glass-card rounded-xl p-6 mb-8">
           <h1 className="text-3xl font-bold mb-4">קורס פייתון לילדים</h1>
