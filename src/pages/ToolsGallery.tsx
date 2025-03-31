@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getCurrentUser, getCompletedToolsCount, isLoggedIn, isAdmin, isGuide } from '../utils/authUtils';
+import { getCurrentUser, getCompletedToolsCount, isLoggedIn, isAdmin } from '../utils/authUtils';
 import { Tool } from '../utils/data';
 import StarsBackground from '../components/StarsBackground';
 import SearchBar from '../components/SearchBar';
@@ -16,19 +15,12 @@ const ToolsGallery: React.FC = () => {
   const [showGuideLogin, setShowGuideLogin] = useState(false);
   
   useEffect(() => {
-    // Check if the user is logged in and redirect only if they're an admin or guide
-    if (isLoggedIn()) {
-      if (isAdmin()) {
-        navigate('/admin');
-      } else if (isGuide()) {
-        navigate('/python-course');
-      }
-      // Students and non-logged-in users stay on the gallery page
+    if (isLoggedIn() && isAdmin()) {
+      navigate('/admin');
     }
     
     updateCompletedCount();
     
-    // Check completed count every second in case it changes from a tool card
     const interval = setInterval(updateCompletedCount, 1000);
     return () => clearInterval(interval);
   }, [navigate]);
@@ -42,7 +34,6 @@ const ToolsGallery: React.FC = () => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
       
-      // Highlight the tool card briefly
       setTimeout(() => {
         const toolElement = document.getElementById(`tool-${tool.id}`);
         if (toolElement) {

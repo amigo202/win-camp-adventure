@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginUser, isLoggedIn, isAdmin, isGuide } from '../utils/authUtils';
@@ -28,8 +27,8 @@ const Login: React.FC = () => {
           description: `ברוך הבא, ${user.displayName}!`,
         });
         
-        // Redirect based on user role - always send instructors to admin panel, not Python course
-        if (user.role === 'admin' || user.role === 'instructor') {
+        // Modified to redirect admin to admin panel, but instructors to main page
+        if (user.role === 'admin') {
           navigate('/admin');
         } else {
           navigate('/');

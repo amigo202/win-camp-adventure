@@ -2,7 +2,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { LayoutDashboard } from 'lucide-react';
+import { LayoutDashboard, Tool } from 'lucide-react';
 import { 
   NavigationMenu,
   NavigationMenuList,
@@ -45,11 +45,22 @@ const GuideNavigation: React.FC = () => {
             <Button 
               variant="outline" 
               size="lg"
+              className="bg-white/20 text-white border-white/30 hover:bg-white/30 hover:text-white text-base font-bold shadow-md backdrop-blur-sm rounded-xl hover:scale-105 transition-all mr-2"
+              onClick={() => navigate('/python-course')}
+            >
+              <LayoutDashboard className="ml-2" size={18} />
+              קורס פייתון
+            </Button>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <Button 
+              variant="outline" 
+              size="lg"
               className="bg-white/20 text-white border-white/30 hover:bg-white/30 hover:text-white text-base font-bold shadow-md backdrop-blur-sm rounded-xl hover:scale-105 transition-all"
               onClick={() => navigate('/')}
             >
-              <LayoutDashboard className="ml-2" size={18} />
-              מעבר לגלריית הכלים
+              <Tool className="ml-2" size={18} />
+              גלריית הכלים
             </Button>
           </NavigationMenuItem>
         </NavigationMenuList>
