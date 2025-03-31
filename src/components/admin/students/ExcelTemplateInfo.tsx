@@ -10,7 +10,7 @@ const ExcelTemplateInfo: React.FC = () => {
         <FileSpreadsheet size={20} className="text-white" />
         <h3 className="text-lg text-white font-bold">תבנית אקסל לייבוא</h3>
       </div>
-      <p className="text-sm text-indigo-200 mb-4">וודאו שקובץ האקסל שלכם מכיל את העמודות הבאות: שם, סיסמה, כיתה (אופציונלי), הערות (אופציונלי)</p>
+      <p className="text-sm text-indigo-200 mb-4">וודאו שקובץ האקסל שלכם מכיל את העמודות הבאות: שם, סיסמה, כיתה (אופציונלי), טלפון הורה (אופציונלי), הערות (אופציונלי)</p>
       <div className="overflow-x-auto">
         <Table className="border border-indigo-600/50">
           <TableHeader className="bg-indigo-800/50">
@@ -18,6 +18,7 @@ const ExcelTemplateInfo: React.FC = () => {
               <TableHead className="text-white font-bold">שם</TableHead>
               <TableHead className="text-white font-bold">סיסמה</TableHead>
               <TableHead className="text-white font-bold">כיתה</TableHead>
+              <TableHead className="text-white font-bold">טלפון הורה</TableHead>
               <TableHead className="text-white font-bold">הערות</TableHead>
             </TableRow>
           </TableHeader>
@@ -26,6 +27,7 @@ const ExcelTemplateInfo: React.FC = () => {
               <TableCell className="text-white">ישראל ישראלי</TableCell>
               <TableCell className="text-white">1234</TableCell>
               <TableCell className="text-white">ד'2</TableCell>
+              <TableCell className="text-white">050-1234567</TableCell>
               <TableCell className="text-white">אלרגיה לבוטנים</TableCell>
             </TableRow>
           </TableBody>

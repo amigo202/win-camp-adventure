@@ -74,21 +74,40 @@ const StudentManagement: React.FC = () => {
     reader.onload = (event) => {
       try {
         const data = event.target?.result;
+        if (!data) {
+          toast.error("לא ניתן לקרוא את הקובץ");
+          return;
+        }
+        
         const workbook = XLSX.read(data, { type: 'binary' });
         const sheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[sheetName];
         const excelData = XLSX.utils.sheet_to_json<any>(worksheet);
+        
+        console.log("Excel data:", excelData); // Debug log
+        
+        if (excelData.length === 0) {
+          toast.error("הקובץ ריק או לא בפורמט המצופה");
+          return;
+        }
 
         // המרת המידע למבנה תלמידים
-        const newStudents: Student[] = excelData.map((row, index) => ({
-          id: (Date.now() + index).toString(),
-          name: row.name || row.Name || row.שם || '',
-          password: row.password || row.Password || row.סיסמה || '',
-          grade: row.grade || row.Grade || row.כיתה || '',
-          notes: row.notes || row.Notes || row.הערות || '',
-          attendanceDays: [],
-          completedTools: []
-        }));
+        const newStudents: Student[] = excelData.map((row, index) => {
+          // בדיקה של מבנה הנתונים בקובץ האקסל לצורך התאמה
+          console.log("Processing row:", row);
+          
+          return {
+            id: (Date.now() + index).toString(),
+            name: row.name || row.Name || row.שם || row["שם"] || '',
+            password: row.password || row.Password || row.סיסמה || row["סיסמה"] || '',
+            grade: row.grade || row.Grade || row.כיתה || row["כיתה"] || '',
+            notes: row.notes || row.Notes || row.הערות || row["הערות"] || '',
+            parentPhone: row.parentPhone || row["טלפון הורה"] || row.phone || row.Phone || '',
+            attendanceDays: [],
+            completedTools: [],
+            createdBy: currentUser?.username
+          };
+        });
 
         // וידוא שכל התלמידים יש להם שם וסיסמה
         const validStudents = newStudents.filter(student => student.name && student.password);
@@ -121,10 +140,11 @@ const StudentManagement: React.FC = () => {
 
   // ייצוא לאקסל
   const handleExportToExcel = () => {
-    const exportData = students.map(({ name, password, grade, notes }) => ({
+    const exportData = students.map(({ name, password, grade, notes, parentPhone }) => ({
       שם: name,
       סיסמה: password,
       כיתה: grade || '',
+      'טלפון הורה': parentPhone || '',
       הערות: notes || ''
     }));
 
