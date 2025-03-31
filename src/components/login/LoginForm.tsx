@@ -21,6 +21,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
   setPassword,
   loading,
   handleLogin,
+  setStudentLogin,
   setGuideLogin
 }) => {
   return (
@@ -64,8 +65,23 @@ const LoginForm: React.FC<LoginFormProps> = ({
         התחברות
       </button>
 
-      {/* Guide login section */}
-      <GuideLoginSection setGuideLogin={setGuideLogin} />
+      {/* Quick access buttons */}
+      <div className="mt-6 border-t border-indigo-200 pt-4">
+        <div className="text-center text-base font-medium text-indigo-700 mb-3">כניסה מהירה</div>
+        <div className="grid grid-cols-2 gap-3">
+          {/* Student login buttons */}
+          <button
+            type="button"
+            onClick={() => setStudentLogin('1')}
+            className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded-lg text-sm flex items-center justify-center gap-1 font-bold"
+          >
+            תלמיד 1
+          </button>
+          
+          {/* Guide login section */}
+          <GuideLoginSection setGuideLogin={setGuideLogin} />
+        </div>
+      </div>
       
       <div className="mt-4 text-center">
         <a href="#" className="text-indigo-700 hover:text-indigo-900 transition-colors text-sm">

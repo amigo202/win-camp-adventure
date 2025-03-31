@@ -8,12 +8,13 @@ import {
   NavigationMenuList,
   NavigationMenuItem,
 } from '@/components/ui/navigation-menu';
-import { isGuide, isAdmin } from '../utils/authUtils';
+import { isGuide, isAdmin, getCurrentUser } from '../utils/authUtils';
 
 const GuideNavigation: React.FC = () => {
   const navigate = useNavigate();
   const isUserGuide = isGuide();
   const isUserAdmin = isAdmin();
+  const user = getCurrentUser();
 
   // Only show this navigation for guides or admins
   if (!isUserGuide && !isUserAdmin) {
@@ -22,7 +23,7 @@ const GuideNavigation: React.FC = () => {
 
   return (
     <div className="bg-indigo-900 text-white py-4 px-6 flex justify-between items-center rounded-lg mb-6 shadow-lg" dir="rtl">
-      <div className="text-xl font-bold">ממשק מדריך</div>
+      <div className="text-xl font-bold">ממשק מדריך - {user?.displayName}</div>
       
       <NavigationMenu dir="rtl">
         <NavigationMenuList className="gap-3">
@@ -31,7 +32,7 @@ const GuideNavigation: React.FC = () => {
               variant="outline" 
               size="lg"
               className="bg-indigo-800 text-white border-white hover:bg-indigo-700 text-base font-bold"
-              onClick={() => navigate('/dashboard')}
+              onClick={() => navigate('/')}
             >
               <LayoutDashboard className="ml-2" size={18} />
               דף ראשי

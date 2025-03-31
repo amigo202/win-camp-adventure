@@ -18,17 +18,17 @@ const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
 
 // Create an admin-only route component
 const AdminRoute = ({ element }: { element: JSX.Element }) => {
-  return isLoggedIn() && isAdmin() ? element : <Navigate to="/dashboard" />;
+  return isLoggedIn() && isAdmin() ? element : <Navigate to="/" />;
 };
 
 // Create a guide-only route component
 const GuideRoute = ({ element }: { element: JSX.Element }) => {
-  return isLoggedIn() && (isGuide() || isAdmin()) ? element : <Navigate to="/dashboard" />;
+  return isLoggedIn() && (isGuide() || isAdmin()) ? element : <Navigate to="/" />;
 };
 
 // Create a student-only route component
 const StudentRoute = ({ element }: { element: JSX.Element }) => {
-  return isLoggedIn() && isStudent() ? element : <Navigate to="/dashboard" />;
+  return isLoggedIn() && isStudent() ? element : <Navigate to="/" />;
 };
 
 // Home route redirects based on user role
@@ -54,7 +54,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<HomeRoute />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
+          <Route path="/dashboard" element={<StudentRoute element={<Dashboard />} />} />
           <Route path="/admin" element={<AdminRoute element={<Admin />} />} />
           <Route path="/python-course" element={<GuideRoute element={<PythonCourse />} />} />
           <Route path="*" element={<NotFound />} />
