@@ -56,7 +56,7 @@ const ToolsGallery: React.FC = () => {
   };
   
   return (
-    <div className="page-container" dir="rtl">
+    <div className="min-h-screen py-6 px-4 md:px-8 relative" dir="rtl">
       <StarsBackground />
       
       <div className="max-w-6xl mx-auto">
@@ -67,9 +67,7 @@ const ToolsGallery: React.FC = () => {
           updateCompletedCount={updateCompletedCount}
         />
         
-        <div className="p-4 md:p-8 rounded-xl bg-white/70 backdrop-blur-sm shadow-lg mb-8">
-          <SearchBar onSelectTool={handleToolSelect} />
-        </div>
+        <SearchBar onSelectTool={handleToolSelect} />
         
         <CategoriesDisplay onSelectTool={handleToolSelect} />
       </div>
@@ -79,7 +77,7 @@ const ToolsGallery: React.FC = () => {
         onOpenChange={setShowGuideLogin}
       />
       
-      <div className="footer-section">
+      <div className="mt-10 text-center text-gray-500 text-sm">
         WIN CAMP &copy; {new Date().getFullYear()} | עולם של הרפתקאות טכנולוגיות
       </div>
     </div>

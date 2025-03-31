@@ -7,15 +7,15 @@ import StarsBackground from '../components/StarsBackground';
 
 const PythonCourse: React.FC = () => {
   return (
-    <div className="page-container" dir="rtl">
+    <div className="min-h-screen py-6 px-4 md:px-8 relative" dir="rtl">
       <StarsBackground />
       
       <div className="max-w-6xl mx-auto">
         <Header />
         
-        <div className="content-section">
-          <h1 className="text-4xl font-bold mb-4 text-blue-900">קורס פייתון לילדים</h1>
-          <p className="text-lg leading-relaxed">
+        <div className="glass-card rounded-xl p-6 mb-8">
+          <h1 className="text-3xl font-bold mb-4">קורס פייתון לילדים</h1>
+          <p className="text-lg">
             ברוכים הבאים לקורס פייתון - שפת התכנות הפופולרית בעולם! כאן תלמדו את יסודות התכנות בצורה פשוטה ומהנה.
           </p>
         </div>
@@ -26,7 +26,7 @@ const PythonCourse: React.FC = () => {
         </div>
       </div>
       
-      <div className="footer-section">
+      <div className="mt-10 text-center text-gray-500 text-sm">
         WIN CAMP &copy; {new Date().getFullYear()} | קורס פייתון לילדים
       </div>
     </div>

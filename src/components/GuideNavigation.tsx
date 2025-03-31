@@ -27,7 +27,7 @@ const GuideNavigation: React.FC = () => {
 
   return (
     <div 
-      className="relative overflow-hidden text-white py-6 px-8 flex flex-wrap md:flex-nowrap justify-between items-center rounded-xl mb-6 shadow-lg border border-white/10 bg-white/10 backdrop-blur-sm"
+      className="relative overflow-hidden text-white py-4 px-6 flex justify-between items-center rounded-lg mb-6 shadow-lg border border-white/10"
       style={{ 
         backgroundImage: `url('/lovable-uploads/0347bba2-2b30-4c5c-9c4f-abc081a81785.png')`,
         backgroundSize: 'cover',
@@ -36,23 +36,23 @@ const GuideNavigation: React.FC = () => {
       dir="rtl"
     >
       {/* אפקט שקיפות כדי שהטקסט יהיה קריא */}
-      <div className="absolute inset-0 bg-blue-900/60 backdrop-blur-sm"></div>
+      <div className="absolute inset-0 bg-indigo-900/70 backdrop-blur-sm"></div>
       
-      <div className="text-xl md:text-2xl font-bold relative z-10 flex items-center w-full md:w-auto mb-4 md:mb-0 justify-center md:justify-start">
-        <Sparkles className="text-wincamp-orange ml-3" size={24} />
+      <div className="text-xl font-bold relative z-10 flex items-center">
+        <Sparkles className="text-wincamp-orange ml-2" size={20} />
         ממשק מדריך - {user?.displayName}
       </div>
       
-      <NavigationMenu dir="rtl" className="relative z-10 w-full md:w-auto">
-        <NavigationMenuList className="gap-4 flex flex-wrap md:flex-nowrap justify-center">
+      <NavigationMenu dir="rtl" className="relative z-10">
+        <NavigationMenuList className="gap-3">
           <NavigationMenuItem>
             <Button 
               variant="outline" 
               size="lg"
-              className="bg-white/20 text-white border-white/30 hover:bg-white/30 hover:text-white text-lg font-bold shadow-md backdrop-blur-sm px-6 py-3 rounded-xl transition-all hover:scale-105 w-full md:w-auto"
+              className="bg-white/20 text-white border-white/30 hover:bg-white/30 hover:text-white text-base font-bold shadow-md backdrop-blur-sm"
               onClick={handleNavigateToHome}
             >
-              <LayoutDashboard className="ml-2" size={20} />
+              <LayoutDashboard className="ml-2" size={18} />
               דף ראשי
             </Button>
           </NavigationMenuItem>
@@ -61,10 +61,10 @@ const GuideNavigation: React.FC = () => {
             <Button 
               variant="outline" 
               size="lg"
-              className="bg-white/20 text-white border-white/30 hover:bg-white/30 hover:text-white text-lg font-bold shadow-md backdrop-blur-sm px-6 py-3 rounded-xl transition-all hover:scale-105 w-full md:w-auto"
+              className="bg-white/20 text-white border-white/30 hover:bg-white/30 hover:text-white text-base font-bold shadow-md backdrop-blur-sm"
               onClick={() => navigate('/admin')}
             >
-              <Users className="ml-2" size={20} />
+              <Users className="ml-2" size={18} />
               ניהול קייטנה
             </Button>
           </NavigationMenuItem>
@@ -75,3 +75,4 @@ const GuideNavigation: React.FC = () => {
 };
 
 export default GuideNavigation;
+

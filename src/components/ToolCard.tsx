@@ -44,8 +44,8 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
   return (
     <div id={`tool-${tool.id}`}>
       <div 
-        className={`relative bg-white/70 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer tooltip-container
-          ${completed ? 'completed border-2 border-wincamp-green' : ''} 
+        className={`relative glass-card rounded-xl overflow-hidden card-hover cursor-pointer tooltip-container
+          ${completed ? 'completed' : ''} 
           ${animateIn ? 'animate-bounce-in' : 'opacity-0'}`}
         onClick={handleStartClick}
         dir="rtl"
@@ -54,31 +54,31 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
           <Check size={16} />
         </div>
         
-        <div className="p-6">
-          <div className="text-4xl mb-3">{tool.icon}</div>
-          <h3 className="font-bold text-xl mb-2 text-blue-900">{tool.title}</h3>
+        <div className="p-4">
+          <div className="text-3xl mb-2">{tool.icon}</div>
+          <h3 className="font-bold text-lg mb-1">{tool.title}</h3>
           
-          <div className="flex justify-between mt-6">
+          <div className="flex justify-between mt-4">
             <button 
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-xl shadow-md transition-all hover:scale-105 text-lg"
+              className="bg-wincamp-blue text-white px-3 py-1 rounded-lg text-sm hover:bg-wincamp-purple transition-colors"
               onClick={handleStartClick}
             >
               התחל
             </button>
             
             <button 
-              className={`w-10 h-10 rounded-full flex items-center justify-center transition-all hover:scale-110
+              className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors
                 ${completed 
                   ? 'bg-wincamp-green text-white' 
                   : 'bg-gray-200 text-gray-500 hover:bg-gray-300'}`}
               onClick={handleToggleCompleted}
             >
-              <Check size={18} />
+              <Check size={16} />
             </button>
           </div>
         </div>
         
-        <div className="tooltip bg-blue-900 text-white">
+        <div className="tooltip">
           {tool.description}
         </div>
       </div>
