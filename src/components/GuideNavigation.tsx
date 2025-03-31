@@ -21,6 +21,10 @@ const GuideNavigation: React.FC = () => {
     return null;
   }
 
+  const handleNavigateToHome = () => {
+    navigate('/');
+  };
+
   return (
     <div className="bg-indigo-800/70 text-white py-4 px-6 flex justify-between items-center rounded-lg mb-6 shadow-lg border border-white/10" dir="rtl">
       <div className="text-xl font-bold">ממשק מדריך - {user?.displayName}</div>
@@ -32,12 +36,10 @@ const GuideNavigation: React.FC = () => {
               variant="outline" 
               size="lg"
               className="bg-white/20 text-white border-white/30 hover:bg-white/30 hover:text-white text-base font-bold shadow-md"
-              asChild
+              onClick={handleNavigateToHome}
             >
-              <Link to="/">
-                <LayoutDashboard className="ml-2" size={18} />
-                דף ראשי
-              </Link>
+              <LayoutDashboard className="ml-2" size={18} />
+              דף ראשי
             </Button>
           </NavigationMenuItem>
           
@@ -59,3 +61,4 @@ const GuideNavigation: React.FC = () => {
 };
 
 export default GuideNavigation;
+
