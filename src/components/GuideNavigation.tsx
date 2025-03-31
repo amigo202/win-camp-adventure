@@ -1,8 +1,8 @@
 
 import React from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { LayoutDashboard, Users } from 'lucide-react';
+import { LayoutDashboard, Users, Sparkles, Zap } from 'lucide-react';
 import { 
   NavigationMenu,
   NavigationMenuList,
@@ -26,16 +26,30 @@ const GuideNavigation: React.FC = () => {
   };
 
   return (
-    <div className="bg-indigo-800/70 text-white py-4 px-6 flex justify-between items-center rounded-lg mb-6 shadow-lg border border-white/10" dir="rtl">
-      <div className="text-xl font-bold">ממשק מדריך - {user?.displayName}</div>
+    <div 
+      className="relative overflow-hidden text-white py-4 px-6 flex justify-between items-center rounded-lg mb-6 shadow-lg border border-white/10"
+      style={{ 
+        backgroundImage: `url('/lovable-uploads/0347bba2-2b30-4c5c-9c4f-abc081a81785.png')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }}
+      dir="rtl"
+    >
+      {/* אפקט שקיפות כדי שהטקסט יהיה קריא */}
+      <div className="absolute inset-0 bg-indigo-900/70 backdrop-blur-sm"></div>
       
-      <NavigationMenu dir="rtl">
+      <div className="text-xl font-bold relative z-10 flex items-center">
+        <Sparkles className="text-wincamp-orange ml-2" size={20} />
+        ממשק מדריך - {user?.displayName}
+      </div>
+      
+      <NavigationMenu dir="rtl" className="relative z-10">
         <NavigationMenuList className="gap-3">
           <NavigationMenuItem>
             <Button 
               variant="outline" 
               size="lg"
-              className="bg-white/20 text-white border-white/30 hover:bg-white/30 hover:text-white text-base font-bold shadow-md"
+              className="bg-white/20 text-white border-white/30 hover:bg-white/30 hover:text-white text-base font-bold shadow-md backdrop-blur-sm"
               onClick={handleNavigateToHome}
             >
               <LayoutDashboard className="ml-2" size={18} />
@@ -47,7 +61,7 @@ const GuideNavigation: React.FC = () => {
             <Button 
               variant="outline" 
               size="lg"
-              className="bg-white/20 text-white border-white/30 hover:bg-white/30 hover:text-white text-base font-bold shadow-md"
+              className="bg-white/20 text-white border-white/30 hover:bg-white/30 hover:text-white text-base font-bold shadow-md backdrop-blur-sm"
               onClick={() => navigate('/admin')}
             >
               <Users className="ml-2" size={18} />
@@ -61,4 +75,3 @@ const GuideNavigation: React.FC = () => {
 };
 
 export default GuideNavigation;
-

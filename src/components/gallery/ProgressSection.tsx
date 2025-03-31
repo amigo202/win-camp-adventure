@@ -3,6 +3,7 @@ import React from 'react';
 import { categories } from '../../utils/data';
 import { getToolsByCategory } from '../../utils/data';
 import { toast } from '../../components/ui/use-toast';
+import { Sparkles } from 'lucide-react';
 
 interface ProgressSectionProps {
   completedCount: number;
@@ -24,15 +25,15 @@ const ProgressSection: React.FC<ProgressSectionProps> = ({
     }
   };
 
+  const totalActivities = categories.reduce((acc, cat) => acc + getToolsByCategory(cat.id).length, 0);
+
   return (
     <div className="glass-card rounded-xl p-6 mb-8 animate-slide-in-bottom">
-      <h1 className="text-2xl font-bold mb-2 text-gray-800">
-        WIN CAMP - עולם של כלים ותוכנות
-      </h1>
-      
       <div className="flex flex-wrap justify-between items-center">
-        <div className="text-wincamp-purple">
-          <span className="font-bold">{completedCount}</span> פעילויות הושלמו מתוך {categories.reduce((acc, cat) => acc + getToolsByCategory(cat.id).length, 0)}
+        <div className="flex items-center gap-2 text-wincamp-purple">
+          <Sparkles className="text-wincamp-orange" size={20} />
+          <span className="font-bold text-xl">{completedCount}</span> 
+          <span>פעילויות הושלמו מתוך {totalActivities}</span>
         </div>
         
         <button 
