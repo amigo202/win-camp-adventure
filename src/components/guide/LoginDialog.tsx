@@ -89,7 +89,7 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ open, onOpenChange }) => {
           <Button 
             onClick={handleGuideLogin} 
             disabled={loading} 
-            className="bg-orange-500 hover:bg-orange-600 text-white border-0"
+            className="bg-orange-500 hover:bg-orange-600 text-white border-0 rounded-xl hover:scale-105 transition-all"
           >
             {loading ? "מתחבר..." : "התחבר"}
           </Button>

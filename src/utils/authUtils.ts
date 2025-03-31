@@ -1,10 +1,11 @@
+
 // Simple authentication utilities for WIN CAMP
 
 // Mock credentials - in a real app, these would be stored securely on a server
 const MOCK_USERS = [
   { username: "WINCAMP", password: "12345", role: "admin", displayName: "WINCAMP" },
-  { username: "WINCAMP100", password: "12345", role: "instructor", displayName: "מדריך 1" },
-  { username: "WINCAMP200", password: "12345", role: "instructor", displayName: "מדריך 2" },
+  { username: "WINCAMP100", password: "12345", role: "instructor", displayName: "WINCAMP 100" },
+  { username: "WINCAMP200", password: "12345", role: "instructor", displayName: "WINCAMP 200" },
   { username: "STUDENT1", password: "12345", role: "student", displayName: "תלמיד 1" },
   { username: "STUDENT2", password: "12345", role: "student", displayName: "תלמיד 2" },
   { username: "STUDENT3", password: "12345", role: "student", displayName: "תלמיד 3" },
@@ -80,6 +81,29 @@ export const getCurrentUser = (): User | null => {
 // Logout user
 export const logoutUser = (): void => {
   localStorage.removeItem('wincamp_user');
+};
+
+// Get data for the current user
+export const getCurrentUserData = <T extends { createdBy?: string }>(data: T[]): T[] => {
+  const user = getCurrentUser();
+  if (!user) return [];
+  
+  // For admin users, return all data
+  if (user.role === "admin") return data;
+  
+  // For instructors and students, filter by createdBy
+  return data.filter(item => item.createdBy === user.username);
+};
+
+// Add createdBy to new data items
+export const addCreatedByToData = <T>(data: T): T & { createdBy: string } => {
+  const user = getCurrentUser();
+  if (!user) throw new Error("No user logged in");
+  
+  return {
+    ...data,
+    createdBy: user.username
+  };
 };
 
 // Mark tool as complete

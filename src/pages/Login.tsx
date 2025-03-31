@@ -46,13 +46,13 @@ const Login: React.FC = () => {
   };
   
   return (
-    <div className="min-h-screen py-6 px-4 md:px-8 relative" dir="rtl">
+    <div className="min-h-screen py-6 px-4 md:px-8 relative bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50" dir="rtl">
       <StarsBackground />
       
-      <div className="max-w-md mx-auto">
+      <div className="max-w-md mx-auto p-6 md:p-10 space-y-6">
         <Header showLogout={false} />
         
-        <div className="glass-card rounded-xl p-8 mb-8 animate-slide-in-bottom">
+        <div className="bg-white/70 backdrop-blur-sm rounded-xl shadow-lg p-8 mb-8 animate-slide-in-bottom">
           <h1 className="text-3xl font-bold mb-6 text-center">כניסה ל-WIN CAMP</h1>
           
           <form onSubmit={handleLogin} className="space-y-4">
@@ -82,7 +82,7 @@ const Login: React.FC = () => {
             <Button 
               type="submit" 
               disabled={loading} 
-              className="w-full bg-wincamp-purple hover:bg-wincamp-blue text-white"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl shadow-md transition-all hover:scale-105"
             >
               {loading ? "מתחבר..." : "התחבר"}
             </Button>
@@ -92,7 +92,7 @@ const Login: React.FC = () => {
             <p>משתמשים לדוגמה:</p>
             <ul className="list-disc list-inside space-y-1">
               <li>מנהל: WINCAMP / 12345</li>
-              <li>מדריך: WINCAMP100 / 12345</li>
+              <li>מדריכים: WINCAMP100 או WINCAMP200 / 12345</li>
               <li>תלמיד: STUDENT1 / 12345</li>
             </ul>
           </div>

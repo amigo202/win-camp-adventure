@@ -27,7 +27,7 @@ const GuideNavigation: React.FC = () => {
 
   return (
     <div 
-      className="relative overflow-hidden text-white py-4 px-6 flex justify-between items-center rounded-lg mb-6 shadow-lg border border-white/10"
+      className="relative overflow-hidden text-white py-4 px-6 flex justify-between items-center rounded-xl mb-6 shadow-lg border border-white/10 w-full max-w-7xl mx-auto"
       style={{ 
         backgroundImage: `url('/lovable-uploads/0347bba2-2b30-4c5c-9c4f-abc081a81785.png')`,
         backgroundSize: 'cover',
@@ -49,7 +49,7 @@ const GuideNavigation: React.FC = () => {
             <Button 
               variant="outline" 
               size="lg"
-              className="bg-white/20 text-white border-white/30 hover:bg-white/30 hover:text-white text-base font-bold shadow-md backdrop-blur-sm"
+              className="bg-white/20 text-white border-white/30 hover:bg-white/30 hover:text-white text-base font-bold shadow-md backdrop-blur-sm rounded-xl hover:scale-105 transition-all"
               onClick={handleNavigateToHome}
             >
               <LayoutDashboard className="ml-2" size={18} />
@@ -61,7 +61,7 @@ const GuideNavigation: React.FC = () => {
             <Button 
               variant="outline" 
               size="lg"
-              className="bg-white/20 text-white border-white/30 hover:bg-white/30 hover:text-white text-base font-bold shadow-md backdrop-blur-sm"
+              className="bg-white/20 text-white border-white/30 hover:bg-white/30 hover:text-white text-base font-bold shadow-md backdrop-blur-sm rounded-xl hover:scale-105 transition-all"
               onClick={() => navigate('/admin')}
             >
               <Users className="ml-2" size={18} />
@@ -75,4 +75,3 @@ const GuideNavigation: React.FC = () => {
 };
 
 export default GuideNavigation;
-
