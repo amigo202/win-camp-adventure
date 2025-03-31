@@ -2,7 +2,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { LayoutDashboard, Users, BookOpen } from 'lucide-react';
+import { LayoutDashboard, Users } from 'lucide-react';
 import { 
   NavigationMenu,
   NavigationMenuList,
@@ -48,18 +48,6 @@ const GuideNavigation: React.FC = () => {
             >
               <Users className="ml-2" size={18} />
               ניהול קייטנה
-            </Button>
-          </NavigationMenuItem>
-          
-          <NavigationMenuItem>
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="bg-indigo-800 text-white border-white hover:bg-indigo-700 text-base font-bold"
-              onClick={() => navigate('/python-course')}
-            >
-              <BookOpen className="ml-2" size={18} />
-              קורס פייתון
             </Button>
           </NavigationMenuItem>
         </NavigationMenuList>

@@ -37,6 +37,19 @@ const GuideRoute = ({ element }: { element: JSX.Element }) => {
   return element;
 };
 
+// Python Course - Admin only route
+const PythonRoute = ({ element }: { element: JSX.Element }) => {
+  if (!isLoggedIn()) {
+    return <Navigate to="/login" />;
+  }
+  
+  if (!isAdmin()) {
+    return <Navigate to="/admin" />;
+  }
+  
+  return element;
+};
+
 // Create a redirect component for already logged in users
 const AuthRedirect = ({ element }: { element: JSX.Element }) => {
   if (isLoggedIn()) {
@@ -60,8 +73,8 @@ const App = () => (
         <Routes>
           <Route path="/" element={<ToolsGallery />} />
           <Route path="/login" element={<AuthRedirect element={<Login />} />} />
-          <Route path="/admin" element={<AdminRoute element={<Admin />} />} />
-          <Route path="/python-course" element={<GuideRoute element={<PythonCourse />} />} />
+          <Route path="/admin" element={<GuideRoute element={<Admin />} />} />
+          <Route path="/python-course" element={<PythonRoute element={<PythonCourse />} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
