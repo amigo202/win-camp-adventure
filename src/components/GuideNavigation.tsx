@@ -22,7 +22,7 @@ const GuideNavigation: React.FC = () => {
   }
 
   return (
-    <div className="bg-indigo-900 text-white py-4 px-6 flex justify-between items-center rounded-lg mb-6 shadow-lg" dir="rtl">
+    <div className="bg-gradient-to-r from-indigo-800 to-purple-800 text-white py-4 px-6 flex justify-between items-center rounded-lg mb-6 shadow-lg border border-white/10" dir="rtl">
       <div className="text-xl font-bold">ממשק מדריך - {user?.displayName}</div>
       
       <NavigationMenu dir="rtl">
@@ -31,7 +31,7 @@ const GuideNavigation: React.FC = () => {
             <Button 
               variant="outline" 
               size="lg"
-              className="bg-indigo-800 text-white border-white hover:bg-indigo-700 text-base font-bold"
+              className="bg-white/10 text-white border-white/20 hover:bg-white/20 hover:text-white text-base font-bold shadow-md"
               onClick={() => navigate('/')}
             >
               <LayoutDashboard className="ml-2" size={18} />
@@ -43,7 +43,7 @@ const GuideNavigation: React.FC = () => {
             <Button 
               variant="outline" 
               size="lg"
-              className="bg-indigo-800 text-white border-white hover:bg-indigo-700 text-base font-bold"
+              className="bg-white/10 text-white border-white/20 hover:bg-white/20 hover:text-white text-base font-bold shadow-md"
               onClick={() => navigate('/admin')}
             >
               <Users className="ml-2" size={18} />

@@ -19,7 +19,7 @@ const StudentActions: React.FC<StudentActionsProps> = ({
       <Button 
         variant="outline" 
         onClick={() => fileInputRef.current?.click()}
-        className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white border-none"
+        className="flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white border-none shadow-md"
       >
         <Upload size={16} />
         יבוא מאקסל
@@ -28,7 +28,7 @@ const StudentActions: React.FC<StudentActionsProps> = ({
       <Button 
         variant="outline" 
         onClick={handleExportToExcel}
-        className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white border-none"
+        className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white border-none shadow-md"
         disabled={!studentsExist}
       >
         <Download size={16} />

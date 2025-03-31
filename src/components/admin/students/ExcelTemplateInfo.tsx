@@ -5,28 +5,28 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 
 const ExcelTemplateInfo: React.FC = () => {
   return (
-    <div className="bg-white/5 p-4 rounded-lg">
+    <div className="bg-indigo-700/30 p-4 rounded-lg backdrop-blur-sm border border-indigo-600/50">
       <div className="flex items-center gap-2 mb-2">
-        <FileSpreadsheet size={20} />
-        <h3 className="text-lg">תבנית אקסל לייבוא</h3>
+        <FileSpreadsheet size={20} className="text-white" />
+        <h3 className="text-lg text-white font-bold">תבנית אקסל לייבוא</h3>
       </div>
-      <p className="text-sm text-gray-300 mb-4">וודאו שקובץ האקסל שלכם מכיל את העמודות הבאות: שם, סיסמה, כיתה (אופציונלי), הערות (אופציונלי)</p>
+      <p className="text-sm text-indigo-200 mb-4">וודאו שקובץ האקסל שלכם מכיל את העמודות הבאות: שם, סיסמה, כיתה (אופציונלי), הערות (אופציונלי)</p>
       <div className="overflow-x-auto">
-        <Table className="border border-white/20">
-          <TableHeader>
+        <Table className="border border-indigo-600/50">
+          <TableHeader className="bg-indigo-800/50">
             <TableRow>
-              <TableHead className="text-white">שם</TableHead>
-              <TableHead className="text-white">סיסמה</TableHead>
-              <TableHead className="text-white">כיתה</TableHead>
-              <TableHead className="text-white">הערות</TableHead>
+              <TableHead className="text-white font-bold">שם</TableHead>
+              <TableHead className="text-white font-bold">סיסמה</TableHead>
+              <TableHead className="text-white font-bold">כיתה</TableHead>
+              <TableHead className="text-white font-bold">הערות</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow>
-              <TableCell className="text-white/80">ישראל ישראלי</TableCell>
-              <TableCell className="text-white/80">1234</TableCell>
-              <TableCell className="text-white/80">ד'2</TableCell>
-              <TableCell className="text-white/80">אלרגיה לבוטנים</TableCell>
+            <TableRow className="border-b border-indigo-600/30">
+              <TableCell className="text-white">ישראל ישראלי</TableCell>
+              <TableCell className="text-white">1234</TableCell>
+              <TableCell className="text-white">ד'2</TableCell>
+              <TableCell className="text-white">אלרגיה לבוטנים</TableCell>
             </TableRow>
           </TableBody>
         </Table>

@@ -25,10 +25,10 @@ const ActivityIdeas: React.FC = () => {
   return (
     <div className="space-y-6" dir="rtl">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold">רעיונות לפעילויות גיבוש</h2>
+        <h2 className="text-2xl font-bold text-white">רעיונות לפעילויות גיבוש</h2>
         <Button 
           onClick={handleRandomActivity}
-          className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700"
+          className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white shadow-md"
         >
           פעילות אקראית
         </Button>
@@ -50,7 +50,7 @@ const ActivityIdeas: React.FC = () => {
       </div>
 
       {filteredActivities.length === 0 && (
-        <div className="text-center py-8 text-gray-300">
+        <div className="text-center py-8 text-indigo-200 bg-indigo-800/30 rounded-lg">
           <p>לא נמצאו פעילויות התואמות את החיפוש</p>
         </div>
       )}
