@@ -10,14 +10,14 @@ import {
 } from "@/components/ui/table";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { FileText, Link2, Video, Book, Download, ExternalLink } from "lucide-react";
+import { FileText, Link2, Video, Book, Download, ExternalLink, FolderOpen } from "lucide-react";
 import { categories } from "@/utils/categories";
 
 interface Material {
   id: string;
   title: string;
   category: string;
-  type: 'presentation' | 'document' | 'video' | 'link';
+  type: 'presentation' | 'document' | 'video' | 'link' | 'folder';
   url: string;
   description?: string;
   gradeLevel?: string;
@@ -60,6 +60,46 @@ const demoMaterials: Material[] = [
     url: "https://docs.google.com/document/d/1r5DQ4rnxlMe_twbtfLXGDzxZlddhyN2J",
     description: "מדריך למדריכים על שיעור מוגנות ברשת",
     gradeLevel: "כל הגילאים"
+  },
+  // חומרי לימוד סקראץ'
+  {
+    id: "scratch1",
+    title: "חומר ומצגות על סקראץ'",
+    category: "programming",
+    type: "folder",
+    url: "https://drive.google.com/drive/u/0/folders/1AjzT4fuHtD1A3j10Z2UncK3LDxTmQs_0",
+    description: "תיקיית Drive עם מצגות וחומרי לימוד לסקראץ'",
+    gradeLevel: "כל הגילאים"
+  },
+  // חומרי לימוד פיתוח משחקים
+  {
+    id: "gamedev1",
+    title: "פיתוח משחקים",
+    category: "programming",
+    type: "folder",
+    url: "https://drive.google.com/drive/u/0/folders/1_IGwdTIwaLXq8ysbT4dC0EFFRnDPpvff",
+    description: "תיקיית Drive עם חומרי לימוד לפיתוח משחקים",
+    gradeLevel: "ד'-ו'"
+  },
+  // חומרי לימוד מיינקראפט
+  {
+    id: "minecraft1",
+    title: "תכנות במיינקראפט",
+    category: "minecraft",
+    type: "folder",
+    url: "https://drive.google.com/drive/u/0/folders/10ySub9fEYt9mI1vxrUHTZ8VMX10t7gAc",
+    description: "תיקיית Drive עם חומרי לימוד לתכנות במיינקראפט",
+    gradeLevel: "ג'-ו'"
+  },
+  // חומרי לימוד פיתוח אפליקציות
+  {
+    id: "appdev1",
+    title: "פיתוח אפליקציות",
+    category: "programming",
+    type: "folder",
+    url: "https://drive.google.com/drive/u/0/folders/1KXI22rnaTAQ6yIADSniOFtWpqnl50guM",
+    description: "תיקיית Drive עם חומרי לימוד לפיתוח אפליקציות",
+    gradeLevel: "ה'-ו'"
   }
 ];
 
@@ -79,6 +119,7 @@ const TeachingMaterials: React.FC = () => {
       case 'document': return <Book className="text-blue-600" />;
       case 'video': return <Video className="text-red-600" />;
       case 'link': return <Link2 className="text-green-600" />;
+      case 'folder': return <FolderOpen className="text-yellow-600" />;
       default: return <FileText />;
     }
   };
@@ -159,10 +200,12 @@ const TeachingMaterials: React.FC = () => {
                             <span className="sr-only">פתח</span>
                           </a>
                         </Button>
-                        <Button variant="outline" size="sm">
-                          <Download size={16} />
-                          <span className="sr-only">הורד</span>
-                        </Button>
+                        {material.type !== 'folder' && (
+                          <Button variant="outline" size="sm">
+                            <Download size={16} />
+                            <span className="sr-only">הורד</span>
+                          </Button>
+                        )}
                       </TableCell>
                     </TableRow>
                   ))}
