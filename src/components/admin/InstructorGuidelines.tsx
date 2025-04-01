@@ -6,18 +6,18 @@ import { Sparkles, BookOpenCheck, Clock, Shield, Megaphone, GraduationCap, Heart
 const InstructorGuidelines: React.FC = () => {
   return (
     <div className="space-y-6 py-2" dir="rtl">
-      <div className="flex items-center gap-3 mb-4">
+      <div className="flex items-center gap-3 mb-6 bg-indigo-50 p-4 rounded-xl">
         <BookOpenCheck className="text-wincamp-orange" size={30} />
-        <h2 className="text-2xl font-bold text-white">מדריכים יקרים</h2>
+        <h2 className="text-2xl font-bold text-indigo-800">מדריכים יקרים</h2>
       </div>
 
-      <p className="text-white/90 mb-6">
+      <p className="text-gray-700 mb-6 bg-white/80 p-4 rounded-lg shadow-sm leading-relaxed">
         כדי להבטיח קייטנה מקצועית, מהנה ומעשירה – חשוב להקפיד על הכללים הבאים לאורך כל התקופה:
       </p>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <GuidelineCard 
-          icon={<Clock className="h-6 w-6 text-wincamp-orange" />} 
+          icon={<Clock className="h-6 w-6 text-wincamp-turquoise" />} 
           title="נוכחות והתארגנות"
           items={[
             "הגעה בזמן – להגיע לפחות 15 דקות לפני תחילת הפעילות.",
@@ -26,7 +26,7 @@ const InstructorGuidelines: React.FC = () => {
         />
         
         <GuidelineCard 
-          icon={<Shield className="h-6 w-6 text-wincamp-orange" />} 
+          icon={<Shield className="h-6 w-6 text-wincamp-green" />} 
           title="בטיחות ואחריות"
           items={[
             "בטיחות – להסביר נהלי בטיחות ברורים.",
@@ -37,7 +37,7 @@ const InstructorGuidelines: React.FC = () => {
         />
         
         <GuidelineCard 
-          icon={<Megaphone className="h-6 w-6 text-wincamp-orange" />} 
+          icon={<Megaphone className="h-6 w-6 text-wincamp-pink" />} 
           title="תקשורת והתנהלות"
           items={[
             "שפה ברורה – להסביר בצורה מותאמת לילדים ולעודד שאלות.",
@@ -48,7 +48,7 @@ const InstructorGuidelines: React.FC = () => {
         />
         
         <GuidelineCard 
-          icon={<GraduationCap className="h-6 w-6 text-wincamp-orange" />} 
+          icon={<GraduationCap className="h-6 w-6 text-wincamp-purple" />} 
           title="למידה והדרכה"
           items={[
             "הדרכה מקצועית – להכיר את הכלים ולהתכונן מראש.",
@@ -60,7 +60,7 @@ const InstructorGuidelines: React.FC = () => {
         />
         
         <GuidelineCard 
-          icon={<Heart className="h-6 w-6 text-wincamp-orange" />} 
+          icon={<Heart className="h-6 w-6 text-red-400" />} 
           title="אווירה וערכים"
           items={[
             "חיזוק חיובי – לפרגן, לעודד ולהתלהב יחד עם הילדים.",
@@ -72,14 +72,14 @@ const InstructorGuidelines: React.FC = () => {
         />
       </div>
       
-      <div className="text-center mt-8">
-        <p className="text-wincamp-yellow font-bold text-lg flex items-center justify-center gap-2">
+      <div className="text-center mt-8 bg-indigo-50 p-6 rounded-xl">
+        <p className="text-wincamp-orange font-bold text-lg flex items-center justify-center gap-2">
           <Sparkles className="h-5 w-5" />
           בואו ניצור יחד קייטנה בלתי נשכחת!
         </p>
-        <p className="text-white/90 mt-2">
+        <p className="text-gray-700 mt-2">
           תודה רבה על המחויבות והעשייה,<br />
-          <span className="font-bold">אמיתי</span> 🙌
+          <span className="font-bold text-indigo-800">אמיתי</span> 🙌
         </p>
       </div>
     </div>
@@ -94,17 +94,17 @@ interface GuidelineCardProps {
 
 const GuidelineCard: React.FC<GuidelineCardProps> = ({ icon, title, items }) => {
   return (
-    <Card className="bg-indigo-600/50 border-indigo-500/50 shadow-lg overflow-hidden">
-      <CardHeader className="pb-2">
-        <CardTitle className="flex items-center gap-2 text-white">
+    <Card className="bg-white/80 backdrop-blur-sm border-slate-200 shadow-md overflow-hidden transition-all hover:shadow-lg hover:-translate-y-1">
+      <CardHeader className="pb-2 bg-indigo-50/50">
+        <CardTitle className="flex items-center gap-2 text-indigo-800">
           {icon}
-          {title}
+          <span className="text-lg">{title}</span>
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <ul className="list-disc pr-5 space-y-1 text-white/90">
+        <ul className="list-disc pr-5 space-y-1 text-gray-700">
           {items.map((item, index) => (
-            <li key={index}>{item}</li>
+            <li key={index} className="leading-relaxed">{item}</li>
           ))}
         </ul>
       </CardContent>
