@@ -1,4 +1,3 @@
-
 import { Tool } from '../types/tools';
 
 export const designTools: Tool[] = [
@@ -57,5 +56,13 @@ export const designTools: Tool[] = [
     icon: "🧊",
     link: "https://www.tinkercad.com/",
     description: "עיצוב ויצירת מודלים תלת מימדיים בסביבה ידידותית למתחילים"
+  },
+  {
+    id: "sketchmetademo",
+    title: "אנימציה דיגיטלית",
+    category: "design",
+    icon: "🎨",
+    link: "https://sketch.metademolab.com/canvas",
+    description: "סביבת יצירה ועיצוב אנימציות דיגיטליות"
   }
 ];
