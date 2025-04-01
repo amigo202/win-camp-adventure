@@ -52,7 +52,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ newStudent, setNewStudent, ha
         <div>
           <Button 
             onClick={handleAddStudent} 
-            className="w-full flex items-center justify-center gap-2 bg-sky-500 hover:bg-sky-600 text-white rounded-lg shadow-sm"
+            className="w-full flex items-center justify-center gap-2 bg-purple-500 hover:bg-purple-600 text-white rounded-lg shadow-sm"
           >
             <Plus size={16} className="ml-2" />
             הוסף תלמיד
