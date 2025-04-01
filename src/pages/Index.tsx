@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import GuideNavigation from '../components/GuideNavigation';
@@ -12,7 +11,6 @@ const Index = () => {
   const [animated, setAnimated] = useState(false);
   
   useEffect(() => {
-    // Trigger animations after component mounts
     setTimeout(() => setAnimated(true), 100);
   }, []);
   
@@ -20,13 +18,11 @@ const Index = () => {
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-950 overflow-x-hidden">
       <StarsBackground />
       
-      {/* Header Component */}
       <div className="container mx-auto px-4 pt-4">
         <Header />
         {user && <GuideNavigation />}
       </div>
       
-      {/* Hero Section */}
       <div className="flex-1 flex flex-col items-center justify-center relative mt-4 md:mt-0">
         <div 
           className={`w-full max-w-6xl mx-auto rounded-xl overflow-hidden relative transition-all duration-1000 ${animated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
@@ -68,28 +64,26 @@ const Index = () => {
           </div>
         </div>
         
-        {/* Features Section */}
         <div className="w-full max-w-6xl mx-auto mt-12 px-4 mb-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {features.map((feature, index) => (
               <div 
                 key={feature.title}
-                className={`glass-card p-8 rounded-xl bg-gradient-to-br from-white/10 to-white/5 hover:from-white/15 hover:to-white/10 backdrop-blur-md border border-white/20 shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 ${animated ? 'animate-slide-in-bottom' : 'opacity-0 translate-y-20'}`}
+                className={`bg-white rounded-xl p-8 shadow-lg text-gray-800 ${animated ? 'animate-slide-in-bottom' : 'opacity-0 translate-y-20'}`}
                 style={{ animationDelay: `${0.2 + index * 0.1}s` }}
               >
                 <div className="flex items-center mb-4">
-                  <div className="p-3 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 text-white mr-4">
+                  <div className="p-3 rounded-full bg-purple-100 text-purple-600 mr-4">
                     {feature.icon}
                   </div>
-                  <h3 className="text-2xl font-bold text-white">{feature.title}</h3>
+                  <h3 className="text-2xl font-bold text-gray-800">{feature.title}</h3>
                 </div>
-                <p className="text-white/90 text-lg">{feature.description}</p>
+                <p className="text-gray-600 text-lg">{feature.description}</p>
               </div>
             ))}
           </div>
         </div>
         
-        {/* Quote Banner */}
         <div 
           className={`w-full max-w-6xl mx-auto mt-4 mb-16 px-4 ${animated ? 'animate-slide-in-bottom' : 'opacity-0'}`} 
           style={{ animationDelay: '0.7s' }}
@@ -108,7 +102,6 @@ const Index = () => {
   );
 };
 
-// Feature data
 const features = [
   {
     title: "למידה חווייתית",
