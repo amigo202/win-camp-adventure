@@ -23,7 +23,7 @@ export const minecraftTools: Tool[] = [
     title: "בניית עולמות מיינקראפט",
     category: "minecraft",
     icon: "🏝️",
-    link: "https://www.minecraft.net/",
-    description: "צרו עולמות מדהימים במיינקראפט"
+    link: "https://tlauncher.org/",
+    description: "צרו עולמות מדהימים במיינקראפט עם TLauncher"
   }
 ];
