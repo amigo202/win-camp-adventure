@@ -6,11 +6,11 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 const ExcelTemplateInfo: React.FC = () => {
   return (
     <div className="bg-indigo-700/30 p-4 rounded-lg backdrop-blur-sm border border-indigo-600/50">
-      <div className="flex items-center gap-2 mb-2">
-        <FileSpreadsheet size={20} className="text-white" />
+      <div className="flex items-center gap-2 mb-2 justify-end">
         <h3 className="text-lg text-white font-bold">תבנית אקסל לייבוא</h3>
+        <FileSpreadsheet size={20} className="text-white" />
       </div>
-      <p className="text-sm text-indigo-200 mb-4">וודאו שקובץ האקסל שלכם מכיל את העמודות הבאות: שם (חובה), כיתה וטלפון הורה. הערות הם אופציונליים.</p>
+      <p className="text-sm text-indigo-200 mb-4 text-right">וודאו שקובץ האקסל שלכם מכיל את העמודות הבאות: שם (חובה), כיתה וטלפון הורה. הערות הם אופציונליים.</p>
       <div className="overflow-x-auto">
         <Table className="border border-indigo-600/50">
           <TableHeader className="bg-indigo-800/50">

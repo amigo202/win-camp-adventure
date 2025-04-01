@@ -38,7 +38,7 @@ const StudentsTable: React.FC<StudentsTableProps> = ({
 
   return (
     <div className="bg-indigo-700/30 p-4 rounded-lg overflow-hidden backdrop-blur-sm border border-indigo-600/50">
-      <h3 className="text-xl mb-4 text-white font-bold">תלמידים ({displayStudents.length} מתוך {students.length})</h3>
+      <h3 className="text-xl mb-4 text-white font-bold text-right">תלמידים ({displayStudents.length} מתוך {students.length})</h3>
       <ScrollArea className="h-[450px]">
         <div className="overflow-x-auto">
           <Table>
@@ -49,7 +49,7 @@ const StudentsTable: React.FC<StudentsTableProps> = ({
                 <TableHead className="text-white font-bold">כיתה</TableHead>
                 <TableHead className="text-white font-bold">טלפון הורה</TableHead>
                 <TableHead className="text-white font-bold">הערות</TableHead>
-                <TableHead className="text-white font-bold text-right">פעולות</TableHead>
+                <TableHead className="text-white font-bold text-left">פעולות</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -60,7 +60,7 @@ const StudentsTable: React.FC<StudentsTableProps> = ({
                   <TableCell className="text-white">{student.grade || '-'}</TableCell>
                   <TableCell className="text-white">{student.parentPhone || '-'}</TableCell>
                   <TableCell className="text-white">{student.notes || '-'}</TableCell>
-                  <TableCell className="text-right">
+                  <TableCell className="text-left">
                     <Button 
                       variant="ghost" 
                       size="icon" 

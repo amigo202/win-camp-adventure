@@ -91,7 +91,6 @@ const AttendanceTracker: React.FC = () => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold">רישום נוכחות</h2>
         <div className="flex gap-2">
           <Popover>
             <PopoverTrigger asChild>
@@ -99,7 +98,7 @@ const AttendanceTracker: React.FC = () => {
                 variant="outline"
                 className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white border-none"
               >
-                <CalendarIcon className="h-4 w-4" />
+                <CalendarIcon className="h-4 w-4 ml-2" />
                 {format(date, 'dd/MM/yyyy', { locale: he })}
               </Button>
             </PopoverTrigger>
@@ -114,39 +113,40 @@ const AttendanceTracker: React.FC = () => {
             </PopoverContent>
           </Popover>
         </div>
+        <h2 className="text-2xl font-bold">רישום נוכחות</h2>
       </div>
 
       {students.length > 0 ? (
         <>
           <div className="bg-white/5 p-4 rounded-lg">
             <div className="flex justify-between items-center mb-4">
-              <div className="space-x-2 flex gap-2">
-                <Button 
-                  variant="outline" 
-                  onClick={markAllPresent}
-                  className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white border-none"
-                >
-                  <Check size={16} />
-                  סמן הכל כנוכחים
-                </Button>
-                <Button 
-                  variant="outline" 
-                  onClick={markAllAbsent}
-                  className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white border-none"
-                >
-                  <X size={16} />
-                  סמן הכל כנעדרים
-                </Button>
-              </div>
-              
               <Button 
                 onClick={saveAttendance}
                 className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700"
                 disabled={!unsavedChanges}
               >
-                <Save size={16} />
+                <Save size={16} className="ml-2" />
                 שמור נוכחות
               </Button>
+              
+              <div className="space-x-2 flex gap-2">
+                <Button 
+                  variant="outline" 
+                  onClick={markAllAbsent}
+                  className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white border-none"
+                >
+                  <X size={16} className="ml-2" />
+                  סמן הכל כנעדרים
+                </Button>
+                <Button 
+                  variant="outline" 
+                  onClick={markAllPresent}
+                  className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white border-none"
+                >
+                  <Check size={16} className="ml-2" />
+                  סמן הכל כנוכחים
+                </Button>
+              </div>
             </div>
             
             <div className="overflow-x-auto">
@@ -176,12 +176,12 @@ const AttendanceTracker: React.FC = () => {
                         >
                           {attendance[student.id] ? (
                             <span className="flex items-center gap-2">
-                              <Check size={16} />
+                              <Check size={16} className="ml-2" />
                               נוכח/ת
                             </span>
                           ) : (
                             <span className="flex items-center gap-2">
-                              <X size={16} />
+                              <X size={16} className="ml-2" />
                               נעדר/ת
                             </span>
                           )}
@@ -196,7 +196,6 @@ const AttendanceTracker: React.FC = () => {
           
           {unsavedChanges && (
             <div className="fixed bottom-4 left-4 right-4 bg-yellow-500 text-black p-4 rounded-md shadow-lg max-w-xl mx-auto flex justify-between items-center">
-              <p>יש לך שינויים שלא נשמרו!</p>
               <Button 
                 onClick={saveAttendance}
                 variant="secondary"
@@ -204,6 +203,7 @@ const AttendanceTracker: React.FC = () => {
               >
                 שמור עכשיו
               </Button>
+              <p>יש לך שינויים שלא נשמרו!</p>
             </div>
           )}
         </>
