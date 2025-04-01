@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginUser, isLoggedIn, isAdmin, isGuide, getSavedGuideLogin, isGuideLoginSaved } from '../utils/authUtils';
@@ -18,7 +17,6 @@ const Login: React.FC = () => {
   const [rememberMe, setRememberMe] = useState(true);
   
   useEffect(() => {
-    // If guide login is saved, fill in credentials
     if (isGuideLoginSaved()) {
       const savedCredentials = getSavedGuideLogin();
       if (savedCredentials) {
@@ -41,7 +39,6 @@ const Login: React.FC = () => {
           description: `ברוך הבא, ${user.displayName}!`,
         });
         
-        // Modified to redirect admin to admin panel, but instructors to main page
         if (user.role === 'admin') {
           navigate('/admin');
         } else {
@@ -111,15 +108,6 @@ const Login: React.FC = () => {
               {loading ? "מתחבר..." : "התחבר"}
             </Button>
           </form>
-          
-          <div className="mt-6 text-sm text-gray-500 space-y-2">
-            <p>משתמשים לדוגמה:</p>
-            <ul className="list-disc list-inside space-y-1">
-              <li>מנהל: WINCAMP / 12345</li>
-              <li>מדריכים: WINCAMP100 או WINCAMP200 / 12345</li>
-              <li>תלמיד: STUDENT1 / 12345</li>
-            </ul>
-          </div>
         </div>
       </div>
     </div>

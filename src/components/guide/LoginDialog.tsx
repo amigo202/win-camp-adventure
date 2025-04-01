@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginUser, isGuideLoginSaved, getSavedGuideLogin } from '../../utils/authUtils';
@@ -21,14 +20,12 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ open, onOpenChange }) => {
   const [loading, setLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
   
-  // Check for saved credentials when the dialog opens
   useEffect(() => {
     if (open && isGuideLoginSaved()) {
       const savedCredentials = getSavedGuideLogin();
       if (savedCredentials) {
         setUsername(savedCredentials.username);
         setPassword(savedCredentials.password);
-        // Auto login if credentials are saved
         handleGuideLogin(true);
       }
     }
@@ -39,7 +36,6 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ open, onOpenChange }) => {
       setLoading(true);
     }
     
-    // Simulate network request with a slight delay
     setTimeout(() => {
       const user = loginUser(username, password, rememberMe);
       
@@ -49,13 +45,9 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ open, onOpenChange }) => {
           description: `ברוך הבא, ${user.displayName}!`,
         });
         
-        // Close the dialog first
         onOpenChange(false);
-        
-        // תמיד להפנות למסך הניהול
         navigate('/admin');
       } else if (!isAutoLogin) {
-        // Only show error if not auto-login attempt
         toast({
           title: "התחברות נכשלה",
           description: "שם משתמש או סיסמה לא נכונים. רק למדריכים ומנהלים.",
@@ -63,7 +55,6 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ open, onOpenChange }) => {
         });
         setLoading(false);
       } else {
-        // Auto-login failed silently
         setLoading(false);
       }
     }, 800);
@@ -124,10 +115,6 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ open, onOpenChange }) => {
           >
             {loading ? "מתחבר..." : "התחבר"}
           </Button>
-        </div>
-        
-        <div className="mt-4 text-sm text-gray-700 text-center">
-          למדריכים: שם משתמש = WINCAMP100 או WINCAMP200, סיסמה = 12345
         </div>
       </DialogContent>
     </Dialog>
