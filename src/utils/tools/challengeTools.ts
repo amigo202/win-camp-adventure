@@ -1,4 +1,3 @@
-
 import { Tool } from '../types/tools';
 
 export const challengeTools: Tool[] = [
@@ -25,5 +24,13 @@ export const challengeTools: Tool[] = [
     icon: "🎉",
     link: "#",
     description: "גלו את ההפתעה היומית - בדיחה, טיפ או פרס מיוחד"
+  },
+  {
+    id: "chess",
+    title: "שחמט און ליין",
+    category: "challenge",
+    icon: "♟️",
+    link: "https://lichess.org/",
+    description: "שחקו שחמט באופן מקוון עם שחקנים מכל רחבי העולם"
   }
 ];

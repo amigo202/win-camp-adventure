@@ -41,5 +41,13 @@ export const aiTools: Tool[] = [
     icon: "🎬",
     link: "https://www.vidu.com/",
     description: "צרו סרטונים מרהיבים באמצעות בינה מלאכותית"
+  },
+  {
+    id: "suno",
+    title: "יצירת שירים עם AI",
+    category: "ai",
+    icon: "🎵",
+    link: "https://suno.com/home",
+    description: "יצירת שירים מקוריים באמצעות בינה מלאכותית"
   }
 ];
