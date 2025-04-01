@@ -28,16 +28,15 @@ const GuideNavigation: React.FC = () => {
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}
-      dir="rtl"
     >
       <div className="absolute inset-0 bg-indigo-900/70 backdrop-blur-sm"></div>
       
       <div className="text-xl font-bold relative z-10 flex items-center">
-        <div className="ml-2 text-wincamp-orange">🌟</div>
+        <div className="mr-2 text-wincamp-orange">🌟</div>
         ממשק מדריך - {user?.displayName}
       </div>
       
-      <NavigationMenu dir="rtl" className="relative z-10">
+      <NavigationMenu className="relative z-10">
         <NavigationMenuList className="gap-3">
           <NavigationMenuItem>
             <Button 
