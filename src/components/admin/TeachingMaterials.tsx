@@ -64,7 +64,7 @@ const demoMaterials: Material[] = [
   // חומרי לימוד סקראץ'
   {
     id: "scratch1",
-    title: "חומר ומצגות על סקראץ'",
+    title: "חומר ומצגות על סקרץ'",
     category: "programming",
     type: "folder",
     url: "https://drive.google.com/drive/u/0/folders/1AjzT4fuHtD1A3j10Z2UncK3LDxTmQs_0",
@@ -100,6 +100,26 @@ const demoMaterials: Material[] = [
     url: "https://drive.google.com/drive/u/0/folders/1KXI22rnaTAQ6yIADSniOFtWpqnl50guM",
     description: "תיקיית Drive עם חומרי לימוד לפיתוח אפליקציות",
     gradeLevel: "ה'-ו'"
+  },
+  // וידאו חדש על בינה מלאכותית
+  {
+    id: "ai2",
+    title: "בינה מלאכותית לילדים - בינאלי",
+    category: "ai",
+    type: "video",
+    url: "https://www.youtube.com/watch?v=koszPr68xZ4",
+    description: "סרטון הסבר על בינה מלאכותית לילדים מבינאלי",
+    gradeLevel: "כל הגילאים"
+  },
+  // וידאו נוסף על בינה מלאכותית
+  {
+    id: "ai3",
+    title: "איך ללמד ילדים על בינה מלאכותית",
+    category: "ai",
+    type: "video", 
+    url: "https://www.youtube.com/watch?v=I6BB1BPCHog",
+    description: "סרטון על איך ללמד ילדים על בינה מלאכותית - שושע עוז",
+    gradeLevel: "כל הגילאים"
   }
 ];
 
