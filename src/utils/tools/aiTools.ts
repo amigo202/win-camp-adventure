@@ -1,10 +1,9 @@
-
 import { Tool } from '../types/tools';
 
 export const aiTools: Tool[] = [
   {
     id: "dalle",
-    title: "יצירת תמונות עם בינה מלאכותית",
+    title: "יצירת תמונות עם AI",
     category: "ai",
     icon: "🖼️",
     link: "https://www.bing.com/create",
