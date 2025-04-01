@@ -9,6 +9,7 @@ import AttendanceTracker from '../components/admin/AttendanceTracker';
 import ActivityMonitor from '../components/admin/ActivityMonitor';
 import ActivityIdeas from '../components/admin/ActivityIdeas';
 import TeachingMaterials from '../components/admin/TeachingMaterials';
+import InstructorGuidelines from '../components/admin/InstructorGuidelines';
 import Header from '../components/Header';
 import GuideNavigation from '../components/GuideNavigation';
 import StarsBackground from '../components/StarsBackground';
@@ -65,8 +66,14 @@ const Admin: React.FC = () => {
           <h1 className="text-3xl font-bold text-white">ממשק ניהול קייטנת WIN CAMP</h1>
         </div>
 
-        <Tabs defaultValue="students" className="w-full">
-          <TabsList className="grid grid-cols-5 mb-8 bg-indigo-700/60 p-1 rounded-xl">
+        <Tabs defaultValue="guidelines" className="w-full">
+          <TabsList className="grid grid-cols-6 mb-8 bg-indigo-700/60 p-1 rounded-xl">
+            <TabsTrigger 
+              value="guidelines" 
+              className="text-white data-[state=active]:bg-indigo-500/80 data-[state=active]:text-white"
+            >
+              הנחיות למדריכים
+            </TabsTrigger>
             <TabsTrigger 
               value="students" 
               className="text-white data-[state=active]:bg-indigo-500/80 data-[state=active]:text-white"
@@ -98,6 +105,10 @@ const Admin: React.FC = () => {
               חומרי לימוד
             </TabsTrigger>
           </TabsList>
+          
+          <TabsContent value="guidelines" className="bg-indigo-700/40 backdrop-blur-sm rounded-lg p-4 border border-indigo-600/50 text-white">
+            <InstructorGuidelines />
+          </TabsContent>
           
           <TabsContent value="students" className="bg-indigo-700/40 backdrop-blur-sm rounded-lg p-4 border border-indigo-600/50 text-white">
             <StudentManagement />
