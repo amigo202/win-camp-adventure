@@ -15,8 +15,8 @@ export const aiTools: Tool[] = [
     title: "יצירת סיפורים עם AI",
     category: "ai",
     icon: "📚",
-    link: "https://www.storyai.com/",
-    description: "חברו סיפורים ייחודיים בעזרת בינה מלאכותית"
+    link: "https://www.storywizard.ai/login",
+    description: "יצירת סיפורים מרגשים ויצירתיים בעזרת בינה מלאכותית"
   },
   {
     id: "chatgpt",
