@@ -49,5 +49,13 @@ export const designTools: Tool[] = [
     icon: "📱",
     link: "https://www.figma.com/",
     description: "למדו לעצב ממשקים למשתמשים"
+  },
+  {
+    id: "tinkercad",
+    title: "תלת מימד עם טינקרקאד",
+    category: "design",
+    icon: "🧊",
+    link: "https://www.tinkercad.com/",
+    description: "עיצוב ויצירת מודלים תלת מימדיים בסביבה ידידותית למתחילים"
   }
 ];
