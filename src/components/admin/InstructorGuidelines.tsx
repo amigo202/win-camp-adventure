@@ -11,7 +11,7 @@ const InstructorGuidelines: React.FC = () => {
         <h2 className="text-2xl font-bold text-white">מדריכים יקרים</h2>
       </div>
 
-      <p className="text-white/90 mb-6">
+      <p className="text-white/90 mb-6 text-right">
         כדי להבטיח קייטנה מקצועית, מהנה ומעשירה – חשוב להקפיד על הכללים הבאים לאורך כל התקופה:
       </p>
       
@@ -102,7 +102,7 @@ const GuidelineCard: React.FC<GuidelineCardProps> = ({ icon, title, items }) => 
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <ul className="list-disc pl-5 text-white/90 space-y-1">
+        <ul className="list-disc pr-5 text-right text-white/90 space-y-1">
           {items.map((item, index) => (
             <li key={index}>{item}</li>
           ))}

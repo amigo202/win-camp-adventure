@@ -32,7 +32,7 @@ const GuideNavigation: React.FC = () => {
       <div className="absolute inset-0 bg-indigo-900/70 backdrop-blur-sm"></div>
       
       <div className="text-xl font-bold relative z-10 flex items-center">
-        <div className="mr-2 text-wincamp-orange">🌟</div>
+        <div className="ml-2 text-wincamp-orange">🌟</div>
         ממשק מדריך - {user?.displayName}
       </div>
       

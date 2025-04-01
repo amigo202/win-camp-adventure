@@ -45,6 +45,7 @@
   html {
     direction: rtl;
     font-family: 'Varela Round', sans-serif;
+    text-align: right;
   }
 
   body {
@@ -74,7 +75,7 @@
   }
   
   .section-icon {
-    @apply text-3xl mr-2;
+    @apply text-3xl ml-2;
   }
   
   /* Stars background animation */
@@ -108,7 +109,7 @@
   
   /* Tool card completion styles */
   .completed-badge {
-    @apply absolute -top-2 -right-2 bg-wincamp-green text-white h-8 w-8 rounded-full flex items-center justify-center transform scale-0 transition-transform duration-300;
+    @apply absolute -top-2 -left-2 bg-wincamp-green text-white h-8 w-8 rounded-full flex items-center justify-center transform scale-0 transition-transform duration-300;
   }
   
   .completed .completed-badge {
@@ -121,7 +122,7 @@
   
   /* Custom tooltip */
   .tooltip {
-    @apply invisible absolute z-10 py-2 px-3 bg-gray-800 text-white text-sm rounded-lg opacity-0 transition-opacity duration-300 w-48 text-center bottom-full left-1/2 -translate-x-1/2 mb-2;
+    @apply invisible absolute z-10 py-2 px-3 bg-gray-800 text-white text-sm rounded-lg opacity-0 transition-opacity duration-300 w-48 text-center bottom-full right-1/2 translate-x-1/2 mb-2;
   }
   
   .tooltip-container:hover .tooltip {
@@ -139,5 +140,10 @@
   
   .text-gray-600 {
     @apply text-gray-700;
+  }
+
+  /* RTL specific adjustments */
+  .list-disc {
+    list-style-position: inside;
   }
 }
