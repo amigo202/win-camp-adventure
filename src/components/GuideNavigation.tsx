@@ -28,7 +28,7 @@ const GuideNavigation: React.FC = () => {
       <div className="flex justify-between items-center relative z-10">
         <div className="text-xl font-bold flex items-center">
           <div className="ml-2 text-wincamp-yellow">🌟</div>
-          ממשק מדריך - {user?.displayName}
+          {user?.displayName}
         </div>
       </div>
     </div>
