@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { loginUser, isLoggedIn, isAdmin, isGuide } from '../utils/authUtils';
+import { loginUser, isLoggedIn, isAdmin, isGuide, getSavedGuideLogin, isGuideLoginSaved } from '../utils/authUtils';
 import { toast } from '../components/ui/use-toast';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 import StarsBackground from '../components/StarsBackground';
 import Header from '../components/Header';
 
@@ -13,13 +15,25 @@ const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [rememberMe, setRememberMe] = useState(true);
+  
+  useEffect(() => {
+    // If guide login is saved, fill in credentials
+    if (isGuideLoginSaved()) {
+      const savedCredentials = getSavedGuideLogin();
+      if (savedCredentials) {
+        setUsername(savedCredentials.username);
+        setPassword(savedCredentials.password);
+      }
+    }
+  }, []);
   
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     
     setTimeout(() => {
-      const user = loginUser(username, password);
+      const user = loginUser(username, password, rememberMe);
       
       if (user) {
         toast({
@@ -76,6 +90,17 @@ const Login: React.FC = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 className="text-right"
               />
+            </div>
+            
+            <div className="flex items-center space-x-2 space-x-reverse">
+              <Checkbox 
+                id="remember-me" 
+                checked={rememberMe} 
+                onCheckedChange={(checked) => setRememberMe(checked as boolean)}
+              />
+              <Label htmlFor="remember-me" className="text-right cursor-pointer">
+                זכור אותי
+              </Label>
             </div>
             
             <Button 

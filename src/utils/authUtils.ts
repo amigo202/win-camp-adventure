@@ -20,7 +20,7 @@ export interface User {
 }
 
 // Login function
-export const loginUser = (username: string, password: string): User | null => {
+export const loginUser = (username: string, password: string, rememberCredentials = false): User | null => {
   // Convert to uppercase for case-insensitive comparison
   const uppercaseUsername = username.toUpperCase();
   
@@ -39,6 +39,14 @@ export const loginUser = (username: string, password: string): User | null => {
     
     // Store user in localStorage for persistence
     localStorage.setItem('wincamp_user', JSON.stringify(user));
+    
+    // Save credentials if rememberCredentials is true and the user is an instructor or admin
+    if (rememberCredentials && (user.role === "instructor" || user.role === "admin")) {
+      localStorage.setItem('wincamp_guide_credentials', JSON.stringify({
+        username: matchedUser.username,
+        password: matchedUser.password
+      }));
+    }
     
     return user;
   }
@@ -81,6 +89,27 @@ export const getCurrentUser = (): User | null => {
 // Logout user
 export const logoutUser = (): void => {
   localStorage.removeItem('wincamp_user');
+  // Don't remove guide credentials on logout - we want to remember them
+  // localStorage.removeItem('wincamp_guide_credentials');
+};
+
+// Check if guide login is saved
+export const isGuideLoginSaved = (): boolean => {
+  return localStorage.getItem('wincamp_guide_credentials') !== null;
+};
+
+// Get saved guide login
+export const getSavedGuideLogin = (): { username: string; password: string } | null => {
+  const credentialsJson = localStorage.getItem('wincamp_guide_credentials');
+  if (credentialsJson) {
+    return JSON.parse(credentialsJson);
+  }
+  return null;
+};
+
+// Clear saved guide login
+export const clearSavedGuideLogin = (): void => {
+  localStorage.removeItem('wincamp_guide_credentials');
 };
 
 // Get data for the current user
