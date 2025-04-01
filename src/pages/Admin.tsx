@@ -8,6 +8,7 @@ import StudentManagement from '../components/admin/StudentManagement';
 import AttendanceTracker from '../components/admin/AttendanceTracker';
 import ActivityMonitor from '../components/admin/ActivityMonitor';
 import ActivityIdeas from '../components/admin/ActivityIdeas';
+import TeachingMaterials from '../components/admin/TeachingMaterials';
 import Header from '../components/Header';
 import GuideNavigation from '../components/GuideNavigation';
 import StarsBackground from '../components/StarsBackground';
@@ -65,7 +66,7 @@ const Admin: React.FC = () => {
         </div>
 
         <Tabs defaultValue="students" className="w-full">
-          <TabsList className="grid grid-cols-4 mb-8 bg-indigo-700/60 p-1 rounded-xl">
+          <TabsList className="grid grid-cols-5 mb-8 bg-indigo-700/60 p-1 rounded-xl">
             <TabsTrigger 
               value="students" 
               className="text-white data-[state=active]:bg-indigo-500/80 data-[state=active]:text-white"
@@ -90,6 +91,12 @@ const Admin: React.FC = () => {
             >
               רעיונות לפעילויות
             </TabsTrigger>
+            <TabsTrigger 
+              value="materials" 
+              className="text-white data-[state=active]:bg-indigo-500/80 data-[state=active]:text-white"
+            >
+              חומרי לימוד
+            </TabsTrigger>
           </TabsList>
           
           <TabsContent value="students" className="bg-indigo-700/40 backdrop-blur-sm rounded-lg p-4 border border-indigo-600/50 text-white">
@@ -106,6 +113,10 @@ const Admin: React.FC = () => {
 
           <TabsContent value="ideas" className="bg-indigo-700/40 backdrop-blur-sm rounded-lg p-4 border border-indigo-600/50 text-white">
             <ActivityIdeas />
+          </TabsContent>
+          
+          <TabsContent value="materials" className="bg-indigo-700/40 backdrop-blur-sm rounded-lg p-4 border border-indigo-600/50 text-white">
+            <TeachingMaterials />
           </TabsContent>
         </Tabs>
       </div>
