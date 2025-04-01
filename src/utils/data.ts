@@ -1,3 +1,4 @@
+
 export interface Tool {
   id: string;
   title: string;
@@ -102,7 +103,7 @@ export const tools: Tool[] = [
     title: "blockly code",
     category: "programming",
     icon: "🧱",
-    link: "https://developers.google.com/blockly",
+    link: "https://blockly.games",
     description: "סביבת תכנות חזותית מבוססת בלוקים"
   },
   
