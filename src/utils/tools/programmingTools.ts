@@ -15,7 +15,7 @@ export const programmingTools: Tool[] = [
     title: "תכנות ב-Scratch Junior",
     category: "programming",
     icon: "🐱",
-    link: "https://www.scratchjr.org/",
+    link: "https://moshe310.wixsite.com/codejr/blank",
     description: "גרסה מותאמת לילדים צעירים יותר של סקרץ', מאפשרת ליצור סיפורים ומשחקים בממשק פשוט"
   },
   {
