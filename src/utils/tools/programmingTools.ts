@@ -1,3 +1,4 @@
+
 import { Tool } from '../types/tools';
 
 export const programmingTools: Tool[] = [
@@ -32,6 +33,14 @@ export const programmingTools: Tool[] = [
     icon: "🌐",
     link: "https://lovable.dev/",
     description: "למדו לבנות אתרי אינטרנט בצורה פשוטה וידידותית עם Lovable"
+  },
+  {
+    id: "appinventor",
+    title: "פיתוח אפליקציות",
+    category: "programming",
+    icon: "📱",
+    link: "https://appinventor.mit.edu/",
+    description: "יצירת אפליקציות לטלפונים חכמים בסביבה חזותית ידידותית למתחילים"
   },
   {
     id: "pythonturtle",
