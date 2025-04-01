@@ -5,28 +5,28 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 
 const ExcelTemplateInfo: React.FC = () => {
   return (
-    <div className="bg-indigo-700/30 p-4 rounded-lg backdrop-blur-sm border border-indigo-600/50">
+    <div className="bg-white/70 backdrop-blur-md shadow-xl rounded-lg p-4 border border-slate-200">
       <div className="flex items-center gap-2 mb-2 justify-end">
-        <h3 className="text-lg text-white font-bold">תבנית אקסל לייבוא</h3>
-        <FileSpreadsheet size={20} className="text-white" />
+        <h3 className="text-lg text-gray-800 font-bold">תבנית אקסל לייבוא</h3>
+        <FileSpreadsheet size={20} className="text-gray-800" />
       </div>
-      <p className="text-sm text-indigo-200 mb-4 text-right">וודאו שקובץ האקסל שלכם מכיל את העמודות הבאות: שם (חובה), כיתה וטלפון הורה. הערות הם אופציונליים.</p>
+      <p className="text-sm text-gray-600 mb-4 text-right">וודאו שקובץ האקסל שלכם מכיל את העמודות הבאות: שם (חובה), כיתה וטלפון הורה. הערות הם אופציונליים.</p>
       <div className="overflow-x-auto">
-        <Table className="border border-indigo-600/50">
-          <TableHeader className="bg-indigo-800/50">
+        <Table className="border border-slate-200">
+          <TableHeader className="bg-slate-100">
             <TableRow>
-              <TableHead className="text-white font-bold">שם</TableHead>
-              <TableHead className="text-white font-bold">כיתה</TableHead>
-              <TableHead className="text-white font-bold">טלפון הורה</TableHead>
-              <TableHead className="text-white font-bold">הערות</TableHead>
+              <TableHead className="text-gray-800 font-bold">שם</TableHead>
+              <TableHead className="text-gray-800 font-bold">כיתה</TableHead>
+              <TableHead className="text-gray-800 font-bold">טלפון הורה</TableHead>
+              <TableHead className="text-gray-800 font-bold">הערות</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow className="border-b border-indigo-600/30">
-              <TableCell className="text-white">ישראל ישראלי</TableCell>
-              <TableCell className="text-white">ד'2</TableCell>
-              <TableCell className="text-white">050-1234567</TableCell>
-              <TableCell className="text-white">אלרגיה לבוטנים</TableCell>
+            <TableRow className="border-b border-slate-200">
+              <TableCell className="text-gray-800">ישראל ישראלי</TableCell>
+              <TableCell className="text-gray-800">ד'2</TableCell>
+              <TableCell className="text-gray-800">050-1234567</TableCell>
+              <TableCell className="text-gray-800">אלרגיה לבוטנים</TableCell>
             </TableRow>
           </TableBody>
         </Table>

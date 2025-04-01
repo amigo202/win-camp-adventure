@@ -18,7 +18,7 @@ const ActivityMonitor: React.FC = () => {
 
   return (
     <div className="space-y-6" dir="rtl">
-      <h2 className="text-2xl font-bold">מעקב פעילות</h2>
+      <h2 className="text-2xl font-bold text-gray-800">מעקב פעילות</h2>
       
       {/* כרטיסי סטטיסטיקות */}
       <StatisticsCards 

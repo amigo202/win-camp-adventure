@@ -16,8 +16,8 @@ interface ToolsProgressChartProps {
 
 const ToolsProgressChart: React.FC<ToolsProgressChartProps> = ({ toolsProgressData }) => {
   return (
-    <div className="bg-white/5 p-4 rounded-lg">
-      <h3 className="text-xl mb-4">התפלגות השלמת כלים</h3>
+    <div className="bg-white/70 backdrop-blur-md shadow-xl rounded-lg p-4 border border-slate-200">
+      <h3 className="text-xl mb-4 text-gray-800">התפלגות השלמת כלים</h3>
       <div className="h-64">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>

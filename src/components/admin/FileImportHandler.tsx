@@ -44,7 +44,7 @@ const FileImportHandler: React.FC<FileImportHandlerProps> = ({ students, onStude
       <Button 
         variant="outline" 
         onClick={handleExportToExcel}
-        className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white border-none shadow-md"
+        className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white border-none shadow-sm"
         disabled={students.length === 0}
       >
         <Download size={16} className="ml-2" />
@@ -54,7 +54,7 @@ const FileImportHandler: React.FC<FileImportHandlerProps> = ({ students, onStude
       <Button 
         variant="outline" 
         onClick={() => fileInputRef.current?.click()}
-        className="flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white border-none shadow-md"
+        className="flex items-center gap-2 bg-sky-500 hover:bg-sky-600 text-white border-none shadow-sm"
       >
         <Upload size={16} className="ml-2" />
         יבוא מאקסל

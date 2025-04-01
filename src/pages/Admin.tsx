@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Home } from 'lucide-react';
@@ -20,13 +19,11 @@ const Admin: React.FC = () => {
 
   useEffect(() => {
     const checkAuth = () => {
-      // בדיקה אם המשתמש מחובר
       if (!isLoggedIn()) {
         navigate('/login');
         return;
       }
 
-      // בדיקה אם המשתמש מנהל או מדריך
       if (!isAdmin() && !isGuide()) {
         navigate('/');
         return;
@@ -35,7 +32,6 @@ const Admin: React.FC = () => {
       setLoading(false);
     };
 
-    // הרץ בדיקת אימות מידית
     checkAuth();
   }, [navigate]);
 
@@ -44,7 +40,7 @@ const Admin: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen py-6 px-4 md:px-8 relative bg-gradient-to-br from-indigo-900 to-indigo-950" dir="rtl">
+    <div className="min-h-screen py-6 px-4 md:px-8 relative bg-gradient-to-br from-purple-100 via-blue-100 to-white" dir="rtl">
       <StarsBackground />
       
       <div className="max-w-7xl mx-auto">
@@ -55,7 +51,7 @@ const Admin: React.FC = () => {
         <div className="flex justify-end mb-4">
           <button
             onClick={() => navigate("/")}
-            className="flex items-center gap-2 bg-wincamp-blue hover:bg-wincamp-blue/90 text-white px-4 py-2 rounded-md shadow-md transition-colors"
+            className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md shadow-md transition-colors"
           >
             <Home size={20} />
             מעבר לגלריית הכלים
@@ -63,66 +59,66 @@ const Admin: React.FC = () => {
         </div>
 
         <Tabs defaultValue="guidelines" className="w-full">
-          <TabsList className="grid grid-cols-6 mb-8 bg-indigo-700/60 p-1 rounded-xl">
+          <TabsList className="grid grid-cols-6 mb-8 bg-indigo-300/60 p-1 rounded-xl">
             <TabsTrigger 
               value="guidelines" 
-              className="text-white data-[state=active]:bg-indigo-500/80 data-[state=active]:text-white"
+              className="text-gray-700 data-[state=active]:bg-indigo-400/80 data-[state=active]:text-white"
             >
               הנחיות למדריכים
             </TabsTrigger>
             <TabsTrigger 
               value="students" 
-              className="text-white data-[state=active]:bg-indigo-500/80 data-[state=active]:text-white"
+              className="text-gray-700 data-[state=active]:bg-indigo-400/80 data-[state=active]:text-white"
             >
               ניהול תלמידים
             </TabsTrigger>
             <TabsTrigger 
               value="attendance" 
-              className="text-white data-[state=active]:bg-indigo-500/80 data-[state=active]:text-white"
+              className="text-gray-700 data-[state=active]:bg-indigo-400/80 data-[state=active]:text-white"
             >
               רישום נוכחות
             </TabsTrigger>
             <TabsTrigger 
               value="activity" 
-              className="text-white data-[state=active]:bg-indigo-500/80 data-[state=active]:text-white"
+              className="text-gray-700 data-[state=active]:bg-indigo-400/80 data-[state=active]:text-white"
             >
               מעקב פעילות
             </TabsTrigger>
             <TabsTrigger 
               value="ideas" 
-              className="text-white data-[state=active]:bg-indigo-500/80 data-[state=active]:text-white"
+              className="text-gray-700 data-[state=active]:bg-indigo-400/80 data-[state=active]:text-white"
             >
               רעיונות לפעילויות
             </TabsTrigger>
             <TabsTrigger 
               value="materials" 
-              className="text-white data-[state=active]:bg-indigo-500/80 data-[state=active]:text-white"
+              className="text-gray-700 data-[state=active]:bg-indigo-400/80 data-[state=active]:text-white"
             >
               חומרי לימוד
             </TabsTrigger>
           </TabsList>
           
-          <TabsContent value="guidelines" className="bg-indigo-700/40 backdrop-blur-sm rounded-lg p-4 border border-indigo-600/50 text-white">
+          <TabsContent value="guidelines" className="bg-white/70 backdrop-blur-md shadow-xl rounded-lg p-4 border border-slate-200 text-gray-800">
             <InstructorGuidelines />
           </TabsContent>
           
-          <TabsContent value="students" className="bg-indigo-700/40 backdrop-blur-sm rounded-lg p-4 border border-indigo-600/50 text-white">
+          <TabsContent value="students" className="bg-white/70 backdrop-blur-md shadow-xl rounded-lg p-4 border border-slate-200 text-gray-800">
             <StudentManagement />
           </TabsContent>
           
-          <TabsContent value="attendance" className="bg-indigo-700/40 backdrop-blur-sm rounded-lg p-4 border border-indigo-600/50 text-white">
+          <TabsContent value="attendance" className="bg-white/70 backdrop-blur-md shadow-xl rounded-lg p-4 border border-slate-200 text-gray-800">
             <AttendanceTracker />
           </TabsContent>
           
-          <TabsContent value="activity" className="bg-indigo-700/40 backdrop-blur-sm rounded-lg p-4 border border-indigo-600/50 text-white">
+          <TabsContent value="activity" className="bg-white/70 backdrop-blur-md shadow-xl rounded-lg p-4 border border-slate-200 text-gray-800">
             <ActivityMonitor />
           </TabsContent>
 
-          <TabsContent value="ideas" className="bg-indigo-700/40 backdrop-blur-sm rounded-lg p-4 border border-indigo-600/50 text-white">
+          <TabsContent value="ideas" className="bg-white/70 backdrop-blur-md shadow-xl rounded-lg p-4 border border-slate-200 text-gray-800">
             <ActivityIdeas />
           </TabsContent>
           
-          <TabsContent value="materials" className="bg-indigo-700/40 backdrop-blur-sm rounded-lg p-4 border border-indigo-600/50 text-white">
+          <TabsContent value="materials" className="bg-white/70 backdrop-blur-md shadow-xl rounded-lg p-4 border border-slate-200 text-gray-800">
             <TeachingMaterials />
           </TabsContent>
         </Tabs>
