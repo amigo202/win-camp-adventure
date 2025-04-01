@@ -26,7 +26,6 @@ const Header: React.FC<HeaderProps> = ({ showLogout = true }) => {
         backgroundPosition: 'center'
       }}
     >
-      {/* אפקט שקיפות כדי שהטקסט יהיה קריא */}
       <div className="absolute inset-0 bg-indigo-900/60 backdrop-blur-sm"></div>
       
       <div className="flex items-center justify-between w-full relative z-10">
@@ -43,7 +42,7 @@ const Header: React.FC<HeaderProps> = ({ showLogout = true }) => {
             <span className="text-white ml-2">שלום, {user.displayName}!</span>
             <button 
               onClick={handleLogout}
-              className="bg-white/20 hover:bg-white/30 text-white text-sm px-4 py-1 rounded-full transition-all backdrop-blur-sm"
+              className="mr-2 bg-white/20 hover:bg-white/30 text-white text-sm px-4 py-1 rounded-full transition-all backdrop-blur-sm"
             >
               התנתק
             </button>
