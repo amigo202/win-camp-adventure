@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Home } from 'lucide-react';
@@ -36,11 +37,11 @@ const Admin: React.FC = () => {
   }, [navigate]);
 
   if (loading) {
-    return <div className="flex justify-center items-center h-screen">טוען...</div>;
+    return <div className="flex justify-center items-center h-screen text-gray-800">טוען...</div>;
   }
 
   return (
-    <div className="min-h-screen py-6 px-4 md:px-8 relative bg-gradient-to-br from-purple-100 via-blue-100 to-white" dir="rtl">
+    <div className="min-h-screen py-6 px-4 md:px-8 relative bg-gradient-to-br from-slate-50 via-indigo-50 to-white" dir="rtl">
       <StarsBackground />
       
       <div className="max-w-7xl mx-auto">
@@ -51,7 +52,7 @@ const Admin: React.FC = () => {
         <div className="flex justify-end mb-4">
           <button
             onClick={() => navigate("/")}
-            className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md shadow-md transition-colors"
+            className="flex items-center gap-2 bg-sky-500 hover:bg-sky-600 text-white px-4 py-2 rounded-md shadow-md transition-colors"
           >
             <Home size={20} />
             מעבר לגלריית הכלים
@@ -59,66 +60,66 @@ const Admin: React.FC = () => {
         </div>
 
         <Tabs defaultValue="guidelines" className="w-full">
-          <TabsList className="grid grid-cols-6 mb-8 bg-indigo-300/60 p-1 rounded-xl">
+          <TabsList className="grid grid-cols-6 mb-8 bg-indigo-200/60 p-1 rounded-xl">
             <TabsTrigger 
               value="guidelines" 
-              className="text-gray-700 data-[state=active]:bg-indigo-400/80 data-[state=active]:text-white"
+              className="text-gray-800 data-[state=active]:bg-indigo-400/80 data-[state=active]:text-white"
             >
               הנחיות למדריכים
             </TabsTrigger>
             <TabsTrigger 
               value="students" 
-              className="text-gray-700 data-[state=active]:bg-indigo-400/80 data-[state=active]:text-white"
+              className="text-gray-800 data-[state=active]:bg-indigo-400/80 data-[state=active]:text-white"
             >
               ניהול תלמידים
             </TabsTrigger>
             <TabsTrigger 
               value="attendance" 
-              className="text-gray-700 data-[state=active]:bg-indigo-400/80 data-[state=active]:text-white"
+              className="text-gray-800 data-[state=active]:bg-indigo-400/80 data-[state=active]:text-white"
             >
               רישום נוכחות
             </TabsTrigger>
             <TabsTrigger 
               value="activity" 
-              className="text-gray-700 data-[state=active]:bg-indigo-400/80 data-[state=active]:text-white"
+              className="text-gray-800 data-[state=active]:bg-indigo-400/80 data-[state=active]:text-white"
             >
               מעקב פעילות
             </TabsTrigger>
             <TabsTrigger 
               value="ideas" 
-              className="text-gray-700 data-[state=active]:bg-indigo-400/80 data-[state=active]:text-white"
+              className="text-gray-800 data-[state=active]:bg-indigo-400/80 data-[state=active]:text-white"
             >
               רעיונות לפעילויות
             </TabsTrigger>
             <TabsTrigger 
               value="materials" 
-              className="text-gray-700 data-[state=active]:bg-indigo-400/80 data-[state=active]:text-white"
+              className="text-gray-800 data-[state=active]:bg-indigo-400/80 data-[state=active]:text-white"
             >
               חומרי לימוד
             </TabsTrigger>
           </TabsList>
           
-          <TabsContent value="guidelines" className="bg-white/70 backdrop-blur-md shadow-xl rounded-lg p-4 border border-slate-200 text-gray-800">
+          <TabsContent value="guidelines" className="bg-white/80 backdrop-blur-md shadow-xl rounded-lg p-4 border border-slate-200 text-gray-900">
             <InstructorGuidelines />
           </TabsContent>
           
-          <TabsContent value="students" className="bg-white/70 backdrop-blur-md shadow-xl rounded-lg p-4 border border-slate-200 text-gray-800">
+          <TabsContent value="students" className="bg-white/80 backdrop-blur-md shadow-xl rounded-lg p-4 border border-slate-200 text-gray-900">
             <StudentManagement />
           </TabsContent>
           
-          <TabsContent value="attendance" className="bg-white/70 backdrop-blur-md shadow-xl rounded-lg p-4 border border-slate-200 text-gray-800">
+          <TabsContent value="attendance" className="bg-white/80 backdrop-blur-md shadow-xl rounded-lg p-4 border border-slate-200 text-gray-900">
             <AttendanceTracker />
           </TabsContent>
           
-          <TabsContent value="activity" className="bg-white/70 backdrop-blur-md shadow-xl rounded-lg p-4 border border-slate-200 text-gray-800">
+          <TabsContent value="activity" className="bg-white/80 backdrop-blur-md shadow-xl rounded-lg p-4 border border-slate-200 text-gray-900">
             <ActivityMonitor />
           </TabsContent>
 
-          <TabsContent value="ideas" className="bg-white/70 backdrop-blur-md shadow-xl rounded-lg p-4 border border-slate-200 text-gray-800">
+          <TabsContent value="ideas" className="bg-white/80 backdrop-blur-md shadow-xl rounded-lg p-4 border border-slate-200 text-gray-900">
             <ActivityIdeas />
           </TabsContent>
           
-          <TabsContent value="materials" className="bg-white/70 backdrop-blur-md shadow-xl rounded-lg p-4 border border-slate-200 text-gray-800">
+          <TabsContent value="materials" className="bg-white/80 backdrop-blur-md shadow-xl rounded-lg p-4 border border-slate-200 text-gray-900">
             <TeachingMaterials />
           </TabsContent>
         </Tabs>
