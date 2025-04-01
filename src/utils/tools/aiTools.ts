@@ -33,5 +33,13 @@ export const aiTools: Tool[] = [
     icon: "💬",
     link: "https://chat.openai.com/",
     description: "שוחחו עם בינה מלאכותית וקבלו תשובות לשאלות שלכם"
+  },
+  {
+    id: "vidu",
+    title: "יצירת וידאו עם AI",
+    category: "ai",
+    icon: "🎬",
+    link: "https://www.vidu.com/",
+    description: "צרו סרטונים מרהיבים באמצעות בינה מלאכותית"
   }
 ];
