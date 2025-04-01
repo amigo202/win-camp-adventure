@@ -62,12 +62,8 @@ const Admin: React.FC = () => {
           </button>
         </div>
 
-        <div className="bg-indigo-800/40 backdrop-blur-sm border border-indigo-700/70 rounded-xl p-6 mb-8 animate-slide-in-bottom">
-          <h1 className="text-3xl font-bold text-white text-right">ממשק ניהול קייטנת WIN CAMP</h1>
-        </div>
-
         <Tabs defaultValue="guidelines" className="w-full">
-          <TabsList className="grid grid-cols-6 mb-8 bg-indigo-700/60 p-1 rounded-xl">
+          <TabsList className="grid grid-cols-3 mb-8 bg-indigo-700/60 p-1 rounded-xl">
             <TabsTrigger 
               value="guidelines" 
               className="text-white data-[state=active]:bg-indigo-500/80 data-[state=active]:text-white"
@@ -86,24 +82,6 @@ const Admin: React.FC = () => {
             >
               רישום נוכחות
             </TabsTrigger>
-            <TabsTrigger 
-              value="activity" 
-              className="text-white data-[state=active]:bg-indigo-500/80 data-[state=active]:text-white"
-            >
-              מעקב פעילות
-            </TabsTrigger>
-            <TabsTrigger 
-              value="ideas" 
-              className="text-white data-[state=active]:bg-indigo-500/80 data-[state=active]:text-white"
-            >
-              רעיונות לפעילויות
-            </TabsTrigger>
-            <TabsTrigger 
-              value="materials" 
-              className="text-white data-[state=active]:bg-indigo-500/80 data-[state=active]:text-white"
-            >
-              חומרי לימוד
-            </TabsTrigger>
           </TabsList>
           
           <TabsContent value="guidelines" className="bg-indigo-700/40 backdrop-blur-sm rounded-lg p-4 border border-indigo-600/50 text-white">
@@ -116,18 +94,6 @@ const Admin: React.FC = () => {
           
           <TabsContent value="attendance" className="bg-indigo-700/40 backdrop-blur-sm rounded-lg p-4 border border-indigo-600/50 text-white">
             <AttendanceTracker />
-          </TabsContent>
-          
-          <TabsContent value="activity" className="bg-indigo-700/40 backdrop-blur-sm rounded-lg p-4 border border-indigo-600/50 text-white">
-            <ActivityMonitor />
-          </TabsContent>
-
-          <TabsContent value="ideas" className="bg-indigo-700/40 backdrop-blur-sm rounded-lg p-4 border border-indigo-600/50 text-white">
-            <ActivityIdeas />
-          </TabsContent>
-          
-          <TabsContent value="materials" className="bg-indigo-700/40 backdrop-blur-sm rounded-lg p-4 border border-indigo-600/50 text-white">
-            <TeachingMaterials />
           </TabsContent>
         </Tabs>
       </div>
