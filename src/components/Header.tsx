@@ -2,7 +2,7 @@
 import React from 'react';
 import { getCurrentUser, logoutUser } from '../utils/authUtils';
 import { useNavigate } from 'react-router-dom';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Star } from 'lucide-react';
 
 interface HeaderProps {
   showLogout?: boolean;
@@ -38,8 +38,10 @@ const Header: React.FC<HeaderProps> = ({ showLogout = true }) => {
         
         {showLogout && user && (
           <div className="flex items-center">
-            <Sparkles className="text-wincamp-orange ml-2" size={18} />
-            <span className="text-white ml-2">שלום, {user.displayName}!</span>
+            <div className="flex items-center bg-white/20 px-3 py-1 rounded-full">
+              <Star className="text-wincamp-yellow ml-2" size={16} />
+              <span className="text-white text-sm ml-2">{user.displayName}</span>
+            </div>
             <button 
               onClick={handleLogout}
               className="mr-2 bg-white/20 hover:bg-white/30 text-white text-sm px-4 py-1 rounded-full transition-all backdrop-blur-sm"
