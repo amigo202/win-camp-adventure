@@ -45,12 +45,12 @@ const StudentManager: React.FC = () => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
+        <h2 className="text-2xl font-bold">ניהול תלמידים</h2>
         <FileImportHandler 
           students={students} 
           setStudents={() => {}} 
           onStudentsImported={handleStudentsImported} 
         />
-        <h2 className="text-2xl font-bold">ניהול תלמידים</h2>
       </div>
 
       <StudentForm 

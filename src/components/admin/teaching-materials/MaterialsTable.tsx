@@ -51,7 +51,7 @@ const MaterialsTable: React.FC<MaterialsTableProps> = ({ materials }) => {
   }
 
   return (
-    <div className="overflow-x-auto rounded-md border">
+    <div className="overflow-x-auto rounded-md border" dir="rtl">
       <Table>
         <TableHeader>
           <TableRow>
@@ -60,7 +60,7 @@ const MaterialsTable: React.FC<MaterialsTableProps> = ({ materials }) => {
             <TableHead>קטגוריה</TableHead>
             <TableHead>כיתות</TableHead>
             <TableHead>תיאור</TableHead>
-            <TableHead className="w-24 text-left">פעולות</TableHead>
+            <TableHead className="w-24">פעולות</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -75,7 +75,7 @@ const MaterialsTable: React.FC<MaterialsTableProps> = ({ materials }) => {
               </TableCell>
               <TableCell>{material.gradeLevel}</TableCell>
               <TableCell>{material.description}</TableCell>
-              <TableCell className="flex space-x-2">
+              <TableCell className="flex gap-2">
                 <Button variant="outline" size="sm" asChild>
                   <a href={material.url} target="_blank" rel="noopener noreferrer">
                     <ExternalLink size={16} />

@@ -16,7 +16,7 @@ const TeachingMaterials: React.FC = () => {
     : materials;
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4" dir="rtl">
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl">חומרי לימוד למדריכים</CardTitle>

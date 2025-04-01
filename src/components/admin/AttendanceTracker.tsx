@@ -88,12 +88,12 @@ const AttendanceTracker: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" dir="rtl">
       <div className="flex justify-between items-center">
+        <h2 className="text-2xl font-bold">רישום נוכחות</h2>
         <div className="flex gap-2">
           <DateSelector date={date} setDate={setDate} />
         </div>
-        <h2 className="text-2xl font-bold">רישום נוכחות</h2>
       </div>
 
       {students.length > 0 ? (

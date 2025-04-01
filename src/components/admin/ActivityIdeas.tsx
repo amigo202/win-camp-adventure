@@ -25,13 +25,13 @@ const ActivityIdeas: React.FC = () => {
   return (
     <div className="space-y-6" dir="rtl">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-white">רעיונות לפעילויות גיבוש</h2>
         <Button 
           onClick={handleRandomActivity}
           className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white shadow-md"
         >
           פעילות אקראית
         </Button>
+        <h2 className="text-2xl font-bold text-white">רעיונות לפעילויות גיבוש</h2>
       </div>
 
       <FeaturedActivity activity={currentActivity} />

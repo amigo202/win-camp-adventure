@@ -17,20 +17,20 @@ const AttendanceTable: React.FC<AttendanceTableProps> = ({
   toggleAttendance 
 }) => {
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto" dir="rtl">
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="text-white text-right">שם</TableHead>
-            <TableHead className="text-white text-right">כיתה</TableHead>
+            <TableHead className="text-white">שם</TableHead>
+            <TableHead className="text-white">כיתה</TableHead>
             <TableHead className="text-white text-center">נוכחות</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {students.map((student) => (
             <TableRow key={student.id}>
-              <TableCell className="font-medium text-white text-right">{student.name}</TableCell>
-              <TableCell className="text-white text-right">{student.grade || '-'}</TableCell>
+              <TableCell className="font-medium text-white">{student.name}</TableCell>
+              <TableCell className="text-white">{student.grade || '-'}</TableCell>
               <TableCell className="text-center">
                 <Button 
                   variant="ghost" 
@@ -44,12 +44,12 @@ const AttendanceTable: React.FC<AttendanceTableProps> = ({
                 >
                   {attendance[student.id] ? (
                     <span className="flex items-center gap-2">
-                      <Check size={16} className="ml-2" />
+                      <Check size={16} />
                       נוכח/ת
                     </span>
                   ) : (
                     <span className="flex items-center gap-2">
-                      <X size={16} className="ml-2" />
+                      <X size={16} />
                       נעדר/ת
                     </span>
                   )}

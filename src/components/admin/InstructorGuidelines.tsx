@@ -5,13 +5,13 @@ import { Sparkles, BookOpenCheck, Clock, Shield, Megaphone, GraduationCap, Heart
 
 const InstructorGuidelines: React.FC = () => {
   return (
-    <div className="space-y-6 py-2">
-      <div className="flex items-center gap-3 mb-4 justify-end">
-        <h2 className="text-2xl font-bold text-white">מדריכים יקרים</h2>
+    <div className="space-y-6 py-2" dir="rtl">
+      <div className="flex items-center gap-3 mb-4">
         <BookOpenCheck className="text-wincamp-orange" size={30} />
+        <h2 className="text-2xl font-bold text-white">מדריכים יקרים</h2>
       </div>
 
-      <p className="text-white/90 mb-6 text-right">
+      <p className="text-white/90 mb-6">
         כדי להבטיח קייטנה מקצועית, מהנה ומעשירה – חשוב להקפיד על הכללים הבאים לאורך כל התקופה:
       </p>
       
@@ -96,13 +96,13 @@ const GuidelineCard: React.FC<GuidelineCardProps> = ({ icon, title, items }) => 
   return (
     <Card className="bg-indigo-600/50 border-indigo-500/50 shadow-lg overflow-hidden">
       <CardHeader className="pb-2">
-        <CardTitle className="flex items-center gap-2 text-white justify-end">
-          {title}
+        <CardTitle className="flex items-center gap-2 text-white">
           {icon}
+          {title}
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <ul className="list-disc pr-5 text-right text-white/90 space-y-1">
+        <ul className="list-disc pr-5 space-y-1 text-white/90">
           {items.map((item, index) => (
             <li key={index}>{item}</li>
           ))}

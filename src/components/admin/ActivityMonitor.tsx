@@ -17,7 +17,7 @@ const ActivityMonitor: React.FC = () => {
   } = useActivityMonitor();
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" dir="rtl">
       <h2 className="text-2xl font-bold">מעקב פעילות</h2>
       
       {/* כרטיסי סטטיסטיקות */}

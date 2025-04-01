@@ -17,34 +17,34 @@ const AttendanceActions: React.FC<AttendanceActionsProps> = ({
   unsavedChanges
 }) => {
   return (
-    <div className="flex justify-between items-center mb-4">
-      <Button 
-        onClick={saveAttendance}
-        className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700"
-        disabled={!unsavedChanges}
-      >
-        <Save size={16} className="ml-2" />
-        שמור נוכחות
-      </Button>
-      
-      <div className="space-x-2 flex gap-2">
-        <Button 
-          variant="outline" 
-          onClick={markAllAbsent}
-          className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white border-none"
-        >
-          <X size={16} className="ml-2" />
-          סמן הכל כנעדרים
-        </Button>
+    <div className="flex justify-between items-center mb-4" dir="rtl">
+      <div className="flex gap-2">
         <Button 
           variant="outline" 
           onClick={markAllPresent}
           className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white border-none"
         >
-          <Check size={16} className="ml-2" />
+          <Check size={16} />
           סמן הכל כנוכחים
         </Button>
+        <Button 
+          variant="outline" 
+          onClick={markAllAbsent}
+          className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white border-none"
+        >
+          <X size={16} />
+          סמן הכל כנעדרים
+        </Button>
       </div>
+      
+      <Button 
+        onClick={saveAttendance}
+        className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700"
+        disabled={!unsavedChanges}
+      >
+        <Save size={16} />
+        שמור נוכחות
+      </Button>
     </div>
   );
 };
