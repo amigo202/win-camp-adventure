@@ -31,7 +31,7 @@ const ActivityIdeas: React.FC = () => {
         >
           פעילות אקראית
         </Button>
-        <h2 className="text-2xl font-bold text-white">רעיונות לפעילויות גיבוש</h2>
+        <h2 className="text-2xl font-bold text-indigo-900">רעיונות לפעילויות גיבוש</h2>
       </div>
 
       <FeaturedActivity activity={currentActivity} />
@@ -50,7 +50,7 @@ const ActivityIdeas: React.FC = () => {
       </div>
 
       {filteredActivities.length === 0 && (
-        <div className="text-center py-8 text-indigo-200 bg-indigo-800/30 rounded-lg">
+        <div className="text-center py-8 text-indigo-800 bg-indigo-100/90 rounded-lg shadow-inner">
           <p>לא נמצאו פעילויות התואמות את החיפוש</p>
         </div>
       )}

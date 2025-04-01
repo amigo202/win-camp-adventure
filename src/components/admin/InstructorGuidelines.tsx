@@ -6,12 +6,12 @@ import { Sparkles, BookOpenCheck, Clock, Shield, Megaphone, GraduationCap, Heart
 const InstructorGuidelines: React.FC = () => {
   return (
     <div className="space-y-6 py-2" dir="rtl">
-      <div className="flex items-center gap-3 mb-6 bg-indigo-50 p-4 rounded-xl">
+      <div className="flex items-center gap-3 mb-6 bg-gradient-to-r from-indigo-100 to-indigo-200 p-4 rounded-xl shadow-sm">
         <BookOpenCheck className="text-wincamp-orange" size={30} />
-        <h2 className="text-2xl font-bold text-indigo-800">מדריכים יקרים</h2>
+        <h2 className="text-2xl font-bold text-indigo-900">מדריכים יקרים</h2>
       </div>
 
-      <p className="text-gray-700 mb-6 bg-white/80 p-4 rounded-lg shadow-sm leading-relaxed">
+      <p className="text-gray-800 mb-6 bg-white/90 p-4 rounded-lg shadow-sm leading-relaxed border border-indigo-100">
         כדי להבטיח קייטנה מקצועית, מהנה ומעשירה – חשוב להקפיד על הכללים הבאים לאורך כל התקופה:
       </p>
       
@@ -60,7 +60,7 @@ const InstructorGuidelines: React.FC = () => {
         />
         
         <GuidelineCard 
-          icon={<Heart className="h-6 w-6 text-red-400" />} 
+          icon={<Heart className="h-6 w-6 text-red-500" />} 
           title="אווירה וערכים"
           items={[
             "חיזוק חיובי – לפרגן, לעודד ולהתלהב יחד עם הילדים.",
@@ -72,12 +72,12 @@ const InstructorGuidelines: React.FC = () => {
         />
       </div>
       
-      <div className="text-center mt-8 bg-indigo-50 p-6 rounded-xl">
+      <div className="text-center mt-8 bg-gradient-to-r from-indigo-100 to-indigo-200 p-6 rounded-xl shadow-sm border border-indigo-200">
         <p className="text-wincamp-orange font-bold text-lg flex items-center justify-center gap-2">
           <Sparkles className="h-5 w-5" />
           בואו ניצור יחד קייטנה בלתי נשכחת!
         </p>
-        <p className="text-gray-700 mt-2">
+        <p className="text-gray-800 mt-2">
           תודה רבה על המחויבות והעשייה,<br />
           <span className="font-bold text-indigo-800">אמיתי</span> 🙌
         </p>
@@ -94,15 +94,15 @@ interface GuidelineCardProps {
 
 const GuidelineCard: React.FC<GuidelineCardProps> = ({ icon, title, items }) => {
   return (
-    <Card className="bg-white/80 backdrop-blur-sm border-slate-200 shadow-md overflow-hidden transition-all hover:shadow-lg hover:-translate-y-1">
-      <CardHeader className="pb-2 bg-indigo-50/50">
-        <CardTitle className="flex items-center gap-2 text-indigo-800">
+    <Card className="bg-white/90 backdrop-blur-sm border-slate-200 shadow-md overflow-hidden transition-all hover:shadow-lg hover:-translate-y-1">
+      <CardHeader className="pb-2 bg-gradient-to-r from-indigo-50 to-indigo-100 border-b border-indigo-100">
+        <CardTitle className="flex items-center gap-2 text-indigo-900">
           {icon}
           <span className="text-lg">{title}</span>
         </CardTitle>
       </CardHeader>
-      <CardContent>
-        <ul className="list-disc pr-5 space-y-1 text-gray-700">
+      <CardContent className="pt-3">
+        <ul className="list-disc pr-5 space-y-1 text-gray-800">
           {items.map((item, index) => (
             <li key={index} className="leading-relaxed">{item}</li>
           ))}
