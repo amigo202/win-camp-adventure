@@ -1,16 +1,15 @@
 
 import React, { useState, useEffect } from 'react';
-import { Button } from "@/components/ui/button";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Calendar as CalendarIcon, Check, X, Save } from 'lucide-react';
 import { format } from 'date-fns';
-import { he } from 'date-fns/locale';
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
 import { toast } from "sonner";
 import { Student } from '@/types/student';
 import { getStudentsData, saveStudentsData } from '../../utils/studentUtils';
 import { getCurrentUser } from '../../utils/authUtils';
+import DateSelector from './attendance/DateSelector';
+import AttendanceTable from './attendance/AttendanceTable';
+import AttendanceActions from './attendance/AttendanceActions';
+import UnsavedChangesAlert from './attendance/UnsavedChangesAlert';
+import EmptyStudentsMessage from './attendance/EmptyStudentsMessage';
 
 const AttendanceTracker: React.FC = () => {
   const [students, setStudents] = useState<Student[]>([]);
@@ -92,26 +91,7 @@ const AttendanceTracker: React.FC = () => {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div className="flex gap-2">
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button
-                variant="outline"
-                className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white border-none"
-              >
-                <CalendarIcon className="h-4 w-4 ml-2" />
-                {format(date, 'dd/MM/yyyy', { locale: he })}
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-auto p-0" align="end">
-              <Calendar
-                mode="single"
-                selected={date}
-                onSelect={(newDate) => newDate && setDate(newDate)}
-                disabled={(date) => date > new Date() || date < new Date('2023-01-01')}
-                initialFocus
-              />
-            </PopoverContent>
-          </Popover>
+          <DateSelector date={date} setDate={setDate} />
         </div>
         <h2 className="text-2xl font-bold">רישום נוכחות</h2>
       </div>
@@ -119,98 +99,27 @@ const AttendanceTracker: React.FC = () => {
       {students.length > 0 ? (
         <>
           <div className="bg-white/5 p-4 rounded-lg">
-            <div className="flex justify-between items-center mb-4">
-              <Button 
-                onClick={saveAttendance}
-                className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700"
-                disabled={!unsavedChanges}
-              >
-                <Save size={16} className="ml-2" />
-                שמור נוכחות
-              </Button>
-              
-              <div className="space-x-2 flex gap-2">
-                <Button 
-                  variant="outline" 
-                  onClick={markAllAbsent}
-                  className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white border-none"
-                >
-                  <X size={16} className="ml-2" />
-                  סמן הכל כנעדרים
-                </Button>
-                <Button 
-                  variant="outline" 
-                  onClick={markAllPresent}
-                  className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white border-none"
-                >
-                  <Check size={16} className="ml-2" />
-                  סמן הכל כנוכחים
-                </Button>
-              </div>
-            </div>
+            <AttendanceActions
+              saveAttendance={saveAttendance}
+              markAllPresent={markAllPresent}
+              markAllAbsent={markAllAbsent}
+              unsavedChanges={unsavedChanges}
+            />
             
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="text-white">שם</TableHead>
-                    <TableHead className="text-white">כיתה</TableHead>
-                    <TableHead className="text-white text-center">נוכחות</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {students.map((student) => (
-                    <TableRow key={student.id}>
-                      <TableCell className="font-medium text-white">{student.name}</TableCell>
-                      <TableCell className="text-white">{student.grade || '-'}</TableCell>
-                      <TableCell className="text-center">
-                        <Button 
-                          variant="ghost" 
-                          size="sm" 
-                          onClick={() => toggleAttendance(student.id)}
-                          className={`w-28 ${
-                            attendance[student.id] 
-                              ? 'bg-green-500/30 hover:bg-green-500/40 text-white' 
-                              : 'bg-red-500/30 hover:bg-red-500/40 text-white'
-                          }`}
-                        >
-                          {attendance[student.id] ? (
-                            <span className="flex items-center gap-2">
-                              <Check size={16} className="ml-2" />
-                              נוכח/ת
-                            </span>
-                          ) : (
-                            <span className="flex items-center gap-2">
-                              <X size={16} className="ml-2" />
-                              נעדר/ת
-                            </span>
-                          )}
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
+            <AttendanceTable
+              students={students}
+              attendance={attendance}
+              toggleAttendance={toggleAttendance}
+            />
           </div>
           
-          {unsavedChanges && (
-            <div className="fixed bottom-4 left-4 right-4 bg-yellow-500 text-black p-4 rounded-md shadow-lg max-w-xl mx-auto flex justify-between items-center">
-              <Button 
-                onClick={saveAttendance}
-                variant="secondary"
-                className="bg-black text-white hover:bg-gray-800"
-              >
-                שמור עכשיו
-              </Button>
-              <p>יש לך שינויים שלא נשמרו!</p>
-            </div>
-          )}
+          <UnsavedChangesAlert 
+            saveAttendance={saveAttendance} 
+            show={unsavedChanges} 
+          />
         </>
       ) : (
-        <div className="bg-white/5 p-8 rounded-lg text-center">
-          <p className="text-gray-300">לא נמצאו תלמידים. הוסיפו תלמידים במסך ניהול התלמידים.</p>
-        </div>
+        <EmptyStudentsMessage />
       )}
     </div>
   );
