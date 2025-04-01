@@ -144,6 +144,18 @@
   [dir="rtl"] table td {
     text-align: right;
   }
+
+  /* RTL specific adjustments for horizontal navigation bars */
+  [dir="rtl"] .flex-row-reverse {
+    flex-direction: row-reverse;
+  }
+
+  [dir="rtl"] .nav-items {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+  }
 }
 
 /* RTL fixes for UI components */
