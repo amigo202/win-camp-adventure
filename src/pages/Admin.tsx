@@ -40,11 +40,11 @@ const Admin: React.FC = () => {
   }, [navigate]);
 
   if (loading) {
-    return <div className="flex justify-center items-center h-screen" dir="rtl">טוען...</div>;
+    return <div className="flex justify-center items-center h-screen">טוען...</div>;
   }
 
   return (
-    <div className="min-h-screen py-6 px-4 md:px-8 relative bg-gradient-to-br from-indigo-900 to-indigo-950" dir="rtl">
+    <div className="min-h-screen py-6 px-4 md:px-8 relative bg-gradient-to-br from-indigo-900 to-indigo-950">
       <StarsBackground />
       
       <div className="max-w-7xl mx-auto">
@@ -52,18 +52,18 @@ const Admin: React.FC = () => {
         
         <GuideNavigation />
 
-        <div className="mb-4">
+        <div className="mb-4 text-right">
           <button
             onClick={() => navigate("/")}
             className="flex items-center gap-2 bg-wincamp-blue hover:bg-wincamp-blue/90 text-white px-4 py-2 rounded-md shadow-md transition-colors"
           >
-            <Home size={20} />
+            <Home size={20} className="ml-2" />
             מעבר לגלריית הכלים
           </button>
         </div>
 
         <div className="bg-indigo-800/40 backdrop-blur-sm border border-indigo-700/70 rounded-xl p-6 mb-8 animate-slide-in-bottom">
-          <h1 className="text-3xl font-bold text-white">ממשק ניהול קייטנת WIN CAMP</h1>
+          <h1 className="text-3xl font-bold text-white text-right">ממשק ניהול קייטנת WIN CAMP</h1>
         </div>
 
         <Tabs defaultValue="guidelines" className="w-full">

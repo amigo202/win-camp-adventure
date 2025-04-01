@@ -6,9 +6,9 @@ import { Sparkles, BookOpenCheck, Clock, Shield, Megaphone, GraduationCap, Heart
 const InstructorGuidelines: React.FC = () => {
   return (
     <div className="space-y-6 py-2">
-      <div className="flex items-center gap-3 mb-4">
-        <BookOpenCheck className="text-wincamp-orange" size={30} />
+      <div className="flex items-center gap-3 mb-4 justify-end">
         <h2 className="text-2xl font-bold text-white">מדריכים יקרים</h2>
+        <BookOpenCheck className="text-wincamp-orange" size={30} />
       </div>
 
       <p className="text-white/90 mb-6 text-right">
@@ -96,9 +96,9 @@ const GuidelineCard: React.FC<GuidelineCardProps> = ({ icon, title, items }) => 
   return (
     <Card className="bg-indigo-600/50 border-indigo-500/50 shadow-lg overflow-hidden">
       <CardHeader className="pb-2">
-        <CardTitle className="flex items-center gap-2 text-white">
-          {icon}
+        <CardTitle className="flex items-center gap-2 text-white justify-end">
           {title}
+          {icon}
         </CardTitle>
       </CardHeader>
       <CardContent>
