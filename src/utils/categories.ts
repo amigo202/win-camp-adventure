@@ -31,5 +31,11 @@ export const categories: Category[] = [
     title: "אתגר יומי",
     icon: "🧠",
     color: "orange"
+  },
+  {
+    id: "safety",
+    title: "מוגנות ברשת",
+    icon: "🛡️",
+    color: "red"
   }
 ];
