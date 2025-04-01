@@ -11,6 +11,14 @@ export const aiTools: Tool[] = [
     description: "צרו תמונות מדהימות באמצעות בינה מלאכותית"
   },
   {
+    id: "poe",
+    title: "יצירת בוט עם AI",
+    category: "ai",
+    icon: "🤖",
+    link: "https://poe.com/",
+    description: "פלטפורמה לשיחה ויצירת בוטים מבוססי בינה מלאכותית"
+  },
+  {
     id: "aistories",
     title: "יצירת סיפורים עם AI",
     category: "ai",
