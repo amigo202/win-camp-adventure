@@ -44,23 +44,23 @@ const StudentsTable: React.FC<StudentsTableProps> = ({
           <Table>
             <TableHeader className="bg-indigo-800/50 sticky top-0 z-10">
               <TableRow>
-                <TableHead className="text-white font-bold">שם</TableHead>
-                <TableHead className="text-white font-bold">סיסמה</TableHead>
-                <TableHead className="text-white font-bold">כיתה</TableHead>
-                <TableHead className="text-white font-bold">טלפון הורה</TableHead>
-                <TableHead className="text-white font-bold">הערות</TableHead>
-                <TableHead className="text-white font-bold text-left">פעולות</TableHead>
+                <TableHead className="text-white font-bold text-right">שם</TableHead>
+                <TableHead className="text-white font-bold text-right">סיסמה</TableHead>
+                <TableHead className="text-white font-bold text-right">כיתה</TableHead>
+                <TableHead className="text-white font-bold text-right">טלפון הורה</TableHead>
+                <TableHead className="text-white font-bold text-right">הערות</TableHead>
+                <TableHead className="text-white font-bold">פעולות</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {displayStudents.map((student) => (
                 <TableRow key={student.id} className="border-b border-indigo-600/30 hover:bg-indigo-700/40">
-                  <TableCell className="font-medium text-white">{student.name}</TableCell>
-                  <TableCell className="text-white">{student.password}</TableCell>
-                  <TableCell className="text-white">{student.grade || '-'}</TableCell>
-                  <TableCell className="text-white">{student.parentPhone || '-'}</TableCell>
-                  <TableCell className="text-white">{student.notes || '-'}</TableCell>
-                  <TableCell className="text-left">
+                  <TableCell className="font-medium text-white text-right">{student.name}</TableCell>
+                  <TableCell className="text-white text-right">{student.password}</TableCell>
+                  <TableCell className="text-white text-right">{student.grade || '-'}</TableCell>
+                  <TableCell className="text-white text-right">{student.parentPhone || '-'}</TableCell>
+                  <TableCell className="text-white text-right">{student.notes || '-'}</TableCell>
+                  <TableCell>
                     <Button 
                       variant="ghost" 
                       size="icon" 

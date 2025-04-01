@@ -16,20 +16,20 @@ const StudentActivityTable: React.FC<StudentActivityTableProps> = ({ students, f
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="text-white">שם</TableHead>
-              <TableHead className="text-white">כיתה</TableHead>
+              <TableHead className="text-white text-right">שם</TableHead>
+              <TableHead className="text-white text-right">כיתה</TableHead>
               <TableHead className="text-white text-center">כלים שהושלמו</TableHead>
-              <TableHead className="text-white">פעילות אחרונה</TableHead>
+              <TableHead className="text-white text-right">פעילות אחרונה</TableHead>
               <TableHead className="text-white text-center">ימי נוכחות</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {students.map((student) => (
               <TableRow key={student.id}>
-                <TableCell className="font-medium text-white">{student.name}</TableCell>
-                <TableCell className="text-white">{student.grade || '-'}</TableCell>
+                <TableCell className="font-medium text-white text-right">{student.name}</TableCell>
+                <TableCell className="text-white text-right">{student.grade || '-'}</TableCell>
                 <TableCell className="text-white text-center">{student.completedTools?.length || 0}</TableCell>
-                <TableCell className="text-white">{student.lastActive ? formatDate(student.lastActive) : 'לא פעיל עדיין'}</TableCell>
+                <TableCell className="text-white text-right">{student.lastActive ? formatDate(student.lastActive) : 'לא פעיל עדיין'}</TableCell>
                 <TableCell className="text-white text-center">{student.attendanceDays?.length || 0}</TableCell>
               </TableRow>
             ))}
