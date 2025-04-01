@@ -1,4 +1,3 @@
-
 export interface Tool {
   id: string;
   title: string;
@@ -233,7 +232,17 @@ export const tools: Tool[] = [
     icon: "🎉",
     link: "#",
     description: "גלו את ההפתעה היומית - בדיחה, טיפ או פרס מיוחד"
-  }
+  },
+  
+  // Adding Hour of Code tool
+  {
+    id: "hourofcode",
+    title: "שעת קוד",
+    category: "programming",
+    icon: "🧊",
+    link: "https://www.hourofcode.co.il/activities",
+    description: "פעילות מרגשת ללימוד תכנות ויצירתיות - שעת קוד"
+  },
 ];
 
 export const getToolsByCategory = (categoryId: string): Tool[] => {
