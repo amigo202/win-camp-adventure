@@ -55,7 +55,7 @@ export const programmingTools: Tool[] = [
     title: "סטודיו קוד",
     category: "programming",
     icon: "📝",
-    link: "https://code.org/studio",
+    link: "https://code.org/",
     description: "סביבת לימוד תכנות לילדים עם משחקים מוכרים ודמויות אהובות"
   },
   {
