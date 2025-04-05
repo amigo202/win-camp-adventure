@@ -1,10 +1,12 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Trash2 } from 'lucide-react';
+import { Trash2, CheckSquare } from 'lucide-react';
 import { Student } from '@/types/student';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { Checkbox } from '@/components/ui/checkbox';
+import { toast } from "sonner";
 
 interface StudentsTableProps {
   students: Student[];
@@ -18,6 +20,7 @@ const StudentsTable: React.FC<StudentsTableProps> = ({
   filteredStudents 
 }) => {
   const displayStudents = filteredStudents || students;
+  const [selectedStudents, setSelectedStudents] = useState<string[]>([]);
 
   if (students.length === 0) {
     return (
@@ -40,14 +43,67 @@ const StudentsTable: React.FC<StudentsTableProps> = ({
     handleDeleteStudent(id);
   };
 
+  const toggleStudentSelection = (studentId: string) => {
+    setSelectedStudents(prev => {
+      if (prev.includes(studentId)) {
+        return prev.filter(id => id !== studentId);
+      } else {
+        return [...prev, studentId];
+      }
+    });
+  };
+
+  const handleBulkDelete = () => {
+    if (selectedStudents.length === 0) {
+      toast.error("לא נבחרו תלמידים למחיקה");
+      return;
+    }
+
+    if (window.confirm(`האם אתה בטוח שברצונך למחוק ${selectedStudents.length} תלמידים?`)) {
+      selectedStudents.forEach(id => {
+        handleDeleteStudent(id);
+      });
+      setSelectedStudents([]);
+      toast.success(`${selectedStudents.length} תלמידים נמחקו בהצלחה`);
+    }
+  };
+
+  const selectAll = () => {
+    if (selectedStudents.length === displayStudents.length) {
+      setSelectedStudents([]);
+    } else {
+      setSelectedStudents(displayStudents.map(student => student.id));
+    }
+  };
+
   return (
     <div className="bg-white/80 backdrop-blur-md shadow-xl rounded-lg p-4 overflow-hidden border border-slate-200" dir="rtl">
-      <h3 className="text-xl mb-4 text-gray-900 font-bold">תלמידים ({displayStudents.length} מתוך {students.length})</h3>
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="text-xl text-gray-900 font-bold">תלמידים ({displayStudents.length} מתוך {students.length})</h3>
+        {selectedStudents.length > 0 && (
+          <Button 
+            variant="destructive"
+            className="flex items-center gap-2"
+            onClick={handleBulkDelete}
+          >
+            <Trash2 size={16} />
+            מחק {selectedStudents.length} תלמידים
+          </Button>
+        )}
+      </div>
+
       <ScrollArea className="h-[450px]">
         <div className="overflow-x-auto">
           <Table>
             <TableHeader className="bg-indigo-200/80 sticky top-0 z-10">
               <TableRow>
+                <TableHead className="w-12 text-center">
+                  <Checkbox 
+                    checked={displayStudents.length > 0 && selectedStudents.length === displayStudents.length}
+                    onCheckedChange={selectAll}
+                    aria-label="בחר הכל"
+                  />
+                </TableHead>
                 <TableHead className="text-gray-900 font-bold">שם</TableHead>
                 <TableHead className="text-gray-900 font-bold">סיסמה</TableHead>
                 <TableHead className="text-gray-900 font-bold">כיתה</TableHead>
@@ -59,6 +115,13 @@ const StudentsTable: React.FC<StudentsTableProps> = ({
             <TableBody>
               {displayStudents.map((student) => (
                 <TableRow key={student.id} className="border-b border-slate-200 hover:bg-slate-100/60">
+                  <TableCell className="text-center">
+                    <Checkbox 
+                      checked={selectedStudents.includes(student.id)}
+                      onCheckedChange={() => toggleStudentSelection(student.id)}
+                      aria-label={`בחר תלמיד ${student.name}`}
+                    />
+                  </TableCell>
                   <TableCell className="font-medium text-gray-900">{student.name}</TableCell>
                   <TableCell className="text-gray-900">{student.password}</TableCell>
                   <TableCell className="text-gray-900">{student.grade || '-'}</TableCell>
