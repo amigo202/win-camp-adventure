@@ -72,13 +72,18 @@ export const useStudentManagement = () => {
   };
 
   const handleDeleteStudent = (id: string) => {
-    if (window.confirm("האם אתה בטוח שברצונך למחוק את התלמיד?")) {
-      const updatedStudents = students.filter(student => student.id !== id);
-      setStudents(updatedStudents);
-      saveStudentsData(updatedStudents);
-      deleteStudentUtil(id);
-      toast.success("התלמיד נמחק בהצלחה");
-    }
+    console.log(`handleDeleteStudent called for ID: ${id}`);
+    
+    // מחיקה רגילה (ללא אישור) כי האישור כבר נעשה במקום אחר
+    const updatedStudents = students.filter(student => student.id !== id);
+    console.log(`Filtered students length after deletion: ${updatedStudents.length}`);
+    
+    setStudents(updatedStudents);
+    saveStudentsData(updatedStudents);
+    deleteStudentUtil(id);
+    console.log(`Student ${id} successfully deleted`);
+    
+    // הערה: אין צורך בהודעת toast כאן כי היא תוצג במקום שקורא לפונקציה זו
   };
 
   const handleStudentsImported = (importedStudents: Student[]) => {

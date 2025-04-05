@@ -59,31 +59,32 @@ const StudentsTable: React.FC<StudentsTableProps> = ({
       return;
     }
 
-    // שמור את מספר התלמידים שנבחרו לפני המחיקה
+    console.log("Initial selectedStudents:", selectedStudents);
     const countToDelete = selectedStudents.length;
     
     if (window.confirm(`האם אתה בטוח שברצונך למחוק ${countToDelete} תלמידים?`)) {
-      console.log("Deleting students:", selectedStudents);
+      console.log(`Confirmed deleting ${countToDelete} students`);
       
-      // יצירת עותק של מערך התלמידים שנבחרו למחיקה
+      // עותק של מערך התלמידים שנבחרו למחיקה - חשוב מאוד!
       const studentsToDelete = [...selectedStudents];
+      console.log("Copy of students to delete:", studentsToDelete);
       
-      try {
-        // מחיקת כל תלמיד
-        for (const id of studentsToDelete) {
-          console.log(`Attempting to delete student with ID: ${id}`);
+      // ניקוי הבחירה לפני המחיקה למניעת בעיות
+      setSelectedStudents([]);
+      
+      // מחיקה בנפרד של כל תלמיד מהעותק
+      studentsToDelete.forEach(id => {
+        console.log(`Processing deletion for student ID: ${id}`);
+        try {
           handleDeleteStudent(id);
+          console.log(`Successfully deleted student ID: ${id}`);
+        } catch (error) {
+          console.error(`Error deleting student ${id}:`, error);
         }
-        
-        // ניקוי הבחירה לאחר המחיקה
-        setSelectedStudents([]);
-        
-        // הצגת הודעת הצלחה עם המספר המקורי
-        toast.success(`${countToDelete} תלמידים נמחקו בהצלחה`);
-      } catch (error) {
-        console.error("Error while deleting students:", error);
-        toast.error("אירעה שגיאה בעת מחיקת התלמידים");
-      }
+      });
+      
+      // הצגת הודעת הצלחה עם המספר המקורי
+      toast.success(`${countToDelete} תלמידים נמחקו בהצלחה`);
     }
   };
 
