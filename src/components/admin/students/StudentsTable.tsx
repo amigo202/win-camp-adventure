@@ -40,7 +40,10 @@ const StudentsTable: React.FC<StudentsTableProps> = ({
 
   const onDeleteClick = (id: string) => {
     console.log("Deleting student with ID:", id);
-    handleDeleteStudent(id);
+    if (window.confirm("האם אתה בטוח שברצונך למחוק את התלמיד?")) {
+      handleDeleteStudent(id);
+      toast.success("התלמיד נמחק בהצלחה");
+    }
   };
 
   const toggleStudentSelection = (studentId: string) => {
@@ -72,20 +75,23 @@ const StudentsTable: React.FC<StudentsTableProps> = ({
       // ניקוי הבחירה לפני המחיקה למניעת בעיות
       setSelectedStudents([]);
       
-      // מחיקה בנפרד של כל תלמיד מהעותק
-      studentsToDelete.forEach(id => {
-        console.log(`Processing deletion for student ID: ${id}`);
-        try {
-          handleDeleteStudent(id);
-          console.log(`Successfully deleted student ID: ${id}`);
-        } catch (error) {
-          console.error(`Error deleting student ${id}:`, error);
-        }
-      });
+      // FIX: Pass the entire array of students to delete at once to the hook
+      // This way we'll update state only once and avoid rendering issues
+      handleMultipleStudentsDelete(studentsToDelete);
       
       // הצגת הודעת הצלחה עם המספר המקורי
       toast.success(`${countToDelete} תלמידים נמחקו בהצלחה`);
     }
+  };
+
+  // Helper method to pass to parent for bulk deletion
+  const handleMultipleStudentsDelete = (studentIds: string[]) => {
+    studentIds.forEach(id => {
+      console.log(`Requesting deletion for student ID: ${id}`);
+    });
+    
+    // Call the parent component's handler with the array of IDs
+    handleDeleteStudent(studentIds.join(','));
   };
 
   const selectAll = () => {
