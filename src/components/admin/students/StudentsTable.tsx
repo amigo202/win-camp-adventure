@@ -2,25 +2,30 @@
 import React, { useState } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Trash2, CheckSquare } from 'lucide-react';
+import { Trash2, CheckSquare, Edit2, Save, X } from 'lucide-react';
 import { Student } from '@/types/student';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Input } from '@/components/ui/input';
 import { toast } from "sonner";
 
 interface StudentsTableProps {
   students: Student[];
-  handleDeleteStudent: (id: string | string[]) => void; // Updated to accept string or string array
+  handleDeleteStudent: (id: string | string[]) => void;
   filteredStudents?: Student[];
+  handleUpdateStudent?: (id: string, data: Partial<Student>) => void;
 }
 
 const StudentsTable: React.FC<StudentsTableProps> = ({ 
   students, 
   handleDeleteStudent,
-  filteredStudents 
+  filteredStudents,
+  handleUpdateStudent 
 }) => {
   const displayStudents = filteredStudents || students;
   const [selectedStudents, setSelectedStudents] = useState<string[]>([]);
+  const [editingStudent, setEditingStudent] = useState<string | null>(null);
+  const [editedValues, setEditedValues] = useState<Partial<Student>>({});
 
   if (students.length === 0) {
     return (
@@ -39,7 +44,6 @@ const StudentsTable: React.FC<StudentsTableProps> = ({
   }
 
   const onDeleteClick = (id: string) => {
-    console.log("Deleting student with ID:", id);
     if (window.confirm("האם אתה בטוח שברצונך למחוק את התלמיד?")) {
       handleDeleteStudent(id);
       toast.success("התלמיד נמחק בהצלחה");
@@ -61,16 +65,12 @@ const StudentsTable: React.FC<StudentsTableProps> = ({
       toast.error("לא נבחרו תלמידים למחיקה");
       return;
     }
-
-    console.log("Initial selectedStudents:", selectedStudents);
+    
     const countToDelete = selectedStudents.length;
     
     if (window.confirm(`האם אתה בטוח שברצונך למחוק ${countToDelete} תלמידים?`)) {
-      console.log(`Confirmed deleting ${countToDelete} students`);
-      
       // Make a copy of the selected students array
       const studentsToDelete = [...selectedStudents];
-      console.log("Students to delete:", studentsToDelete);
       
       // Clear selection before deletion to prevent UI issues
       setSelectedStudents([]);
@@ -88,6 +88,43 @@ const StudentsTable: React.FC<StudentsTableProps> = ({
     } else {
       setSelectedStudents(displayStudents.map(student => student.id));
     }
+  };
+
+  const startEditing = (student: Student) => {
+    setEditingStudent(student.id);
+    setEditedValues({
+      name: student.name,
+      password: student.password,
+      grade: student.grade || '',
+      parentPhone: student.parentPhone || '',
+      notes: student.notes || ''
+    });
+  };
+
+  const cancelEditing = () => {
+    setEditingStudent(null);
+    setEditedValues({});
+  };
+
+  const saveEditing = (id: string) => {
+    if (!handleUpdateStudent) return;
+    
+    // Remove any empty string values to avoid overwriting with empty strings
+    const cleanedValues = Object.fromEntries(
+      Object.entries(editedValues).filter(([_, value]) => value !== '')
+    );
+    
+    handleUpdateStudent(id, cleanedValues);
+    setEditingStudent(null);
+    setEditedValues({});
+    toast.success("פרטי התלמיד עודכנו בהצלחה");
+  };
+
+  const handleInputChange = (field: keyof Student, value: string) => {
+    setEditedValues(prev => ({
+      ...prev,
+      [field]: value
+    }));
   };
 
   return (
@@ -136,21 +173,101 @@ const StudentsTable: React.FC<StudentsTableProps> = ({
                       aria-label={`בחר תלמיד ${student.name}`}
                     />
                   </TableCell>
-                  <TableCell className="font-medium text-gray-900">{student.name}</TableCell>
-                  <TableCell className="text-gray-900">{student.password}</TableCell>
-                  <TableCell className="text-gray-900">{student.grade || '-'}</TableCell>
-                  <TableCell className="text-gray-900">{student.parentPhone || '-'}</TableCell>
-                  <TableCell className="text-gray-900">{student.notes || '-'}</TableCell>
-                  <TableCell>
-                    <Button 
-                      variant="ghost" 
-                      size="icon"
-                      onClick={() => onDeleteClick(student.id)}
-                      className="text-red-600 hover:text-red-700 hover:bg-red-100"
-                    >
-                      <Trash2 size={16} />
-                    </Button>
-                  </TableCell>
+                  
+                  {editingStudent === student.id ? (
+                    // Editing mode - show input fields
+                    <>
+                      <TableCell>
+                        <Input 
+                          value={editedValues.name || ''}
+                          onChange={(e) => handleInputChange('name', e.target.value)}
+                          className="bg-white text-right"
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <Input 
+                          value={editedValues.password || ''}
+                          onChange={(e) => handleInputChange('password', e.target.value)}
+                          className="bg-white text-right"
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <Input 
+                          value={editedValues.grade || ''}
+                          onChange={(e) => handleInputChange('grade', e.target.value)}
+                          className="bg-white text-right"
+                          placeholder="הזן כיתה"
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <Input 
+                          value={editedValues.parentPhone || ''}
+                          onChange={(e) => handleInputChange('parentPhone', e.target.value)}
+                          className="bg-white text-right"
+                          placeholder="הזן טלפון"
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <Input 
+                          value={editedValues.notes || ''}
+                          onChange={(e) => handleInputChange('notes', e.target.value)}
+                          className="bg-white text-right"
+                          placeholder="הזן הערות"
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex space-x-2">
+                          <Button 
+                            variant="ghost" 
+                            size="icon"
+                            onClick={() => saveEditing(student.id)}
+                            className="text-green-600 hover:text-green-700 hover:bg-green-100"
+                          >
+                            <Save size={16} />
+                          </Button>
+                          <Button 
+                            variant="ghost" 
+                            size="icon"
+                            onClick={cancelEditing}
+                            className="text-gray-600 hover:text-gray-700 hover:bg-gray-100"
+                          >
+                            <X size={16} />
+                          </Button>
+                        </div>
+                      </TableCell>
+                    </>
+                  ) : (
+                    // Regular display mode
+                    <>
+                      <TableCell className="font-medium text-gray-900">{student.name}</TableCell>
+                      <TableCell className="text-gray-900">{student.password}</TableCell>
+                      <TableCell className="text-gray-900">{student.grade || '-'}</TableCell>
+                      <TableCell className="text-gray-900">{student.parentPhone || '-'}</TableCell>
+                      <TableCell className="text-gray-900">{student.notes || '-'}</TableCell>
+                      <TableCell>
+                        <div className="flex space-x-2">
+                          {handleUpdateStudent && (
+                            <Button 
+                              variant="ghost" 
+                              size="icon"
+                              onClick={() => startEditing(student)}
+                              className="text-blue-600 hover:text-blue-700 hover:bg-blue-100"
+                            >
+                              <Edit2 size={16} />
+                            </Button>
+                          )}
+                          <Button 
+                            variant="ghost" 
+                            size="icon"
+                            onClick={() => onDeleteClick(student.id)}
+                            className="text-red-600 hover:text-red-700 hover:bg-red-100"
+                          >
+                            <Trash2 size={16} />
+                          </Button>
+                        </div>
+                      </TableCell>
+                    </>
+                  )}
                 </TableRow>
               ))}
             </TableBody>

@@ -14,7 +14,8 @@ const StudentManager: React.FC = () => {
     setNewStudent,
     handleAddStudent,
     handleDeleteStudent,
-    handleStudentsImported
+    handleStudentsImported,
+    handleUpdateStudent
   } = useStudentManagement();
 
   const [searchTerm, setSearchTerm] = useState('');
@@ -71,7 +72,8 @@ const StudentManager: React.FC = () => {
       <StudentsTable 
         students={students} 
         filteredStudents={filteredStudents}
-        handleDeleteStudent={handleDeleteStudent} 
+        handleDeleteStudent={handleDeleteStudent}
+        handleUpdateStudent={handleUpdateStudent}
       />
     </div>
   );

@@ -6,7 +6,8 @@ import {
   getStudentsData, 
   saveStudentsData, 
   deleteStudent as deleteStudentUtil, 
-  addStudent as addStudentUtil
+  addStudent as addStudentUtil,
+  updateStudent as updateStudentUtil
 } from '@/utils/studentUtils';
 import { getCurrentUser } from '@/utils/authUtils';
 
@@ -71,6 +72,22 @@ export const useStudentManagement = () => {
     toast.success("התלמיד נוסף בהצלחה");
   };
 
+  const handleUpdateStudent = (id: string, updatedData: Partial<Student>) => {
+    setStudents(prevStudents => {
+      const updatedStudents = prevStudents.map(student => 
+        student.id === id ? { ...student, ...updatedData } : student
+      );
+      
+      // Save to storage
+      saveStudentsData(updatedStudents);
+      
+      return updatedStudents;
+    });
+    
+    // Update in utility function as well
+    updateStudentUtil(id, updatedData);
+  };
+
   const handleDeleteStudent = (id: string | string[]) => {
     console.log(`handleDeleteStudent called with:`, id);
     
@@ -121,6 +138,7 @@ export const useStudentManagement = () => {
     newStudent,
     setNewStudent,
     handleAddStudent,
+    handleUpdateStudent,
     handleDeleteStudent,
     handleStudentsImported
   };
