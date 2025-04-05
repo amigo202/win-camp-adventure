@@ -28,6 +28,12 @@ const ExcelTemplateInfo: React.FC = () => {
               <TableCell className="text-gray-800">050-1234567</TableCell>
               <TableCell className="text-gray-800">אלרגיה לבוטנים</TableCell>
             </TableRow>
+            <TableRow>
+              <TableCell className="text-gray-800">שירה כהן</TableCell>
+              <TableCell className="text-gray-800">ג'1</TableCell>
+              <TableCell className="text-gray-800">052-9876543</TableCell>
+              <TableCell className="text-gray-800"></TableCell>
+            </TableRow>
           </TableBody>
         </Table>
       </div>

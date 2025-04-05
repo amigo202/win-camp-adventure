@@ -1,4 +1,3 @@
-
 import * as XLSX from 'xlsx';
 import { Student } from '@/types/student';
 import { getCurrentUser } from './authUtils';
@@ -46,16 +45,16 @@ export const importStudentsFromExcel = (file: File): Promise<Student[]> => {
         const firstRow = excelData[0];
         console.log("First row sample:", firstRow);
 
-        // Find column names
-        const nameColumn = findColumn(["שם", "שם מלא"], ["name", "fullname", "full name"], firstRow);
-        const gradeColumn = findColumn(["כיתה"], ["grade", "class"], firstRow);
-        const phoneColumn = findColumn(["טלפון הורה", "טלפון"], ["phone", "parent phone", "parentphone", "phone number"], firstRow);
+        // Find column names - updating this part to better identify the expected columns
+        const nameColumn = findColumn(["שם", "שם מלא", "שם התלמיד"], ["name", "fullname", "full name", "student name"], firstRow);
+        const gradeColumn = findColumn(["כיתה", "כתה"], ["grade", "class"], firstRow);
+        const phoneColumn = findColumn(["טלפון הורה", "טלפון", "פלאפון", "נייד"], ["phone", "parent phone", "parentphone", "phone number", "mobile"], firstRow);
         const notesColumn = findColumn(["הערות"], ["notes", "comments"], firstRow);
 
         console.log("Detected columns:", { nameColumn, gradeColumn, phoneColumn, notesColumn });
 
         if (!nameColumn) {
-          toast.error("לא נמצאה עמודת 'שם' בקובץ האקסל");
+          toast.error("לא נמצאה עמודת 'שם' בקובץ האקסל - זהו שדה חובה");
           reject("Name column not found");
           return;
         }
@@ -136,14 +135,40 @@ export const exportStudentsToExcel = (students: Student[]) => {
 };
 
 /**
- * Helper function to find column names in Excel data
+ * Helper function to find column names in Excel data - improved to be more flexible
  */
 const findColumn = (hebrewNames: string[], englishNames: string[], row: any): string => {
+  // First try exact match with Hebrew names
   for (const name of hebrewNames) {
     if (row[name] !== undefined) return name;
   }
+  
+  // Then try exact match with English names
   for (const name of englishNames) {
     if (row[name] !== undefined) return name;
   }
+  
+  // If no exact matches, try case-insensitive partial matches
+  const allKeys = Object.keys(row);
+  
+  // Try to find Hebrew partial matches first (higher priority)
+  for (const key of allKeys) {
+    for (const name of hebrewNames) {
+      if (key.includes(name) || name.includes(key)) {
+        return key;
+      }
+    }
+  }
+  
+  // Then try to find English partial matches
+  for (const key of allKeys) {
+    const lowerKey = key.toLowerCase();
+    for (const name of englishNames) {
+      if (lowerKey.includes(name.toLowerCase()) || name.toLowerCase().includes(lowerKey)) {
+        return key;
+      }
+    }
+  }
+  
   return "";
 };
