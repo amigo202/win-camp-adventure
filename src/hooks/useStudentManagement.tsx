@@ -71,19 +71,43 @@ export const useStudentManagement = () => {
     toast.success("התלמיד נוסף בהצלחה");
   };
 
-  const handleDeleteStudent = (id: string) => {
-    console.log(`handleDeleteStudent called for ID: ${id}`);
+  const handleDeleteStudent = (id: string | string[]) => {
+    console.log(`handleDeleteStudent called with:`, id);
     
-    // מחיקה רגילה (ללא אישור) כי האישור כבר נעשה במקום אחר
-    const updatedStudents = students.filter(student => student.id !== id);
-    console.log(`Filtered students length after deletion: ${updatedStudents.length}`);
-    
-    setStudents(updatedStudents);
-    saveStudentsData(updatedStudents);
-    deleteStudentUtil(id);
-    console.log(`Student ${id} successfully deleted`);
-    
-    // הערה: אין צורך בהודעת toast כאן כי היא תוצג במקום שקורא לפונקציה זו
+    // Handle bulk deletion (array of IDs)
+    if (Array.isArray(id)) {
+      if (id.length === 0) return;
+      
+      console.log(`Bulk deleting ${id.length} students:`, id);
+      
+      // Update students state once with all deletions
+      setStudents(prevStudents => {
+        const remainingStudents = prevStudents.filter(student => !id.includes(student.id));
+        console.log(`Filtered students length after bulk deletion: ${remainingStudents.length}`);
+        
+        // Save remaining students to storage
+        saveStudentsData(remainingStudents);
+        
+        // Delete each student individually from utility function
+        id.forEach(studentId => {
+          deleteStudentUtil(studentId);
+          console.log(`Deleted student ${studentId} via utility`);
+        });
+        
+        return remainingStudents;
+      });
+    } 
+    // Handle single deletion (string ID)
+    else {
+      console.log(`Single deletion for student ID: ${id}`);
+      const updatedStudents = students.filter(student => student.id !== id);
+      console.log(`Filtered students length after deletion: ${updatedStudents.length}`);
+      
+      setStudents(updatedStudents);
+      saveStudentsData(updatedStudents);
+      deleteStudentUtil(id);
+      console.log(`Student ${id} successfully deleted`);
+    }
   };
 
   const handleStudentsImported = (importedStudents: Student[]) => {
