@@ -1,4 +1,3 @@
-
 import { Student } from '../types/student';
 import { getCurrentUser } from './authUtils';
 
@@ -53,7 +52,7 @@ export const saveStudentsData = (students: Student[]): void => {
   localStorage.setItem(STUDENTS_STORAGE_KEY, JSON.stringify(updatedAllStudents));
 };
 
-// הוספת תלמיד חדש
+// הוספת תלמיד חדש - עודכן כך שלא ישמור במקום אחר
 export const addStudent = (student: Student): void => {
   const currentUser = getCurrentUser();
   if (!currentUser) return;
@@ -64,15 +63,15 @@ export const addStudent = (student: Student): void => {
     createdBy: currentUser.username
   };
   
-  const students = getStudentsData();
-  students.push(studentWithCreator);
-  saveStudentsData(students);
+  // We no longer save to localStorage here to avoid duplicate saves
+  // This is now handled in the useStudentManagement hook
+  console.log("Added student:", studentWithCreator);
 };
 
 // מחיקת תלמיד לפי מזהה
 export const deleteStudent = (id: string): void => {
-  const currentUser = getCurrentUser();
   const students = getStudentsData();
+  const currentUser = getCurrentUser();
   
   // Make sure the instructor can only delete their own students
   const updatedStudents = students.filter(student => {
@@ -85,6 +84,7 @@ export const deleteStudent = (id: string): void => {
     return student.id !== id || student.createdBy !== currentUser?.username;
   });
   
+  // Save the updated students list WITHOUT the deleted student
   saveStudentsData(updatedStudents);
 };
 

@@ -35,6 +35,11 @@ const StudentsTable: React.FC<StudentsTableProps> = ({
     );
   }
 
+  const onDeleteClick = (id: string) => {
+    console.log("Deleting student with ID:", id);
+    handleDeleteStudent(id);
+  };
+
   return (
     <div className="bg-white/80 backdrop-blur-md shadow-xl rounded-lg p-4 overflow-hidden border border-slate-200" dir="rtl">
       <h3 className="text-xl mb-4 text-gray-900 font-bold">תלמידים ({displayStudents.length} מתוך {students.length})</h3>
@@ -62,8 +67,8 @@ const StudentsTable: React.FC<StudentsTableProps> = ({
                   <TableCell>
                     <Button 
                       variant="ghost" 
-                      size="icon" 
-                      onClick={() => handleDeleteStudent(student.id)}
+                      size="icon"
+                      onClick={() => onDeleteClick(student.id)}
                       className="text-red-600 hover:text-red-700 hover:bg-red-100"
                     >
                       <Trash2 size={16} />

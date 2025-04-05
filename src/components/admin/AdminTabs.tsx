@@ -10,7 +10,7 @@ import InstructorGuidelines from './InstructorGuidelines';
 
 const AdminTabs: React.FC = () => {
   return (
-    <Tabs defaultValue="guidelines" className="w-full">
+    <Tabs defaultValue="students" className="w-full">
       <TabsList className="grid grid-cols-6 mb-8 bg-white/80 p-2 rounded-xl shadow-md border border-indigo-100">
         <TabsTrigger 
           value="guidelines" 

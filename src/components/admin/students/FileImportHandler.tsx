@@ -8,7 +8,6 @@ import { importStudentsFromExcel, exportStudentsToExcel } from '@/utils/excelUti
 
 interface FileImportHandlerProps {
   students: Student[];
-  setStudents: React.Dispatch<React.SetStateAction<Student[]>>;
   onStudentsImported: (newStudents: Student[]) => void;
 }
 
@@ -25,6 +24,7 @@ const FileImportHandler: React.FC<FileImportHandlerProps> = ({ students, onStude
       toast.success(`יובאו ${importedStudents.length} תלמידים בהצלחה`);
     } catch (error) {
       console.error("Failed to import students:", error);
+      toast.error("שגיאה ביבוא תלמידים");
     }
     
     // Reset file input

@@ -47,9 +47,17 @@ export const useStudentManagement = () => {
       createdBy: currentUser?.username
     };
 
-    const updatedStudents = [...students, student];
-    setStudents(updatedStudents);
-    saveStudentsData(updatedStudents);
+    // Add to state directly
+    setStudents(prevStudents => {
+      const updatedStudents = [...prevStudents, student];
+      
+      // Save to storage from here (removed from addStudentUtil since we're already doing it)
+      saveStudentsData(updatedStudents);
+      
+      return updatedStudents;
+    });
+    
+    // This was causing duplicate storage saves - we'll just call it without save
     addStudentUtil(student);
     
     setNewStudent({
