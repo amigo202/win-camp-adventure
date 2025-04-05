@@ -52,18 +52,13 @@ const StudentManager: React.FC = () => {
         />
       </div>
 
-      <div className="flex flex-col md:flex-row gap-6">
-        <div className="md:w-1/2">
-          <StudentForm 
-            newStudent={newStudent} 
-            setNewStudent={setNewStudent} 
-            handleAddStudent={handleAddStudent} 
-          />
-        </div>
-        <div className="md:w-1/2">
-          <ExcelTemplateInfo />
-        </div>
-      </div>
+      <StudentForm 
+        newStudent={newStudent} 
+        setNewStudent={setNewStudent} 
+        handleAddStudent={handleAddStudent} 
+      />
+      
+      <ExcelTemplateInfo />
       
       <SearchFilter
         searchTerm={searchTerm}
