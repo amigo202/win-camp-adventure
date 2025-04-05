@@ -59,12 +59,23 @@ const StudentsTable: React.FC<StudentsTableProps> = ({
       return;
     }
 
-    if (window.confirm(`האם אתה בטוח שברצונך למחוק ${selectedStudents.length} תלמידים?`)) {
-      selectedStudents.forEach(id => {
+    // Store the count before deletion for the success message
+    const count = selectedStudents.length;
+    
+    if (window.confirm(`האם אתה בטוח שברצונך למחוק ${count} תלמידים?`)) {
+      // Create a copy of the selected students before starting deletion
+      const studentsToDelete = [...selectedStudents];
+      
+      // Delete each student
+      studentsToDelete.forEach(id => {
         handleDeleteStudent(id);
       });
+      
+      // Clear selection after deletion is complete
       setSelectedStudents([]);
-      toast.success(`${selectedStudents.length} תלמידים נמחקו בהצלחה`);
+      
+      // Show success message with the original count
+      toast.success(`${count} תלמידים נמחקו בהצלחה`);
     }
   };
 
