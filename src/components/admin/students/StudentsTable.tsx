@@ -59,23 +59,31 @@ const StudentsTable: React.FC<StudentsTableProps> = ({
       return;
     }
 
-    // Store the count before deletion for the success message
-    const count = selectedStudents.length;
+    // שמור את מספר התלמידים שנבחרו לפני המחיקה
+    const countToDelete = selectedStudents.length;
     
-    if (window.confirm(`האם אתה בטוח שברצונך למחוק ${count} תלמידים?`)) {
-      // Create a copy of the selected students before starting deletion
+    if (window.confirm(`האם אתה בטוח שברצונך למחוק ${countToDelete} תלמידים?`)) {
+      console.log("Deleting students:", selectedStudents);
+      
+      // יצירת עותק של מערך התלמידים שנבחרו למחיקה
       const studentsToDelete = [...selectedStudents];
       
-      // Delete each student
-      studentsToDelete.forEach(id => {
-        handleDeleteStudent(id);
-      });
-      
-      // Clear selection after deletion is complete
-      setSelectedStudents([]);
-      
-      // Show success message with the original count
-      toast.success(`${count} תלמידים נמחקו בהצלחה`);
+      try {
+        // מחיקת כל תלמיד
+        for (const id of studentsToDelete) {
+          console.log(`Attempting to delete student with ID: ${id}`);
+          handleDeleteStudent(id);
+        }
+        
+        // ניקוי הבחירה לאחר המחיקה
+        setSelectedStudents([]);
+        
+        // הצגת הודעת הצלחה עם המספר המקורי
+        toast.success(`${countToDelete} תלמידים נמחקו בהצלחה`);
+      } catch (error) {
+        console.error("Error while deleting students:", error);
+        toast.error("אירעה שגיאה בעת מחיקת התלמידים");
+      }
     }
   };
 
